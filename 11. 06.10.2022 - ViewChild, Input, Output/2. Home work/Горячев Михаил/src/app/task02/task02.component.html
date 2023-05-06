@@ -1,0 +1,60 @@
+<!-- #region Параметры обработки -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark shadow border-3 border-top border-primary sticky-top">
+    <div class="container-fluid justify-content-center">
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav d-flex">
+                <div>
+                    <div class="d-inline-flex align-items-center">
+
+                        <!-- Исходные данные -->
+                        <button type="button" class="btn btn-success ms-5 me-3" data-bs-toggle="modal"
+                                data-bs-target="#modalId"
+                                (click)="selectByDefault()">
+                            Исходные данные
+                        </button>
+
+
+                        <!-- По жанру -->
+                        <select #genre class="form-select w-8rem ms-5 me-3">
+                            <option *ngFor="let t of genreList">{{t}}</option>
+                        </select>
+                        <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal"
+                                data-bs-target="#modalId"
+                                (click)="selectByGenre(genre.value)">
+                            По жанру
+                        </button>
+
+                        <!-- По режиссеру -->
+                        <select #director class="form-select w-15rem ms-5 me-3">
+                            <option *ngFor="let t of directorList">{{t}}</option>
+                        </select>
+                        <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal"
+                                data-bs-target="#modalId"
+                                (click)="selectByDirector(director.value)">
+                            По режиссеру
+                        </button>
+
+                        <!-- По году выпуска -->
+                        <select #year class="form-select w-8rem ms-5 me-3">
+                            <option *ngFor="let t of yearList">{{t}}</option>
+                        </select>
+                        <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal"
+                                data-bs-target="#modalId"
+                                (click)="selectByYear(+year.value)">
+                            По году выпуска
+                        </button>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- #endregion -->
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 min-vh-100 p-3">
+    <h4 class="text-center">Задание 2. Фильмотека</h4>
+
+    <!-- Вывод таблицы с фильмами -->
+    <app-film-table [filmListView]="filmListView"></app-film-table>
+</section>

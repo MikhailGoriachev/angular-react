@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+
+    <title>Basic Promise</title>
+</head>
+<body>
+    <script>
+        window.onload = () => {
+            document.querySelector('#out1').innerHTML = '<b>страница загружена</b>';
+
+            // Promise – предоставляют удобный способ организации асинхронного кода.
+            // Promise – это специальный объект, который содержит своё состояние. Вначале
+            // pending («ожидание»), затем – одно из:
+            //  fulfilled («выполнено успешно»)
+            //  rejected («выполнено с ошибкой»).
+            //
+            // На promise можно навешивать коллбэки двух типов:
+            // onFulfilled – срабатывают, когда promise в состоянии
+            //               «выполнен успешно».
+            // onRejected –  срабатывают, когда promise в состоянии
+            //               «выполнен с ошибкой».
+            //
+
+            // Код, которому надо сделать что-то асинхронно, создаёт объект promise
+            // и возвращает его.
+            // Внешний код, получив promise, навешивает на него обработчики.
+            // По завершении процесса асинхронный код переводит promise в состояние
+            // fulfilled (с результатом) или rejected (с ошибкой).
+            // При этом автоматически вызываются соответствующие обработчики
+            // во внешнем коде.
+            // Пока промис работает, вся остальная часть кода программы
+            // не останавливается
+
+            // resolve функция будет вызвана если все ОК - но в д.с. просто по таймеру
+            // reject функция будет вызвана если были ошибки - но в д.с. просто по таймеру
+            // !! это просто модель ситуации !!
+            let promise = new Promise((resolve, reject) => {
+                // модель обработки данных
+                setTimeout(() => {
+                    resolve('данные для первого then')
+                }, 2_000);
+
+                // модель анализа на ошибку
+                setTimeout(() => {
+                    reject(new Error('Error called!'))
+                }, 3_000)
+            });
+
+            // promise.then(onFulfilled, onRejected);
+            // promise.then(resolve, reject);
+            // promise.then навешивает обработчики на успешный результат или ошибку
+            // onFulfilled – функция, которая будет вызвана с результатом при resolve
+            // onRejected – функция, которая будет вызвана с ошибкой при reject
+            promise
+            .then(
+                // onFulfilled: при успешном завершении promise вызывается эта функция
+                // это resolve в создани Promise
+                // !!! конкректные действия в случае успеха !!!
+                result => {
+                    console.log(result);
+                    document.querySelector('#out1').innerHTML = `<u>Hello from first then</u>, result is "${result}"`;
+
+                    // возвращаемое значение - парамтер для следющего then
+                    // !! для resolve() !!
+                    return "данные для второго then";
+                },
+                // onRejected: при возникновении ошибки – ошибка отправляется в ближайший
+                // обработчик onRejected
+                // это reject в создани Promiseresolve
+                // !!! конкректные действия в случае неудачи !!!
+                error => {
+                    console.error(error);
+
+                    // возвращаемое значение - параметр для следющего then (именно для resolve)
+                    return error;
+                }
+            )
+            .then(result => {
+                console.log(result);
+                document.querySelector('#out2').innerHTML = `<u>Hello from second then</u>, result is "${result}"`;
+            },
+            // reject не обязателен
+            err => {
+                console.log('Ошибка: ' + err);
+                document.querySelector('#out2').innerHTML = `<i>${err}<i>`
+            });
+        }
+    </script>
+    <h3>Promise - смотрите сообщения в консоли</h3>
+    <p id="out1"></p>
+    <p id="out2"></p>
+</body>
+</html>

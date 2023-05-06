@@ -1,0 +1,19 @@
+﻿// установка jQuery: https://metanit.com/web/typescript/4.2.php
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "outDir": "dist"
+  },
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ],
+  "typeRoots": [
+    "node_modules/@types"
+  ]
+}

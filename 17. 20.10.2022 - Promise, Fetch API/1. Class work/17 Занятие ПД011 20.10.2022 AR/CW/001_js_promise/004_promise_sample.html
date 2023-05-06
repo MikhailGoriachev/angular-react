@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Promises</title>
+</head>
+<body>
+    <script>
+        function watchMovie(movie) {
+            console.log('Поиск фильма',movie, '...');
+            let promise = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                let cinema = {
+                    name: 'Мегамакс Фокс'
+                };
+                Math.random() > 0.3? resolve(cinema): reject('Кинотеатр не найден');
+                }, 1000);
+            });
+            return promise;
+        }
+
+        function buyTickets() {
+                console.log('Покупка билетов...');
+                let promise = new Promise((resolve, reject) => {
+                setTimeout(() => {               
+                    let tickets = {
+                        seats: '4 билета. 17 ряд. 2, 3, 4, 5 места'
+                    };
+                    Math.random() > 0.7? resolve(tickets): reject('Недостаточно средств');
+                }, 1000);
+            });
+            return promise;              
+        }
+
+        function buyPopCorn() {
+            console.log('Покупка попкорна...');
+            let promise = new Promise((resolve, reject) => {
+                setTimeout(() => {               
+                    let popCorn = {
+                        cost: 'Большой поккорн. 180 руб.'
+                    };
+                    Math.random() > 0.6 ? resolve(popCorn): reject('В баре закончился поп-корн:(');
+                }, 1000);
+            });
+            return promise;              
+        }
+
+        // Функция возвращает promise
+        watchMovie('Venom')
+            // then - затем. Принимает 2 функции.
+            //     1 - в случае успешного выполнения,
+            //     2 - в случае провала.
+            .then(cinema => console.log('Кинотеатр найден!', cinema)) //Создание нового обещания
+            .then(buyTickets)  
+            .then(tickets => console.log('Билеты куплены', tickets))
+            .then(buyPopCorn)
+            .then(popCorn => console.log('Купили попкорн', popCorn, 'Смотрим кино...'))
+            .catch(error => console.error('В кино не идем:', error)) // выполняется в случае ошибки.
+            
+    </script>
+</body>
+</html>

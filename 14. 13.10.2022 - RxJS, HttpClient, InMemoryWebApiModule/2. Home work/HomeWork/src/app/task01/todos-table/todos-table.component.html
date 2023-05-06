@@ -1,0 +1,27 @@
+<h4 class="text-center">Список дел</h4>
+
+<ul class="list-group list-group-horizontal">
+    <li class="list-group-item">Количество: {{stat?.amount}}</li>
+    <li class="list-group-item">Выполнено: {{stat?.complete}}</li>
+    <li class="list-group-item">Ждёт выполнения: {{stat?.noComplete}}</li>
+</ul>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Задача</th>
+        <th>Этап выполнения</th>
+    </tr>
+    </thead>
+
+    <tbody class="align-middle">
+    <tr *ngFor="let t of todos">
+        <td>{{t.id}}</td>
+        <td>{{t.title}}</td>
+        <td class="text-center">
+            <h3 *ngIf="t.completed" class="bi m-0 text-success bi-check-circle"></h3>
+        </td>
+    </tr>
+    </tbody>
+</table>

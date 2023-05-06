@@ -1,0 +1,8 @@
+<div class="wrapper-component">
+    <p>Контент теории</p>
+</div>
+<button (click)="goToPractice()">Посмотреть план практики</button>
+<hr>
+<div class="plan-lessons">
+    <button *ngFor="let lesson of lessons" (click)="showDetailsTheme(lesson)">{{ lesson.theme }}</button>
+</div>

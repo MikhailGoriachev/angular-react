@@ -1,0 +1,29 @@
+<h2>
+    Создание асинхронного пользовательского валидатора
+</h2>
+
+<form novalidate [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <label>Регистрация имейла в акции</label><br>
+    <input type="email" formControlName="email" [ngClass]="{
+          'is-invalid': email.invalid && email.dirty,
+          'is-valid': email.valid && email.dirty }">
+    <br>
+    <br>
+    <div class="error-alert" *ngIf="email.errors && (email.dirty || email.touched)">
+        <span *ngIf="email.errors['required']">Поле обязательное для ввода</span>
+        <span *ngIf="email.errors['registeredEmail']">Email адрес уже зарегистрирован</span>
+    </div>
+    <!-- Этот элемент будет видимым пока все валидаторы email не завершат проверку -->
+    <div class="verification" *ngIf="email.pending">
+        Проверка email...
+    </div>
+    <input type="submit" [disabled]="!registrationForm.valid || email.pending" value="Отправить">
+</form>
+
+<br>
+
+<pre>
+  + customer@shop.com<br>
+  - some@hotmail.com<hr>
+    {{registrationForm.value |json}}
+</pre>

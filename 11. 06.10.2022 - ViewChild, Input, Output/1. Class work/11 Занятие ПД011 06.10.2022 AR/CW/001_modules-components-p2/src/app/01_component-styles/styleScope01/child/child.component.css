@@ -1,0 +1,46 @@
+/* p{
+   background: brown;
+} */
+
+/* :host - стили для текущего комопнента и всех вложенных */
+/* :host {
+    display: block;
+
+    border: 3px solid lightskyblue;
+    background: indigo;
+    padding: 10px;
+    color: lightcyan;
+} */
+
+/* Запись ниже не работает поскольку для Ангуляра она не правильная
+    не смотря на то что имя компонента в теге app-child*/
+/* app-child{
+    display: block;
+
+    border: 3px solid red;
+    background: pink;
+    padding: 10px;
+} */
+
+/* :host в дочернем  - селектор компонента в родительском компоненте */
+/* вариант 1. определение класса, используемого на родительском элементе */
+/* :host(.second-child) {
+    display: block;
+    background-color: darkgreen;
+    color: lightgrey;
+} */
+
+
+/* вариант 2. определение класса, используемого на родительском элементе */
+/* :host.second-child {
+    display: block;
+    background-color: gray;
+    color:lightgray;
+} */
+
+/* вариант 3. определение класса, используемого на родительском элементе */
+/* .second-child:host {
+    display: block;
+    background-color: gold;
+    color: black;
+} */

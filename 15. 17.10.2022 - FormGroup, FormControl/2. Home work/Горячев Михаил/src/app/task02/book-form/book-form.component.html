@@ -1,0 +1,49 @@
+<!-- Модальное окно -->
+<div class="modal fade" id="modalFormId" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>{{isCreateMode ? "Создание книги" : "Редактирование книги"}}</h4>
+            </div>
+            <div class="modal-body">
+                <form novalidate [formGroup]="form" (ngSubmit)="onSubmit(form)">
+
+                    <!-- Название -->
+                    <div class="form-floating my-2">
+                        <input type="text" formControlName="name" placeholder="Название" class="form-control">
+                        <label>Название</label>
+                    </div>
+
+                    <!-- Автор -->
+                    <div class="form-floating my-2">
+                        <select formControlName="author" class="form-select">
+                            <option *ngFor="let a of authorList">{{a}}</option>
+                        </select>
+                        <label>Автор</label>
+                    </div>
+
+                    <!-- Год выпуска -->
+                    <div class="form-floating my-2">
+                        <input type="number" formControlName="pubYear" placeholder="Год выпуска" class="form-control">
+                        <label>Год выпуска</label>
+                    </div>
+
+                    <!-- Цена -->
+                    <div class="form-floating my-2">
+                        <input type="number" formControlName="price" placeholder="Цена" class="form-control">
+                        <label>Цена</label>
+                    </div>
+
+                    <hr>
+
+                    <!-- Кнопки управления -->
+                    <button class="btn btn-success" data-bs-dismiss="modal" [disabled]="form.invalid">
+                        {{isCreateMode ? "Добавить" : "Сохранить"}}
+                    </button>
+                    <button type="button" class="btn btn-secondary mx-3" data-bs-dismiss="modal">Закрыть</button>
+                </form>
+            </div>
+            <div class="modal-"></div>
+        </div>
+    </div>
+</div>

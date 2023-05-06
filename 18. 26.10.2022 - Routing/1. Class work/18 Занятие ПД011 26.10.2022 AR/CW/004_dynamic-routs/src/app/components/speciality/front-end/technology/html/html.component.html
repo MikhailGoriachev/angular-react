@@ -1,0 +1,8 @@
+<div class="wrapper-component">
+    <p>html!</p>
+    <a 
+    [routerLink]="tag.id" 
+    *ngFor="let tag of htmlTags" 
+    >{{ '<' + tag.id + '>' }}</a>
+</div>
+<router-outlet></router-outlet>

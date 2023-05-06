@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--
+
+Введение в формы
+
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React.Введение в формы. Валидация</title>
+
+    <link rel="stylesheet" href="style.css">
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="images/emotion_smile.png" type="image/x-icon">
+</head>
+<body>
+<h3>Введение в формы React. refs</h3>
+<div id="app"></div>
+<!-- локальное подключение React -->
+<script src="lib/react/react.production.min.js"></script>
+<script src=" lib/react/react-dom.production.min.js"></script>
+<script src="lib/babel.min.js"></script>
+
+<script type="text/babel">
+    class UserForm extends React.Component {
+        constructor(props) {
+            super(props);
+
+            this.handleSubmit = this.handleSubmit.bind(this);
+
+            // создание ссылок (рефов) для полей ввода
+            this.nameField = React.createRef();
+            this.ageField = React.createRef();
+        }
+
+        handleSubmit(e) {
+            e.preventDefault();
+
+            console.log(this.nameField);
+            let name = this.nameField.current.value;
+            let age = this.ageField.current.value;
+            alert("Имя: " + name + "\nВозраст: " + age);
+        }
+
+        render() {
+            return <form onSubmit={this.handleSubmit}>
+                <label>Имя:</label><br />
+                <input ref={this.nameField} /><br/><br/>
+                <label>Возраст:</label><br />
+                <input ref={this.ageField} /><br/><br/>
+                <input type="submit" value="Отправить" />
+            </form>;
+        }
+    }
+
+    ReactDOM.createRoot(document.getElementById("app"))
+        .render(
+            <UserForm />
+        );
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+<h2>Busket example</h2>
+<h4>Total cost {{ totalCost }}</h4>
+<div class="products">
+    <app-product-item class="item"
+            *ngFor="let product of products"
+            [card]="product">
+    </app-product-item>
+</div>

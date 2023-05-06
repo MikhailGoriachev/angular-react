@@ -1,0 +1,14 @@
+<h2>Two way binding</h2>
+1 <input type="text" #Var (input)="inputHandle(Var.value)" >
+    метод + переменная для элемента + свойство
+<br>
+<br>
+<!-- [(ngModel)] не работает без регистрации в модуле
+    { FormsModule } from '@angular/forms'  -->
+2 <input type="text" [(ngModel)]="userText"> ngModel
+<br>
+<p>{{ userText }}</p>
+<hr>
+<!-- добвим еще одно поле ввода -->
+3 <input type="number" [(ngModel)]="amount">
+<p>{{amount}}</p>

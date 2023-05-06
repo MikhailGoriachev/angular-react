@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<!--
+  Хук useEffect позволяет управлять различными сопутствующими действиями
+  в функциональном компоненте, на странице, словом тем, что называется
+  "side effects" (побочные эффекты), например, извлечение данных, ручное
+  изменение структуры DOM, использование таймеров, логгирование и т.д...
+  То есть в useEffect выполняет те действия, которые мы не можем выполнить
+  в основной части функционального компонента. Этот хук фактически служит
+  той же цели, что методы жизненного цикла componentDidMount, componentDidUpdate
+  и componentWillUnmount в классах-компонентах.
+
+  В качестве параметра в useEffect() передается функция. При вызове хука
+  useEffect по сути определяется "эффект", который затем применяется в
+  приложении.
+  Когда именно применяется?
+  По умолчанию React применяет эффект после каждого рендеринга, в том числе
+   при первом рендеринге приложения. Причем поскольку подобные эффекты
+   определены внутри компонента, они имеют доступ и к объекту props и
+   к состоянию компонента.
+
+   Например, изменение структуры DOM через useEffect:
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React. Хуки функциональных компонентов</title>
+
+    <link rel="stylesheet" href="style.css">
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="images/emotion_smile.png" type="image/x-icon">
+
+    <!-- локальное подключение React -->
+    <script src="lib/react/react.production.min.js"></script>
+    <script src=" lib/react/react-dom.production.min.js"></script>
+    <script src="lib/babel.min.js"></script>
+</head>
+<body>
+
+<h3>Функциональные компоненты, использование хука useEffect()</h3>
+<h4>Поле вывода: <span id="out"></span></h4>
+<div id="app"></div>
+<button id="unmountBtn">Удалить компоненты</button>
+
+<script type="text/babel">
+
+    // для удобства работы примеров получим корень рендеринга компонентов
+    const root = ReactDOM.createRoot(document.getElementById("app"));
+
+    // при изменении имени или возраста будет меняться заголовок страницы
+    function User(props) {
+        // состояния компонента: name, age
+        const [name, setName] = React.useState(props.name);
+        const [age, setAge] = React.useState(props.age);
+
+        // Определение эффекта, который изменяет заголовок страницы. Причем
+        // в заголовок выводится значение переменной состояния name. То есть
+        // при загрузке страницы мы увидим в ее заголовке "Привет, Таня".
+        // Однако поскольку при вводе в текстовое поле мы изменяем значение
+        // в переменной name, и соответственно React будет выполнять рендеринг
+        // приложения, то одновременно с этим будет изменяться и заголовок страницы
+        React.useEffect(() => {
+            // Изменяем заголовок html-страницы
+            let str = `Привет, ${name}-${age}`;
+            document.title = str;
+            document.querySelector('#out').innerHTML = str;
+            console.log("USE EFFECT")
+        });
+
+        // изменение состояния, хранящего имя - при помощи поля ввода
+        function handleNameChange(event) {
+            setName(event.target.value);
+        } // handleNameChange
+
+        // изменение состояния, хранящего возраст - при помощи поля ввода
+        function handleAgeChange(event) {
+            setAge(event.target.value);
+        } // handleAgeChange
+
+        return (
+            <div>
+                <ul>
+                    <li>Имя: <b>{name}</b></li>
+                    <li>Возраст: <b>{age}</b></li>
+                </ul>
+
+                <div className="border">
+                    <p>
+                        <label>Имя:</label>
+                        <input type="text" value={name} onChange={handleNameChange}/>
+                    </p>
+                    <p>
+                        <label>Возраст:</label>
+                        <input type="number" min="0" max="110" value={age} onChange={handleAgeChange}/>
+                    </p>
+                </div>
+            </div>
+        );
+    } // User
+
+    // ограничение useEffect() - хук срабатывает только при изменении заданного состояния
+    function Meal(props) {
+        const [name, setName] = React.useState(props.name);
+        const [calories, setCalories] = React.useState(props.calories);
+
+        // второй параметр функции хука - массив ограничений, хук срабатывает
+        // при изменении любого из состояний в массиве ограничений
+        React.useEffect(
+            () => {
+                // Изменяем поле вывода на HTML-странице   
+                document.getElementById('out').innerHTML = `${calories}`;
+                console.log(`Meal: useEffect() ${name}, ${calories}`);
+            },
+            [calories] // эффект срабатывает только при изменении calories - убрать массив для демо
+        );
+
+        // слушатели изменений для привязки состояний к полям ввода
+        const changeName = (event) => setName(event.target.value);
+        const changeCalories = (event) => setCalories(event.target.value);
+
+        return (
+            <div>
+                <ul>
+                    <li>Название блюда: <b>{name}</b></li>
+                    <li>Калорийность: <b>{calories}</b></li>
+                </ul>
+
+                <div className="border">
+                    <p>
+                        <label>Название блюда:</label>
+                        <input type="text" value={name} onChange={changeName}/>
+                    </p>
+                    <p>
+                        <label>Калорийность блюда:</label>
+                        <input type="number" value={calories} onChange={changeCalories}/>
+                    </p>
+                </div>
+            </div>
+        );
+    }
+
+    // пример очистки ресурсов в useEffect()
+    function Season(props) {
+        const [season, setSeason] = React.useState(props.season);
+
+        // метод для удаления компонентов из разметки - имитация освобождения ресурсов
+        const unmount = () => {
+            document.getElementById('out').innerHTML = 'Компоненты удалены'
+            root.unmount();
+        }
+
+        // использование хука useEffect()
+        React.useEffect(() => {
+                // получить ссылку на кнопку
+                const unmountBtn = document.getElementById("unmountBtn");
+
+                // подписываемся на событие onclick кнопки unmountBtn
+                // по клику на кнопку удаляем компонент
+                unmountBtn.addEventListener("click", unmount);
+                console.log("EventListener added");
+
+                // возвращает функцию, вызываемую полсе удаления компонента
+                return () => {
+                    // отписываемся от события после удаления компонента
+                    unmountBtn.removeEventListener("click", unmount);
+                    unmountBtn.hidden = true;
+                    console.log("EventListener removed");
+                }
+            },
+            []); // эффект срабатывает только один раз - при самом первом рендеринге
+
+        // в компоненте может быть определено несколько эффектов
+        React.useEffect(() => {
+            document.querySelector('#out').innerHTML = season;
+        });
+
+        return (
+            <div>
+                <p>Время года: <b>{season}</b></p>
+                <div className="border">
+                    <label>Время года:</label>
+                    <input type="text" value={season} onChange={(e) => setSeason(e.target.value)}/>
+                </div>
+            </div>
+        );
+    } // Season
+
+
+    // отрисовка компонентов на странице
+    root.render(
+        <>
+            <hr/>
+            <User name="Коля" age="19"/>
+            <hr/>
+            <Meal name="гречневая каша" calories="90"/>
+            <hr/>
+            <Season id="season" season="осень"/>
+            <hr/>
+        </>
+    )
+</script>
+</body>
+</html>

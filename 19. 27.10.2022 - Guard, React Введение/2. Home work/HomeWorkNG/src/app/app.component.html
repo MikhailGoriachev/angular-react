@@ -1,0 +1,58 @@
+<!-- #region Навигация -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top shadow">
+    <div class="container-fluid justify-content-center">
+
+        <!-- Логотип -->
+        <a class="navbar-brand mx-2" routerLink="/">
+            <img class="logo" src="assets/images/icon.svg" alt="logo">
+        </a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+
+                <!-- Главная -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3" routerLink="/main" routerLinkActive="active">
+                        Главная
+                    </a>
+                </li>
+
+                <!-- Задание 1 -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3" routerLink="/task01" routerLinkActive="active">Задание 1. Студенты</a>
+                </li>
+            </ul>
+        </div>
+        <div class="d-flex justify-content-end pe-3">
+            <ng-container [ngSwitch]="isAuth">
+                <button *ngSwitchCase="false" class="btn btn-success w-8rem" (click)="login()">Войти</button>
+
+                <button *ngSwitchCase="true" class="btn btn-warning w-8rem" (click)="logout()">Выйти</button>
+            </ng-container>
+        </div>
+    </div>
+</nav>
+<!-- #endregion -->
+
+<router-outlet></router-outlet>
+
+<!-- #region Подвал -->
+<footer class="bg-dark shadow fs-6 text-white-50 p-5 pb-2">
+    <p>
+        Разработчик:
+        <a href="https://github.com/MikhailGoriachev" target="_bank">
+            <b>Горячев Михаил</b>
+        </a>
+    </p>
+    <p>Группа: <b>ПД011</b></p>
+    <p>Город: <b>Донецк</b></p>
+    <p>Год создания: <b>2022</b></p>
+    <p>
+        Поддержка:
+        <a href="mailto:goriachevmichael@gmail.com">
+            <b>goriachevmichael@gmail.com</b>
+        </a>
+    </p>
+
+</footer>
+<!-- #endregion -->

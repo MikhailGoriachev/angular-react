@@ -1,0 +1,25 @@
+<h2>addControl & removeControl + <br>setValidators & clearValidators</h2>
+
+<form novalidate [formGroup]="form" (ngSubmit)="onSubmit()">
+	<div >
+		<label>Имя</label><br>
+		<input type="text" required formControlName="name">
+	</div>
+
+	<div >
+		<label>Сообщение</label><br>
+		<textarea type="text" required formControlName="msg"></textarea>
+	</div>
+
+	<br>
+	<div *ngIf="toggle">
+		<input type="text" formControlName="email">
+	</div>
+
+	<button type="button" (click)="subscribe()">Подписаться на рассылку</button>
+	<input [disabled]="form.invalid" type="submit" value="Отправить" >
+</form>
+
+<br>
+
+<pre>{{form.value |json}}</pre>

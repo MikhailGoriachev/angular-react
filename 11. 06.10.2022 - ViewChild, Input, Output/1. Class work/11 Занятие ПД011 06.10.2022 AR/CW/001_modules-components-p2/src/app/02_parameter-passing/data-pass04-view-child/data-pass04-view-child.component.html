@@ -1,0 +1,20 @@
+<h2>@ViewChild</h2>
+
+<button (click)="changeColor()">view-child</button>
+<button (click)="secondChangeColor()">secondViewChild</button>
+<button (click)="toggleBg.childMethod()">ref view-child</button>
+<hr>
+
+<app-view-child></app-view-child>
+<app-view-child></app-view-child>
+<app-view-child #secondViewChild></app-view-child>
+<app-view-child></app-view-child>
+<app-view-child #toggleBg></app-view-child>
+<br>
+<hr>
+<br>
+<input #mainInput type="text">
+<p> {{ p }} </p>
+<button (click)="takeFocus()">Взять фокус поля</button>
+<button (click)="takeValue()">Взять значение поля</button>
+

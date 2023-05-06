@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!-- некорректный вариант асинхронного обновления state -->
+<html lang="ru">
+<head>
+    <meta charset="utf-8"/>
+    <title>React. Состояния</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="images/emotion_smile.png" type="image/x-icon">
+
+</head>
+<body>
+<div id="app"></div>
+
+<!-- локальное подключение React -->
+<script src="lib/react/react.production.min.js"></script>
+<script src=" lib/react/react-dom.production.min.js"></script>
+<script src="lib/babel.min.js"></script>
+
+<script type="text/babel">
+    class ClickButton extends React.Component {
+
+        constructor(props) {
+            super(props);
+            this.state = {counter: 0};
+            this.press = this.press.bind(this);
+        }
+
+        press() {
+            // применение формы setState() с передачей объекта в данном случае недопустимо...
+            // т.к. это два подряд обращения к одному и тому же state
+            this.setState({counter: this.state.counter + parseInt(this.props.increment)});
+            this.setState({counter: this.state.counter + parseInt(this.props.increment)});
+        }
+
+        render() {
+            return <div>
+                <button onClick={this.press}>Счет</button>
+                <div>Счетчик: {this.state.counter} <br/>Инкремент: {this.props.increment}</div>
+            </div>
+        }
+    }
+
+    ReactDOM.createRoot(document.getElementById("app"))
+    .render(
+        <ClickButton increment="1"/>
+    );
+</script>
+</body>
+</html>

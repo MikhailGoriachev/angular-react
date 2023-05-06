@@ -1,0 +1,10 @@
+form{
+    padding: 10px;
+    border: 2px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.alert{
+    background: pink;
+    padding: 5px;
+}

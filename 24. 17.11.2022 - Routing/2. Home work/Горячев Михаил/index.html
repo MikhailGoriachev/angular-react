@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- #region Стили -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <!-- #endregion -->
+
+    <!-- #region Скрипты -->
+    <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- утилиты -->
+    <script src="infrastructure/utils.js"></script>
+    
+    <!-- локальное подключение React -->
+    <script src="lib/react/react.production.min.js"></script>
+    <script src="lib/react/react-dom.production.min.js"></script>
+    <script src="lib/react/history.production.min.js"></script>
+    <script src="lib/react/react-router.production.min.js"></script>
+    <script src="lib/react/react-router-dom.production.min.js"></script>
+
+    <script src="lib/babel.min.js"></script>
+    
+    <!-- Модели -->
+    <script type="text/babel" src="models/BankTransfer.js"></script>
+    <script type="text/babel" src="models/Appointment.js"></script>
+
+    <!-- задание 1 -->
+    <script type="text/babel" src="components/task01/components/Component01.jsx"></script>
+    <script type="text/babel" src="components/task01/components/Component02.jsx"></script>
+    <script type="text/babel" src="components/task01/components/Component03.jsx"></script>
+    <script type="text/babel" src="components/task01/Task01.jsx"></script>
+    
+    <!-- медицинские приёмы -->
+    <script type="text/babel" src="components/appointments/components/AppointmentDetails.jsx"></script>
+    <script type="text/babel" src="components/appointments/components/AppointmentForm.jsx"></script>
+    <script type="text/babel" src="components/appointments/components/AppointmentList.jsx"></script>
+    <script type="text/babel" src="components/appointments/Appointments.jsx"></script>
+    
+    <!-- главная -->
+    <script type="text/babel" src="components/Main.jsx"></script>
+    
+    <script type="text/babel" src="components/Navigation.jsx"></script>
+    
+    <!-- обработка страницы -->
+    <script type="text/babel" src="scripts/index.jsx"></script>
+    
+    <!-- #endregion -->
+
+    <!-- заголовок -->
+    <title>Домашнее задание</title>
+
+    <!-- логотип -->
+    <link rel="shortcut icon" type="image/x-icon" href="images/icon.svg">
+</head>
+<body>
+
+<!-- контент -->
+<div id="app"></div>
+
+<!-- #region Подвал -->
+<footer class="bg-dark shadow fs-6 text-white-50 p-5 pb-2">
+    <p>
+        Разработчик:
+        <a href="https://github.com/MikhailGoriachev" target="_bank">
+            <b>Горячев Михаил</b>
+        </a>
+    </p>
+    <p>Группа: <b>ПД011</b></p>
+    <p>Город: <b>Донецк</b></p>
+    <p>Год создания: <b>2022</b></p>
+    <p>
+        Поддержка:
+        <a href="mailto:goriachevmichael@gmail.com">
+            <b>goriachevmichael@gmail.com</b>
+        </a>
+    </p>
+
+</footer>
+<!-- #endregion -->
+</body>
+</html>

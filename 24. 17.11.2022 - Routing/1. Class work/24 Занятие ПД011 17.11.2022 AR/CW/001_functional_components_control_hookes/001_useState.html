@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<!--
+    Одним из наиболее используемых встроенных хуков является useState,
+    который позволяет определить состояние компонента.
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React. Хуки функциональных компонентов</title>
+
+    <link rel="stylesheet" href="style.css">
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="images/emotion_smile.png" type="image/x-icon">
+
+    <!-- локальное подключение React -->
+    <script src="lib/react/react.production.min.js"></script>
+    <script src=" lib/react/react-dom.production.min.js"></script>
+    <script src="lib/babel.min.js"></script>
+</head>
+<body>
+<h3>Функциональные компоненты, использование хука useState()</h3>
+<div id="app"></div>
+
+<script type="text/babel">
+    // функциональный компонент с состоянием из одного элемента
+    function Counter(props) {
+
+        // получить состояние компонента, метод изменения состояния
+        // хук useState определяет переменные состояния. Единственный аргумент
+        // хука задает начальное значение переменной состояния.
+        // Возвращает useState() массив из двух объектов. Первый объект представляет
+        // значение состояния, а второй объект представляет функцию, которая обновляет
+        // это значение.
+        // Имена этих объектов никак не связаны, но рекомендуется все-таки имена
+        // согласовывать
+        const [count, setCount] = React.useState(props.value);
+
+        // рендеринг элемента с изменением состояния
+        return (
+            <div>
+                <p>Count = <b>{count}</b></p>
+                <button onClick={() => setCount(count + 1)}>
+                    Увеличить
+                </button>
+            </div>
+        );
+    }
+
+    // компонент с несколькими свойствами в состоянии
+    // при помощи элементов ввода демонстрируем изменение
+    // состояния
+    function User(props) {
+        // состояния компонента: name, age
+        const [name, setName] = React.useState(props.name);
+        const [age, setAge]   = React.useState(props.age);
+
+        // изменение состояния, хранящего имя - при помощи поля ввода
+        function handleNameChange(event) {
+            console.dir(event);
+            setName(event.target.value);
+        } // handleNameChange
+
+        // изменение состояния, хранящего возраст - при помощи поля ввода
+        function handleAgeChange(event) {
+            console.dir(event);
+            setAge(event.target.value);
+        } // handleAgeChange
+
+        return (
+            <div>
+                <ul>
+                    <li>Имя: <b>{name}</b></li>
+                    <li>Возраст: <b>{age}</b></li>
+                </ul>
+                
+                <div className="border">
+                    <ul>
+                        <li>
+                            <label>Имя:</label>
+                            <input type="text" value={name} onChange={handleNameChange} />
+                        </li>
+                        <li>
+                            <label>Возраст:</label>
+                            <input type="number" min="0" max="110" value={age} onChange={handleAgeChange} />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        );
+    } // User
+
+    // компонент с объектом в состоянии
+    // при помощи элементов ввода демонстрируем изменение
+    // состояния
+    function Employee(props) {
+        // состояния компонента: name, age
+        const [employee, setEmployee] = React.useState({name: props.name, age: props.age, salary: props.salary});
+
+        // изменение состояния, хранящего имя - при помощи поля ввода
+        function handleNameChange(event) {
+            // т.к. состоянием является весь объект - требуется
+            // передавать все свойства этого объекта...
+            // (при помощи spread-оператора это делать гораздо проще)
+            // setEmployee({name: event.target.value, age: employee.age, salary: employee.salary});
+            setEmployee({...employee, name: event.target.value});
+        } // handleNameChange
+
+        // изменение состояния, хранящего возраст - при помощи поля ввода
+        function handleAgeChange(event) {
+            // setEmployee({name: employee.name, age: event.target.value, salary: employee.salary});
+            setEmployee({...employee, age: event.target.value});
+        } // handleAgeChange
+
+        // изменение состояния, хранящего оклад - при помощи поля ввода
+        function handleSalaryChange(event) {
+            // setEmployee({name: employee.name, age: employee.age, salary: event.target.value});
+            setEmployee({...employee, salary: event.target.value});
+        } // handleSalaryChange
+
+        return (
+            <div>
+                <ul>
+                    <li>Имя: <b>{employee.name}</b></li>
+                    <li>Возраст: <b>{employee.age}</b></li>
+                    <li>Оклад: <b>{employee.salary}</b></li>
+                </ul>
+
+                <div className="border">
+                    <ul>
+                        <li>
+                            <label>Имя:</label>
+                            <input type="text" value={employee.name} onChange={handleNameChange} />
+                        </li>
+                        <li>
+                            <label>Возраст:</label>
+                            <input type="number" min="0" max="110" value={employee.age} onChange={handleAgeChange} />
+                        </li>
+                        <li>
+                            <label>Оклад:</label>
+                            <input type="number" min="0" max="160000" value={employee.salary} onChange={handleSalaryChange} />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        );
+    } // Employee
+
+    // отрисовка компонентов на странице
+    ReactDOM.createRoot(document.getElementById("app"))
+        .render(
+            <>
+                <Counter value={240}/>
+                <hr/>
+                <User name= "Валентина" age="39"/>
+                <hr/>
+                <Employee name="Георгий" age="42" salary="45000" />
+            </>
+        )
+</script>
+</body>
+</html>

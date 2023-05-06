@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- #region Стили -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/styles.css">
+    <!-- #endregion -->
+
+    <!-- #region Скрипты -->
+    <script src="../lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- #endregion -->
+
+    <!-- заголовок -->
+    <title>Главная</title>
+
+    <!-- логотип -->
+    <link rel="shortcut icon" type="image/x-icon" href="images/icon.svg">
+</head>
+<body>
+
+<!-- #region Навигация -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top shadow">
+    <div class="container-fluid justify-content-center">
+
+        <!-- Логотип -->
+        <a class="navbar-brand mx-2" href="index.html">
+            <img class="logo" src="images/icon.svg" alt="logo">
+        </a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+
+                <!-- Главная -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3 active" href="index.html">
+                        Главная
+                    </a>
+                </li>
+
+                <!-- Книга -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3" href="pages/book.html">Книга</a>
+                </li>
+
+                <!-- Товар -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3" href="pages/goods.html">Товар</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- #endregion -->
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 min-vh-100 p-3">
+
+    <!-- #region Теоретическая часть -->
+    <details open>
+        <summary class="h5 text-primary">
+            Теоретическая часть
+        </summary>
+
+        <ul>
+            <li>Понятие о библиотеке React (ReactJS)</li>
+            <li>Понятие о JSX, транспайлере Babel</li>
+            <li>Вывод выражений JSX в разметку</li>
+            <li>Стилизация в React</li>
+        </ul>
+
+    </details>
+    <!-- #endregion -->
+
+    <!-- #region Практическая часть -->
+    <details open>
+        <summary class="h5 text-primary">
+            Практическая часть
+        </summary>
+
+        <p>
+            Разработайте приложение <b>Angular</b> с использованием изученных возможностей Angular. Применяйте формы,
+            валидаторы (синхронные и асинхронные), данные храните в локальном хранилище с использованием имитации
+            таблицы базы данных <b>InMemoryWebApiModule</b>. Сервис доступа к «базе данных» выполните асинхронным с
+            использованием промисов.
+        </p>
+
+        <p>
+            Разбивка на компоненты и организация их взаимодействия – на Ваше усмотрение. В один из компонентов выводите
+            текст этого задания.
+        </p>
+
+        <!-- #region Задание 2 -->
+        <p>
+            <b>Задача 2</b>. Создайте страницу с рендерингом элементов при помощи React.
+        </p>
+
+        <ul>
+            <li>
+                Выведите объект для представления данных о книге: название, автор, год издания, цена, изображение
+                обложки.
+            </li>
+            <li>
+                Выведите объект для представления данных о товаре: наименование, артикул, цена, количество, изображение
+                товара.
+            </li>
+        </ul>
+        <!-- #endregion -->
+    </details>
+    <!-- #endregion -->
+
+    <!-- #region Дополнительно -->
+    <details open>
+        <summary class="h5 text-primary">
+            Дополнительно
+        </summary>
+
+
+        <p>
+            Запись занятия можно скачать
+            <a href="https://cloud.mail.ru/public/o7Lc/huWhYfuXE" target="_blank">по этой
+                ссылке</a>, материалы занятия в прикрепленном архиве.
+        </p>
+
+    </details>
+    <!-- #endregion -->
+</section>
+
+<!-- #region Подвал -->
+<footer class="bg-dark shadow fs-6 text-white-50 p-5 pb-2">
+    <p>
+        Разработчик:
+        <a href="https://github.com/MikhailGoriachev" target="_bank">
+            <b>Горячев Михаил</b>
+        </a>
+    </p>
+    <p>Группа: <b>ПД011</b></p>
+    <p>Город: <b>Донецк</b></p>
+    <p>Год создания: <b>2022</b></p>
+    <p>
+        Поддержка:
+        <a href="mailto:goriachevmichael@gmail.com">
+            <b>goriachevmichael@gmail.com</b>
+        </a>
+    </p>
+
+</footer>
+<!-- #endregion -->
+</body>
+</html>

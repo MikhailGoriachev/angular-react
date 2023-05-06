@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- #region Стили -->
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- #endregion -->
+
+    <!-- #region Скрипты -->
+    <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- #endregion -->
+
+    <!-- заголовок -->
+    <title>Главная</title>
+
+    <!-- логотип -->
+    <link rel="shortcut icon" type="image/x-icon" href="images/icon.svg">
+</head>
+
+<body>
+
+<!-- #region Навигация -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top shadow">
+    <div class="container-fluid justify-content-center">
+        <!-- Логотип -->
+        <a class="navbar-brand mx-2" href="index.html">
+            <img class="logo" src="images/icon.svg" alt="logo">
+        </a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+
+                <!-- Главная -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3 active" href="index.html">Главная</a>
+                </li>
+
+                <!-- Задание 1 -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3" href="htdocs/task01.html">Задание 1</a>
+                </li>
+
+                <!-- Задание 2 -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3" href="htdocs/task02.html">Задание 2</a>
+                </li>
+
+                <!-- Задание 3 -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3" href="htdocs/task03.html">Задание 3</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- #endregion -->
+
+<!-- #region Главная секция -->
+<main>
+
+    <section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+
+        <!-- #region Теоретическая часть -->
+        <details open>
+            <summary class="h5 text-primary">
+                Теоретическая часть
+            </summary>
+
+            <ul>
+                <li>Объявление переменных и констант в TypeScript</li>
+                <li>Система типов TypeScript</li>
+                <li>Объявление и инициализация массивов</li>
+                <li>Кортежи в TypeScript, объявление, инициализация, доступ к отдельным полям кортежа</li>
+                <li>Перечисления <b>enum</b> в TypeScript, объявление, получение строкового представления по числовому
+                    значению перечисления
+                </li>
+                <li>Особенности применения типа <b>any</b></li>
+                <li>Типы <b>void, undefined, null</b></li>
+                <li>Утверждение типов, синтаксис угловых скобок и синтаксис as</li>
+                <li>Функции в TypeScript – в стиле JavaScript</li>
+                <li>Функции с типизированными параметрами и значением в TypeScript</li>
+                <li>Задание переменным типа для хранения функций</li>
+                <li>Опциональные параметры функций</li>
+                <li>Параметры функций по умолчанию</li>
+                <li>Оператор <b>…rest</b> ES6+ для передачи списка параметров переменной длины</li>
+                <li>Стрелочные функции в TypeScript</li>
+                <li>Передача контекста в функции и в стрелочные функции</li>
+                <li>Перегруженные функции в TypeScript</li>
+            </ul>
+
+        </details>
+        <!-- #endregion -->
+
+
+        <!-- #region Практическая часть -->
+        <details open>
+            <summary class="h5 text-primary">
+                Практическая часть
+            </summary>
+
+            <p>
+                Разработайте приложение TypeScript с выводом обработанных данных на страницу HTML – каждая задача
+                на собственной странице.
+            </p>
+
+            <!-- #region Задание 1 -->
+            <p>
+                <b>Задача 1</b>. В одномерном массиве, состоящем из n чисел вычислить:
+            </p>
+            <ul>
+                <li>Количество элементов массива, равных нулю</li>
+                <li>Количество отрицательных элементов массива</li>
+                <li>Сумму элементов массива, расположенных после минимального элемента</li>
+                <li>Сумму модулей элементов массива, расположенных после минимального по модулю элемента</li>
+                <li>Упорядочить элементы массива по возрастанию модулей</li>
+                <li>
+                    Заменить все отрицательные элементы массива их квадратами и упорядочить элементы массива по
+                    возрастанию
+                </li>
+            </ul>
+            <!-- #endregion -->
+
+            <!-- #region Задание 2 -->
+            <p>
+                <b>Задача 2</b>. Описать функцию mean(x, y), вычисляющую среднее арифметическое aMean=(x+y)/2 и среднее
+                геометрическое gMean=√(x∙y), двух положительных чисел x и y. Возвращать aMean, gMean из функции в
+                кортеже. С помощью этой функции найти среднее арифметическое и среднее геометрическое для трех пар
+                случайных чисел их диапазона значений [-10, 10].
+            </p>
+            <!-- #endregion -->
+
+            <!-- #region Задание 3 -->
+            <p>
+                <b>Задача 3</b>. Описать функцию rectPS(x1, y1, x2, y2), вычисляющую периметр и площадь прямоугольника
+                со сторонами, параллельными осям координат, по координатам (x1, y1), (x2, y2) его противоположных
+                вершин. Функция возвращает кортеж с периметром и площадью. С помощью этой функции найти периметры и
+                площади трех прямоугольников с данными противоположными вершинами.
+            </p>
+            <!-- #endregion -->
+        </details>
+        <!-- #endregion -->
+
+        <!-- #region Дополнительно -->
+        <details open>
+            <summary class="h5 text-primary">
+                Дополнительно
+            </summary>
+
+            <p>
+                Запись занятия можно скачать
+                <a href="https://cloud.mail.ru/public/mMHe/Wxnu6kNhk" target="_blank" class="fw-bold">по этой
+                    ссылке</a>, материалы занятия в прикрепленном архиве.
+            </p>
+
+        </details>
+        <!-- #endregion -->
+    </section>
+
+</main>
+<!-- #endregion -->
+
+<!-- #region Подвал-->
+<footer class="bg-dark shadow fs-6 text-white-50 p-5 pb-2">
+    <p>
+        Разработчик:
+        <a href="https://github.com/MikhailGoriachev" target="_bank">
+            <b>Горячев Михаил</b>
+        </a>
+    </p>
+    <p>Группа: <b>ПД011</b></p>
+    <p>Город: <b>Донецк</b></p>
+    <p>Год создания: <b>2022</b></p>
+    <p>
+        Поддержка:
+        <a href="mailto:goriachevmichael@gmail.com">
+            <b>goriachevmichael@gmail.com</b>
+        </a>
+    </p>
+
+</footer>
+<!-- #endregion -->
+</body>
+
+</html>

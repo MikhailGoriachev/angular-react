@@ -1,0 +1,33 @@
+<div class="container">
+    <h1>Введение в Angular</h1>
+    <h2></h2>
+    <main>
+        <nav>
+            <h3>Reactive Forms</h3>
+			
+			<!-- примеры на 17.10.2022 -->
+            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">01_ng-model
+                [(ngModel)] (Two way binding)</a>
+            <a routerLink="styles-forms" routerLinkActive="active">02_styles form</a>
+            <a routerLink="simple-reactive-form" routerLinkActive="active">03_simple reactive form</a>
+            <a routerLink="validators-reactive-form" routerLinkActive="active">04_validators reactive form</a>
+
+            <!-- примеры на 19.10.2022 -->
+            <a routerLink="form-array-reactive-form" routerLinkActive="active">05_Adding fields FormArray</a>
+            <a routerLink="form-builder-reactive-form" routerLinkActive="active">06_FormBuilder</a>
+            <a routerLink="add-remove-controls" routerLinkActive="active">07_add/remove Control</a>
+            <a routerLink="form-autocomplete" routerLinkActive="active">08_patchValue & setValue</a>
+            <a routerLink="alerts-reactive-form" routerLinkActive="active">09_alerts reactive forms</a>
+            <a routerLink="observable-valueChanges" routerLinkActive="active">10_alerts valueChanges</a>
+            <a routerLink="custom-validators" routerLinkActive="active">11_custom Validators</a>
+            <a routerLink="match-validator" routerLinkActive="active">12 Match Validator</a>
+			
+			<!-- примеры на 20.10.2022 -->
+            <a routerLink="async-form1" routerLinkActive="active">13_async Validators</a>
+            <a routerLink="async-form2" routerLinkActive="active">14_async Validators</a>
+        </nav>
+        <div class="examples">
+            <router-outlet></router-outlet>
+        </div>
+    </main>
+</div>

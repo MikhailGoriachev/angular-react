@@ -1,0 +1,29 @@
+<h2>@ContentChild</h2>
+
+<!-- первый экземпляр, только первый #elem будет доступен в дочернем компоненте  -->
+<app-content-child>
+    <p>1 - {{ contentP }}</p>
+    <p #elem>2 - {{ contentP }}</p>
+    <p>3 - {{ contentP }}</p>
+    <p #elem>4 - {{ contentP }}</p>
+</app-content-child>
+
+<hr>
+
+<!-- второй экземпляр -->
+<app-content-child>
+    <app-content-grandchild></app-content-grandchild>
+    <app-content-grandchild></app-content-grandchild>
+    <app-content-grandchild></app-content-grandchild>
+</app-content-child>
+
+<hr>
+
+<!-- третий экземпляр - смешанный контент :) -->
+<app-content-child>
+    <app-content-grandchild></app-content-grandchild>
+    <p #elem>42 - {{ contentP }}</p>
+    <p #elem>42 - {{ contentP }}</p>
+    <app-content-grandchild></app-content-grandchild>
+    <app-content-grandchild></app-content-grandchild>
+</app-content-child>

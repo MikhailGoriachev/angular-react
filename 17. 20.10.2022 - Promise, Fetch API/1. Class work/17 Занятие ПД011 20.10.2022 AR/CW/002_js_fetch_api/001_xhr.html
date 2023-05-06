@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>XMLHttpRequest</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script>
+    //    Объект XMLHttpRequest (или, как его кратко называют, «XHR»)
+    //     дает возможность из JavaScript делать HTTP-запросы к серверу без перезагрузки страницы. 
+    let xhr = new XMLHttpRequest();
+    //         «Синхронный запрос» означает, что после вызова xhr.send() и до ответа сервера главный поток будет «заморожен»:
+    //          посетитель не сможет взаимодействовать со страницей – прокручивать, нажимать на кнопки и т.п.
+    //           После получения ответа выполнение продолжится со следующей строки.
+
+    // «Асинхронный запрос» означает, что браузер отправит запрос, а далее результат нужно будет получить через обработчики событий,
+    //  которые мы рассмотрим далее.
+    xhr.open('GET', 'https://jsonplaceholder.typicode.com/users/6', true);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+
+        if (xhr.status === 200) {
+            if (xhr.readyState === 4) {
+                let user = JSON.parse(xhr.responseText);
+                console.log(user);
+                document.querySelector('#out1').innerHTML = `<pre>${user}</pre>`;
+            }
+        } else {
+            console.log(`${xhr.status}: ${xhr.statusText}`);
+        }
+    }
+
+
+</script>
+<h3>XHR</h3>
+<div id="out1"></div>
+</body>
+</html>

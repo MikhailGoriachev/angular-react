@@ -1,0 +1,17 @@
+<h1>Атрибутивная Директива ngStyle</h1>
+<!-- Biding -->
+<div [style.background-color]="'green'" class="block">
+    <b>Блок</b>
+</div>
+<!-- Directive -->
+<hr>
+<button (click)="toggle = !toggle">Поменять цвет и размер шрифта</button>
+<br>
+<br>
+
+<!-- менять можно одно или несколько свойств  -->
+<div #d [style.background-color]="toggle ? 'tomato' : 'skyblue'"
+     [style.font-size]="toggle ? '14pt' : '18pt'"
+     class="block">
+    <b>Блок</b>
+</div>

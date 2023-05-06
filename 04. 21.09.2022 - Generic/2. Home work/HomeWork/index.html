@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- #region Стили -->
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- #endregion -->
+
+    <!-- #region Скрипты -->
+    <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- #endregion -->
+
+    <!-- заголовок -->
+    <title>Главная</title>
+
+    <!-- логотип -->
+    <link rel="shortcut icon" type="image/x-icon" href="images/icon.svg">
+</head>
+
+<body>
+
+<!-- #region Навигация -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top shadow">
+    <div class="container-fluid justify-content-center">
+        <!-- Логотип -->
+        <a class="navbar-brand mx-2" href="index.html">
+            <img class="logo" src="images/icon.svg" alt="logo">
+        </a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+
+                <!-- Главная -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3 active" href="index.html">Главная</a>
+                </li>
+
+                <!-- Задание 1 -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3" href="htdocs/task01.html">Задание 1</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- #endregion -->
+
+<!-- #region Главная секция -->
+<main>
+
+    <section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+
+        <!-- #region Теоретическая часть -->
+        <details open>
+            <summary class="h5 text-primary">
+                Теоретическая часть
+            </summary>
+
+            <ul>
+                <li>Еще раз о методах массивов в TypeScript</li>
+                <li>Оператор …spread в ES6+</li>
+                <li>Обобщенные типы (дженерики): функции, интерфейсы, классы и методы</li>
+                <li>Ограничения дженериков</li>
+                <li>Функции-генераторы и методы-генераторы</li>
+            </ul>
+
+        </details>
+        <!-- #endregion -->
+
+
+        <!-- #region Практическая часть -->
+        <details open>
+            <summary class="h5 text-primary">
+                Практическая часть
+            </summary>
+
+            <p>
+                <b>Задача 1</b>. Разработайте приложение TypeScript с выводом обработанных данных на страницу HTML по
+                заданию.
+            </p>
+
+            <p>Реализуйте обобщенный класс Stack, обеспечивающий доступ LIFO на базе массива. </p>
+
+            <p>Методы для реализации:</p>
+
+            <ul>
+                <li>Добавление на вершину стека</li>
+                <li>Извлечение с вершины стека</li>
+                <li>Чтение вершины стека</li>
+                <li>Метод-генератор для просмотра стека</li>
+            </ul>
+
+            <p>
+                Продемонстрируйте работу стека на числах, строках и объектах – экземплярах класса Ship из предыдущего
+                задания.
+            </p>
+
+            <p>Работу стеков разных типов демонстрируйте на разных HTML-страницах</p>
+
+        </details>
+        <!-- #endregion -->
+
+        <!-- #region Дополнительно -->
+        <details open>
+            <summary class="h5 text-primary">
+                Дополнительно
+            </summary>
+
+            <p>
+                Запись занятия можно скачать
+                <a href="https://cloud.mail.ru/public/ZGTf/Q6mUcTB5T" target="_blank">по этой
+                    ссылке</a>, материалы занятия в прикрепленном архиве.
+            </p>
+
+        </details>
+        <!-- #endregion -->
+    </section>
+
+</main>
+<!-- #endregion -->
+
+<!-- #region Подвал-->
+<footer class="bg-dark shadow fs-6 text-white-50 p-5 pb-2">
+    <p>
+        Разработчик:
+        <a href="https://github.com/MikhailGoriachev" target="_bank">
+            <b>Горячев Михаил</b>
+        </a>
+    </p>
+    <p>Группа: <b>ПД011</b></p>
+    <p>Город: <b>Донецк</b></p>
+    <p>Год создания: <b>2022</b></p>
+    <p>
+        Поддержка:
+        <a href="mailto:goriachevmichael@gmail.com">
+            <b>goriachevmichael@gmail.com</b>
+        </a>
+    </p>
+
+</footer>
+<!-- #endregion -->
+</body>
+
+</html>

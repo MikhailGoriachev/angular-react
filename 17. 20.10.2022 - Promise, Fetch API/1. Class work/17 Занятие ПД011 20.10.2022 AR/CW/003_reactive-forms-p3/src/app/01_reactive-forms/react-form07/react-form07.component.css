@@ -1,0 +1,10 @@
+form{
+    padding: 10px;
+    border-radius: 5px;
+}
+form.ng-valid{
+    border: 2px solid lightgreen;
+}
+form.ng-invalid{
+    border: 2px solid pink;
+}

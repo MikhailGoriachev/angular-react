@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>Занятие 05.11.2022</title>
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="images/emotion_smile.png" type="image/x-icon">
+
+    <!-- подключение bootstrap -->
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- подключение собственных стилей -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- навигация по приложению, переходы по заданию -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand active" href="index.html">ПД011</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#appNavbar-1">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="appNavbar-1">
+            <ul class="navbar-nav">
+                <!-- Переход на страницу решения задачи -->
+                <li class="nav-item">
+                    <a class="nav-link active" href="index.html"
+                       title="Переход на страницу решения задачи">Главная</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main id="app"></main>
+
+<footer class="mt-5 p-1 bg-dark text-white text-center">
+    <h5>КА Шаг, ПД011, Донецк, 2022</h5>
+</footer>
+
+<!-- локальное подключение React -->
+<script src="/lib/react/react.development.js"></script>
+<script src=" lib/react/react-dom.development.js"></script>
+<script src="lib/babel.min.js"></script>
+<script src="js/utils.js"></script>
+
+<script type="text/babel">
+   // Определение компонента 1
+   // Определить количество корней квадратного уравнения.
+   // пропсы: начальные значения a, b, c
+   // стейт: a, b, c, кол-во корней
+   // по клику на кнопку меняем стейт
+   class Component1 extends React.Component {
+
+       constructor(props) {
+           super(props);
+
+           // копируем пропсы в стейт
+           this.state = {a: props.a, b: props.b, c: props.c, roots: 0};
+
+           this.clickSolve = this.clickSolve.bind(this);
+       }
+
+       // определение количества корней квадратного уравнения
+       getNumRoots(a, b, c) {
+           let d = b*b - 4*a*c;
+           return d<0?0:d>0?2:1;
+       }
+
+       // клик по кнопке для решения задачи
+       clickSolve() {
+           let a = getRand(-10, 10);
+           let b = getRand(-10, 10);
+           let c = getRand(-10, 10);
+
+           this.setState({a: a, b: b, c: c, roots: this.getNumRoots(a, b, c)});
+       } // clickSolve
+
+       render() {
+           return  <div className="card">
+               <div className="card-body">
+                   <h5 className="card-title">Компонент 1</h5>
+                   <p className="card-text">Количество корней квадратного уравнения</p>
+               </div>
+               <ul className="list-group list-group-flush">
+                   <li className="list-group-item">коэффициент a: <b>{this.state.a}</b></li>
+                   <li className="list-group-item">коэффициент b: <b>{this.state.b}</b></li>
+                   <li className="list-group-item">коэффициент c: <b>{this.state.c}</b></li>
+                   <li className="list-group-item">количество корней: <b>{this.state.roots}</b></li>
+               </ul>
+               <div className="card-footer">
+                   <button className="btn btn-outline-success" onClick={this.clickSolve}>Вычислить</button>
+               </div>
+           </div>
+       }
+   }
+
+   // компонент для задачи 2
+   class Component2 extends React.Component {
+       constructor(props) {
+           super(props);
+
+           this.clickSolve = this.clickSolve.bind(this);
+       }
+
+       // клик по кнопке для решения задачи
+       clickSolve() {
+
+       } // clickSolve
+
+       render() {
+           return  <div className="card">
+               <div className="card-body">
+                   <h5 className="card-title">Компонент 2</h5>
+                   <p className="card-text">Периметр равнобедренного треугольника</p>
+               </div>
+               <ul className="list-group list-group-flush">
+                   <li className="list-group-item">Основание a: <b></b></li>
+                   <li className="list-group-item">Высота h: <b></b></li>
+                   <li className="list-group-item">периметр: <b></b></li>
+               </ul>
+               <div className="card-footer">
+                   <button className="btn btn-outline-success" onClick={this.clickSolve}>Вычислить</button>
+               </div>
+           </div>
+       }
+   }
+
+   // компонент для задачи 3
+   class Component3 extends React.Component {
+       constructor(props) {
+           super(props);
+
+           this.clickSolve = this.clickSolve.bind(this);
+       }
+
+       // клик по кнопке для решения задачи
+       clickSolve() {
+
+       } // clickSolve
+
+       render() {
+           return  <div className="card">
+               <div className="card-body">
+                   <h5 className="card-title">Компонент 3</h5>
+                   <p className="card-text">Проверка числа на простоту</p>
+               </div>
+               <ul className="list-group list-group-flush">
+                   <li className="list-group-item">Число a: <b></b></li>
+                   <li className="list-group-item">Результат проверки: <b></b></li>
+               </ul>
+               <div className="card-footer">
+                   <button className="btn btn-outline-success" onClick={this.clickSolve}>Вычислить</button>
+               </div>
+           </div>
+       }
+   }
+
+   // компонент для задачи 4
+   class Component4 extends React.Component {
+       constructor(props) {
+           super(props);
+
+           this.clickSolve = this.clickSolve.bind(this);
+       }
+
+       // клик по кнопке для решения задачи
+       clickSolve() {
+
+       } // clickSolve
+
+       render() {
+           return  <div className="card">
+               <div className="card-body">
+                   <h5 className="card-title">Компонент 4</h5>
+                   <p className="card-text">Номер координатной плоскости точки</p>
+               </div>
+               <ul className="list-group list-group-flush">
+                   <li className="list-group-item">Координата x: <b></b></li>
+                   <li className="list-group-item">Координата y: <b></b></li>
+                   <li className="list-group-item">Номер плоскости: <b></b></li>
+               </ul>
+               <div className="card-footer">
+                   <button className="btn btn-outline-success" onClick={this.clickSolve}>Вычислить</button>
+               </div>
+           </div>
+       }
+   }
+
+    // вывод компонентов
+    ReactDOM.createRoot(document.getElementById("app"))
+        .render(
+            <div className="container">
+                <div className="row mt-5 p-5">
+                    <div className="col-4">
+                        <Component1 a={3} b={5} c={4} />
+                    </div>
+
+                    <div className="col-4">
+                        <Component2 />
+                    </div>
+
+                    <div className="col-4">
+                        <Component3 />
+                    </div>
+
+                    <div className="col-4">
+                        <Component4 />
+                    </div>
+                </div>
+            </div>
+        );
+</script>
+</body>
+</html>

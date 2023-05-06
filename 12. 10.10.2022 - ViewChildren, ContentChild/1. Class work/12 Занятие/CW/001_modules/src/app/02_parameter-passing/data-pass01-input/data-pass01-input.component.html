@@ -1,0 +1,12 @@
+<h2>@Input</h2>
+<!-- хорошо знакомый способ задания компонента - без параметров -->
+<app-input-child></app-input-child>
+<hr>
+<!-- передача литеральных констант "Counter One" и 42 в компонент app-input-child
+     name, counterValue - имя свойств компонент
+     step - внешнее имя для свойства stepCounter
+-->
+<app-input-child name="Counter One" [counterValue]="42" [step]="10"></app-input-child>
+<hr>
+<!-- step - внешнее имя для свойства stepCounter -->
+<app-input-child [name]="'Counter Two'" [step]="hostCounter"></app-input-child>

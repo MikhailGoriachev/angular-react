@@ -1,0 +1,6 @@
+/* стиль применяется только к компоненту first*/
+p {
+  background-color: aquamarine;
+  color: darkblue;
+  padding: 6px;
+}

@@ -1,0 +1,29 @@
+<!-- навигация по приложению, переходы по заданию -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand"  routerLink="/" routerLinkActive="active"
+       [routerLinkActiveOptions]="{exact: true}">ПД011</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#appNavbar-1">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="appNavbar-1">
+      <ul class="navbar-nav">
+        <!-- Переход на обработку коллекции работниклов -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="workers_process" routerLinkActive="active"
+             title="Переход на обрабтку коллекции работников по заанию">Работники</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+<!-- место размещения компонентов - ниже <router-outlet> -->
+<main class="container mt-5">
+  <div class="row">
+    <router-outlet></router-outlet>
+  </div>
+</main>

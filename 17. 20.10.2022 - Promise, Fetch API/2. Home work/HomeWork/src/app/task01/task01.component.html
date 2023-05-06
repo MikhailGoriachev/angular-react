@@ -1,0 +1,334 @@
+<!-- #region Параметры обработки -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark shadow border-3 border-top border-primary sticky-top">
+    <div class="container-fluid justify-content-center">
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav align-items-center">
+
+                <!-- Исходные данные -->
+                <button type="button" class="btn btn-success me-3" (click)="selectByDefault()">
+                    Исходные данные
+                </button>
+
+                <!-- Список тренеров -->
+                <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal"
+                        data-bs-target="#modalId"
+                        (click)="currentSelectType = SelectType.coachList">
+                    Список тренеров
+                </button>
+
+                <!-- По тренеру -->
+                <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal"
+                        data-bs-target="#modalId"
+                        (click)="currentSelectType = SelectType.coach">
+                    По тренеру
+                </button>
+
+                <!-- По дате рождения -->
+                <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal"
+                        data-bs-target="#modalId"
+                        (click)="currentSelectType = SelectType.dateOfBirth">
+                    По дате рождения
+                </button>
+
+                <!-- По разряду -->
+                <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal"
+                        data-bs-target="#modalId"
+                        (click)="currentSelectType = SelectType.levelRange">
+                    По разряду
+                </button>
+
+                <!-- По возрасту -->
+                <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal"
+                        data-bs-target="#modalId"
+                        (click)="currentSelectType = SelectType.ageRange">
+                    По возрасту
+                </button>
+
+                <!-- Самые молодые -->
+                <button type="button" class="btn btn-primary me-3" (click)="selectByYoungest()">
+                    Самые молодые
+                </button>
+
+                <!-- Самые старые -->
+                <button type="button" class="btn btn-primary me-3" (click)="selectByOldest()">
+                    Самые старые
+                </button>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Секция с данными -->
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 min-vh-100 p-3">
+
+    <h4 class="text-center">Задание 1. Студенты</h4>
+
+    <!-- Студенты -->
+    <app-students-table [items]="students"
+                        (onAddItem)="addItem()"
+                        (onEditItem)="editItem($event)"
+                        (onRemoveItem)="removeItem($event)">
+    </app-students-table>
+
+</section>
+
+<!-- Форма для студента -->
+<app-student-form (onSubmitEvent)="formStudentHandler($event)"
+                  [isCreateMode]="isCreateStudent"
+                  [coachList]="coachList"
+                  [levelList]="levelList"
+                  [groupList]="groupList">
+</app-student-form>
+
+<!-- Модальное окно -->
+<div class="modal fade" id="modalId" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <ng-container [ngSwitch]="currentSelectType">
+
+                <!-- Список тренеров -->
+                <ng-container *ngSwitchCase="SelectType.coachList">
+                    <ng-container *ngTemplateOutlet="coachListContent"></ng-container>
+                </ng-container>
+
+                <!-- Выборка по тренеру -->
+                <ng-container *ngSwitchCase="SelectType.coach">
+                    <ng-container *ngTemplateOutlet="coachContent"></ng-container>
+                </ng-container>
+
+                <!-- Выборка по дате рождения -->
+                <ng-container *ngSwitchCase="SelectType.dateOfBirth">
+                    <ng-container *ngTemplateOutlet="dateOfBirthContent"></ng-container>
+                </ng-container>
+
+                <!-- Выборка по диапазону разрядов -->
+                <ng-container *ngSwitchCase="SelectType.levelRange">
+                    <ng-container *ngTemplateOutlet="levelRangeContent"></ng-container>
+                </ng-container>
+
+                <!-- Выборка по диапазону возрастов -->
+                <ng-container *ngSwitchCase="SelectType.ageRange">
+                    <ng-container *ngTemplateOutlet="ageRangeContent"></ng-container>
+                </ng-container>
+
+            </ng-container>
+        </div>
+    </div>
+</div>
+
+<!-- Список тренеров -->
+<ng-template #coachListContent>
+
+    <!-- Заголовок -->
+    <div class="modal-header">
+        <h5 class="modal-title">Список тренеров</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+    </div>
+
+    <!-- Тело -->
+    <div class="modal-body p-3">
+        <table class="table table-borderless table-striped table-hover">
+            <tbody>
+            <tr *ngFor="let c of coachList">
+                <td>{{c}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Подвал -->
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+    </div>
+</ng-template>
+
+
+<!-- Выборка по тренеру -->
+<ng-template #coachContent>
+    <form [formGroup]="formByCoach"
+          (ngSubmit)="selectByCoach(formByCoach.value.coach!)">
+
+        <!-- Заголовок -->
+        <div class="modal-header">
+            <h5 class="modal-title">Выборка по тренеру</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+        </div>
+
+        <!-- Тело -->
+        <div class="modal-body p-3">
+            <div class="form-floating">
+                <select class="form-select me-3 {{Utils.getClassValid(this.formByCoach.controls['coach']!)}}"
+                        formControlName="coach">
+                    <option *ngFor="let c of coachList" [value]="c">{{c}}</option>
+                </select>
+                <label class="form-label">Тренер:</label>
+            </div>
+        </div>
+
+        <!-- Подвал -->
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary me-3 w-8rem" data-bs-dismiss="modal"
+                    [disabled]="this.formByCoach.invalid">
+                Выбрать
+            </button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        </div>
+    </form>
+</ng-template>
+
+
+<!-- Выборка по дате рождения -->
+<ng-template #dateOfBirthContent>
+    <form [formGroup]="formByDateOfBirth"
+          (ngSubmit)="selectByDateOfBirth(formByDateOfBirth.value.dateOfBirth!)">
+
+        <!-- Заголовок -->
+        <div class="modal-header">
+            <h5 class="modal-title">Выборка по дате рождения</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+        </div>
+
+        <!-- Тело -->
+        <div class="modal-body p-3">
+            <div class="form-floating">
+                <select
+                    class="form-select {{Utils.getClassValid(this.formByDateOfBirth.controls['dateOfBirth']!)}}"
+                    formControlName="dateOfBirth">
+                    <option *ngFor="let d of dateOfBirthList"
+                            [value]="d.toISOString()">{{d | date : "dd/MM/yyyy"}}</option>
+                </select>
+                <label class="form-label">Дата рождения:</label>
+            </div>
+        </div>
+
+        <!-- Подвал -->
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary me-3 w-8rem" data-bs-dismiss="modal"
+                    [disabled]="this.formByDateOfBirth.invalid">
+                Выбрать
+            </button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        </div>
+    </form>
+</ng-template>
+
+<!-- Выборка по диапазону разрядов -->
+<ng-template #levelRangeContent>
+    <form [formGroup]="formByLevelRange"
+          (ngSubmit)="selectByLevelRange(formByLevelRange.value.min!, formByLevelRange.value.max!)">
+
+        <!-- Заголовок -->
+        <div class="modal-header">
+            <h5 class="modal-title">Выборка по диапазону разрядов</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+        </div>
+
+        <!-- Тело -->
+        <div class="modal-body p-3">
+
+            <!-- Минимум -->
+            <div class="form-floating mb-2">
+                <select
+                    class="form-select {{
+                        formByLevelRange.hasError('range')
+                            ? 'is-invalid'
+                            : Utils.getClassValid(this.formByLevelRange.controls['min']!)
+                    }}"
+                    formControlName="min">
+                    <option *ngFor="let l of levelList"
+                            [value]="l.value">{{l.name}}</option>
+                </select>
+                <label class="form-label">Минимальный разряд:</label>
+            </div>
+
+            <!-- Максимум -->
+            <div class="form-floating">
+                <select
+                    class="form-select {{
+                        formByLevelRange.hasError('range')
+                            ? 'is-invalid'
+                            : Utils.getClassValid(this.formByLevelRange.controls['max']!)
+                    }}"
+                    formControlName="max">
+                    <option *ngFor="let l of levelList"
+                            [value]="l.value">{{l.name}}</option>
+                </select>
+                <label class="form-label">Максимальный разряд:</label>
+            </div>
+
+            <!-- Вывод ошибки диапазона -->
+            <div *ngIf='formByLevelRange.hasError("range")' class="alert alert-danger mt-3" role="alert">
+                Ошибка диапазона! Максимальное значение должно быть больше минимального
+            </div>
+        </div>
+
+        <!-- Подвал -->
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary me-3 w-8rem" data-bs-dismiss="modal"
+                    [disabled]="this.formByLevelRange.invalid">
+                Выбрать
+            </button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        </div>
+    </form>
+</ng-template>
+
+<!-- Выборка по диапазону возрастов -->
+<ng-template #ageRangeContent>
+    <form [formGroup]="formByAgeRange"
+          (ngSubmit)="selectByAgeRange(formByAgeRangeControls.min.value!, formByAgeRangeControls.max.value!)">
+
+        <!-- Заголовок -->
+        <div class="modal-header">
+            <h5 class="modal-title">Выборка по диапазону возрастов</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+        </div>
+
+        <!-- Тело -->
+        <div class="modal-body p-3">
+
+            <!-- Минимум -->
+            <div class="form-floating mb-2">
+                <input
+                    class="form-control {{
+                        formByAgeRange.hasError('range')
+                            ? 'is-invalid'
+                            : Utils.getClassValid(this.formByAgeRange.controls['min']!)
+                    }}"
+                    type="number"
+                    formControlName="min">
+                <label class="form-label">Минимальный возраст:</label>
+            </div>
+
+            <!-- Максимум -->
+            <div class="form-floating">
+                <input
+                    class="form-control {{
+                        formByAgeRange.hasError('range')
+                            ? 'is-invalid'
+                            : Utils.getClassValid(this.formByAgeRange.controls['max']!)
+                    }}"
+                    type="number"
+                    formControlName="max">
+                <label class="form-label">Максимальный возраст:</label>
+            </div>
+
+            <!-- Вывод ошибки диапазона -->
+            <div *ngIf='formByAgeRange.hasError("range")' class="alert alert-danger mt-3" role="alert">
+                Ошибка диапазона! Максимальное значение должно быть больше минимального
+            </div>
+        </div>
+
+        <!-- Подвал -->
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary me-3 w-8rem" data-bs-dismiss="modal"
+                    [disabled]="this.formByAgeRange.invalid">
+                Выбрать
+            </button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        </div>
+
+    </form>
+</ng-template>
+

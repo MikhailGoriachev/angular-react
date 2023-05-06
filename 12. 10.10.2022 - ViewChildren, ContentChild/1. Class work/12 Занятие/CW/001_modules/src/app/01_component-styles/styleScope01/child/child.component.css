@@ -1,0 +1,34 @@
+
+/* p{
+    background: brown;
+} */
+
+/* :host {
+    display: block;
+    border: 3px solid red;
+    background: pink;
+    padding: 10px;
+} */
+
+/* Запись ниже не работает поскольку для Ангуляра она не правильная
+    не смотря на то что имя компонента в теге app-child*/
+/* app-child{
+    display: block;
+    border: 3px solid red;
+    background: pink;
+    padding: 10px;
+} */
+
+/* Синонимы */
+/* :host(.second-child) {
+    display: block;
+    background-color: aqua;
+} */
+/* :host.second-child {
+    display: block;
+    background-color: green;
+} */
+/* .second-child:host {
+    display: block;
+    background-color: gold;
+} */

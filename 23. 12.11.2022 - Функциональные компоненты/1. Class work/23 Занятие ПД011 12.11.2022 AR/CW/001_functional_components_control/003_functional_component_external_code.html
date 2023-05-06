@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!--
+    Подключение хуков при внешнем размещении кода
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React. Хуки функциональных компонентов</title>
+
+    <link rel="stylesheet" href="style.css">
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="images/emotion_smile.png" type="image/x-icon">
+
+    <!-- локальное подключение React -->
+    <script src="lib/react/react.production.min.js"></script>
+    <script src=" lib/react/react-dom.production.min.js"></script>
+    <script src="lib/babel.min.js"></script>
+</head>
+<body>
+<h3>Функциональный компонент, использование хуков, внешний код</h3>
+<div id="app"></div>
+
+<script src="counter.jsx" type="text/babel"></script>
+<script type="text/babel">
+
+    ReactDOM.createRoot(document.getElementById("app"))
+    .render(
+        <ClickButtonHook increment={2} />
+    )
+</script>
+</body>
+</html>

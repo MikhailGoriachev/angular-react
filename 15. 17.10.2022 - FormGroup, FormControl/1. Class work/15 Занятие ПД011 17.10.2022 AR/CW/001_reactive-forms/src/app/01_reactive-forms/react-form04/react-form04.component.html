@@ -1,0 +1,43 @@
+<h2>Validators</h2>
+<form novalidate [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
+
+     <div class="login-field">
+          Логин <br>
+          <input type="text" formControlName="login">
+          <pre>
+            {{ loginForm.controls['login'].errors | json }}
+               <!--             {{ loginForm.get('login').errors | json }} -->
+        </pre>
+     </div>
+
+     <div class="pass-field">
+          Пароль <br>
+          <input type="password"
+                 formControlName="password">
+          <pre>
+                {{ loginForm.controls['password'].errors | json }}
+            </pre>
+     </div>
+     <div class="checkbox-field">
+          <label>
+               <input formControlName="agree" type="checkbox">
+               Изучаем разработку на Angular!
+          </label>
+          <pre>
+            {{ loginForm.controls['agree'].errors | json }}
+        </pre>
+     </div>
+
+     <input type="submit" class="btn"
+            [disabled]="loginForm.invalid" value="Sign In">
+
+     <input type="button" (click)="showDir(loginForm)" value="Click">
+</form>
+
+<div>
+     <ul>
+          <li>{{ formData.login }}</li>
+          <li>{{ formData.password }}</li>
+          <li>{{ formData.agree }}</li>
+     </ul>
+</div>

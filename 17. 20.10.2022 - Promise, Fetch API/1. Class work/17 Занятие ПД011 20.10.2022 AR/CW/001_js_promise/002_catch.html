@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+
+    <title>Catch</title>
+</head>
+<body>
+<script>
+    let promise = new Promise((resolve, reject) => {
+
+        setTimeout(() => {
+            resolve('Данные, полученные от сервера')
+        }, 1_000);
+
+        setTimeout(() => {
+            reject(new Error('Error called!'))
+        }, 3_000); // увеличить до значения, бОльшего значения в resolve()
+    });
+    // Обработчик .catch(onRejected) получает ошибку и должен обработать её.
+    // !! перехватываются ошибки, возникающие в then !!
+
+    // Есть два варианта развития событий:
+
+    // Если ошибка не критичная, то onRejected возвращает значение через return,
+    // и управление переходит в ближайший .then(onFulfilled).
+    // Если продолжить выполнение с такой ошибкой нельзя, то он делает throw,
+    // и тогда ошибка переходит в следующий ближайший .catch(onRejected).
+    promise
+        .then(result => {
+            console.log(result);
+            document.querySelector('#out1').innerHTML = 'Первый then';
+
+            // раскомментировать для демонстарции работы catch
+            // throw new Error('Ошибка в первом then');
+
+            return result + ' доп. обработка';
+        })
+        .then(result => { console.log(result); document.querySelector('#out2').innerHTML = 'Второй then'; })
+        .catch(error => { console.error(error); document.querySelector('#err1').innerHTML = 'Отработал catch'; })
+</script>
+
+<h3>Promise/catch - смотрите соощения в консоли</h3>
+<p id="out1"></p>
+<p id="out2"></p>
+<p id="err1"></p>
+
+</body>
+</html>

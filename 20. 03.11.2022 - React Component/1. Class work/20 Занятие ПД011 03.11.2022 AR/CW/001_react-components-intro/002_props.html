@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!--
+    Props представляет коллекцию значений, которые ассоциированы с компонентом.
+    Эти значения позволяют создавать динамические компоненты, которые не
+    зависят от жестко закодированных статических данных.
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React. Введение в props</title>
+
+    <link rel="stylesheet" href="style.css">
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="images/emotion_smile.png" type="image/x-icon">
+</head>
+<body>
+    <div id="app"></div>
+
+    <!-- подключение React из CDN -->
+    <!--<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>-->
+    <!--<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>-->
+    <!--<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>-->
+
+    <!-- локальное подключение React -->
+    <script src="/lib/react/react.production.min.js"></script>
+    <script src=" lib/react/react-dom.production.min.js"></script>
+    <script src="lib/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        // компонент со свойствами, на базе функции
+        // Параметр props, который передается в функцию компонента,
+        // инкапсулирует свойства объекта. Например, свойство name и age.
+        // При рендеринге мы можем создать набор компонентов Hello, но передать
+        // в них разные данные для name и age. И таким образом, получим набор
+        // однотипной разметки html, наполненной разными данными.
+        function PersonDiv(props) {
+
+            // ES6+ создание локальных переменных из одноименных свойств объекта props
+            const {age, name} = props;
+
+            return <div>
+                <p>Имя: {name}, возраст: {age}</p>
+            </div>;
+
+            // можно и напрямую обращться к свойствам объекта props
+            // return <div>
+            //     <p>Имя: {props.name}, возраст: {props.age}</p>
+            // </div>;
+        }
+
+        // для функции можно задать значения по умолчанию
+        PersonDiv.defaultProps = {name: "Курагендариус", age: 42};
+
+        // подход на базе стрелочных функций
+        const Greeting = (props) => {
+
+            // ES6+ создание локальных переменных из одноименных свойств объекта props
+            const {text, sender} = props;
+
+            return(<ul>
+                <li>{text}</li>
+                <li>Приветствие от  <b>{sender}</b></li>
+            </ul>);
+        }
+
+        // для стрелочной функции можно задать значения по умолчанию
+        Greeting.defaultProps = {text: "Текст приветствия по умолчанию", sender: 'отправитель по умолчанию'};
+
+        // подход на базе классов
+        // Класс компонента также извне получает объект свойств, который доступен через this.props.
+        class Bye extends React.Component {
+            // метод рендеринга
+            render() {
+                // return <ol>
+                //     <li>Текст: <i>{this.props.text}</i></li>
+                //     <li>От кого: <i>{this.props.sender}</i></li>
+                // </ol>;
+
+                const {text, sender }= this.props;
+                return <ol>
+                    <li>Текст: <i>{text}</i></li>
+                    <li>От кого: <i>{sender}</i></li>
+                </ol>;
+            } // render
+        } // class Bye
+
+        // статическое свойство - значения props по умолчанию
+        Bye.defaultProps = {text: "Текст прощания по умолчанию", sender: 'отправитель по умолчанию'};
+
+        ReactDOM.createRoot(document.getElementById("app"))
+            .render(
+                // При рендеринге React передает значения атрибутов в виде единого объекта "props"
+                <span>
+                    <h3>Компонент со свйоствами, подход на базе функции</h3>
+                    <PersonDiv name="Степан" age="33"/>
+                    <PersonDiv name="Злата" age="32"/>
+                    <PersonDiv name="Злата"/>
+                    <PersonDiv age="32"/>
+                    <PersonDiv/>
+
+                    <h3>Компонент со свойствами, подход на базе стрелочной функции</h3>
+                    <Greeting text="Привет из стрелочной функции" sender="Раиса"/>
+                    <Greeting text="Салют из стрелочной функции" sender="Дарья"/>
+                    <Greeting sender="Дарья"/>
+                    <Greeting text="Салют из стрелочной функции"/>
+                    <Greeting/>
+
+                    <h3>Компонент со свойствами, подход на базе класса</h3>
+                    <Bye text="Пока из класса." sender="Леонид" />
+                    <Bye text="Всем пока, это класс." sender="Галина" />
+                    <Bye text="Всем пока, это класс." />
+                    <Bye sender="Галина" />
+                    <Bye />
+                </span>
+            );
+    </script>
+</body>
+</html>

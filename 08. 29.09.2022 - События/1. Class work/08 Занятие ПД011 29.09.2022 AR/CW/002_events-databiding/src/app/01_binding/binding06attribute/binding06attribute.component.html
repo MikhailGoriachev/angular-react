@@ -1,0 +1,64 @@
+
+<h2>Атрибутивное связывание данных</h2>
+<!--
+        Привязка идет не к атрибуту, а именно к свойству элемента в javascript,
+        который представляет данный элемент html
+        Angular выдаст ошибку - Can't bind to 'r' since it isn't a known property of ...
+        Для того чтобы выполнить привязку к подобным атрибутам необходимо использовать attribute binding
+        [attr.имя_атрибута]="expression" или
+        attr.имя_атрибута="{{ expression }}"
+-->
+<table>
+        <thead>
+            <tr>
+                <th #thTable [attr.colspan]="colSpan">
+                    table title
+                </th>
+<!--                <th #thTable attr.colspan="{{ colSpan }}">-->
+<!--                    table title-->
+<!--                </th>-->
+
+                <!-- colspan выдаст ошибку, а colSpan сработает нормально-->
+<!--                <th #thTable [colspan]="colSpan">-->
+<!--                        table title-->
+<!--                    </th>-->
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>First Row</td>
+                <td>{{ interpolationContent }}</td>
+                <td [textContent]='textInformation'></td>
+            </tr>
+            <tr>
+                <td>Second Row</td>
+                <td>{{ interpolationContent }}</td>
+                <td [innerText]="textInformation">Static content</td>
+            </tr>
+            <tr>
+                <td>Last Row</td>
+                <td>{{ interpolationContent }}</td>
+                <td [innerHTML]="htmlContent"></td>
+            </tr>
+        </tbody>
+      </table>
+<br>
+<button (click)="consoleDir(thTable)">Нажать</button>
+
+<hr>
+<svg width="100" height="100">
+  <!-- [attr.r]="valueR" привязка атрибута радиус к свойству класса -->
+	<circle
+        [attr.r]="valueR"
+        cx="50"
+        cy="50"
+        stroke="green"
+        stroke-width="4"
+        fill="lightgreen"
+        #svgCircle />
+</svg>
+<br>
+<button (click)="increase()">+</button>
+<button (click)="decrease()">-</button>
+<button (click)="consoleDir(svgCircle)">Нажать</button>
+

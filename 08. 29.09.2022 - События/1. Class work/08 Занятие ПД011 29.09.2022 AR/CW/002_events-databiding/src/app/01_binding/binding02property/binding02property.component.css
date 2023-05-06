@@ -1,0 +1,20 @@
+.img-examples{
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid #000;
+    padding: 10px;
+}
+
+img{
+  height: 400px;
+  padding: 6px;
+}
+
+.inputs{
+    background: lightgreen;
+}
+
+input{
+    width: 50px;
+    height: 25px;
+}

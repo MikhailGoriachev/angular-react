@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--
+
+    В приложениях React при удалении компонентов важно освобождать ресурсы, которые
+    используются этими компонентами. Для управления ресурсами можно задействовать
+    функции жизненного цикла компонента.
+
+    Создание подобных ресурсов в компонентах React производится в функции
+    componentDidMount(). А для освобождения ресурсов применяется функция
+    componentWillUnmount().
+
+    Стандартный пример - часы, которые выводят текущее время на страницу
+    и для обновления времени используют таймер:
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React. Жизненный цикл компонента</title>
+
+    <link rel="stylesheet" href="style.css">
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="images/emotion_smile.png" type="image/x-icon">
+</head>
+<body>
+<h3>Введение в жизненный цикл компонентов - управление ресурсами</h3>
+<div id="app"></div>
+
+<!-- локальное подключение React -->
+<script src="lib/react/react.production.min.js"></script>
+<script src=" lib/react/react-dom.production.min.js"></script>
+<script src="lib/babel.min.js"></script>
+
+<script type="text/babel">
+    const root = ReactDOM.createRoot(
+        document.getElementById("app")
+    );
+
+    class Clock extends React.Component {
+        constructor(props) {
+            super(props);
+
+            this.state = {date: new Date(), name: "Tom"};
+            this.unmountClick = this.unmountClick.bind(this);
+
+            console.log("constructor");
+        }
+
+        unmountClick() {
+            console.log("unmount");
+            root.unmount();
+        }
+
+        // захват ресурса - в качестве ресурса используем таймер
+        // например, AJAX-запрос or Fetch API request
+        componentDidMount() {
+            this.timerId = setInterval(() => this.tick(), 1_000);
+            console.log("componentDidMount()");
+        }
+
+        // освобождение ресурса - перед удалением компонента
+        // AJAX-запрос or Fetch API request
+        componentWillUnmount() {
+            clearInterval(this.timerId);
+            console.log("componentWillUnmount()");
+        }
+
+        // обработчик тиков таймера
+        tick() {
+            this.setState({date: new Date()});
+        }
+
+
+        render() {
+            return (
+                <>
+                    <h1>Привет, {this.state.name}</h1>
+                    <h2>Текущее время {this.state.date.toLocaleTimeString()}.</h2>
+                    <button onClick={this.unmountClick}>Unmount (удалить компонент из DOM)</button>
+                </>
+            );
+        }
+    }
+
+    root.render(
+        <Clock/>
+    );
+</script>
+</body>
+</html>

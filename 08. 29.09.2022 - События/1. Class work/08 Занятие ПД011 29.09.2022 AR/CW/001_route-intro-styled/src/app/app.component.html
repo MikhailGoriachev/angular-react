@@ -1,0 +1,18 @@
+<div class="container">
+  <h1>Введение в маршрутизацию Angular</h1>
+  <h2>Simple routing</h2>
+  <nav>
+	  <!--routerLink - директива задает адрес для ссылки -->
+	  <!--routerLinkActive - директива устанавливает или удаляет класс в зависимости от состояния маршрута-->
+    <a routerLink="/" routerLinkActive="active one" [routerLinkActiveOptions]="{exact: true}">First</a>
+    <a routerLink="/second" routerLinkActive="active two">Second</a>
+    <a routerLink="/third" routerLinkActive="active three">Third</a>
+    <a routerLink="/fourth" routerLinkActive="active four">Fourth</a>
+  </nav>
+  <br>
+  <hr>
+  <!--router-outlet после данного элемента будет отображаться компонент,
+    который выбирает роутер в соответствии с маршрутом заданным в RouterModule.forRoot()-->
+    <!-- Поэтому и отсутствуют статически прописанные компоненты -->
+  <router-outlet></router-outlet>
+</div>

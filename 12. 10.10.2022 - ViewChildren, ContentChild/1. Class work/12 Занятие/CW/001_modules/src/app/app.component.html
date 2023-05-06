@@ -1,0 +1,30 @@
+<div class="container">
+  <h1>Введение в Angular</h1>
+  <h2></h2>
+  <main>
+    <nav>
+      <h4>Component styles</h4>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">01_styles</a>
+      <a routerLink="component-css" routerLinkActive="active">02_component-css</a>
+      <a routerLink="view-encapsulation" routerLinkActive="active">03_ViewEncapsulation</a>
+      <h3>Component Interaction</h3>
+      <a routerLink="input" routerLinkActive="active">04_@Input Decorator</a>
+      <a routerLink="output" routerLinkActive="active">05_@Output Decorator</a>
+      <a routerLink="ng-content" routerLinkActive="active">06_ng-content tag</a>
+      <a routerLink="view-child" routerLinkActive="active">07_@ViewChild Decorator</a>
+      <a routerLink="view-children" routerLinkActive="active">08_@ViewChildren Decorator</a>
+      <a routerLink="content-child" routerLinkActive="active">09_@ContentChild Decorator</a>
+      <a routerLink="content-children" routerLinkActive="active">10_@ContentChildren Decorator</a>
+      <h3>Component lifecycle</h3>
+      <a routerLink="lifecycle-component" routerLinkActive="active">11_Full component life cycle</a>
+      <a routerLink="lifecycle-steps" routerLinkActive="active">12_Lifecycle steps</a>
+      <a routerLink="ng-on-changes" routerLinkActive="active">13_ngOnChanges() lifecycle</a>
+      <a routerLink="ng-after-content" routerLinkActive="active">14_ngAfterContentInit() lifecycle</a>
+      <a routerLink="ng-after-view-init" routerLinkActive="active">15_ngAfterViewInit() lifecycle</a>
+      <a routerLink="ng-after-view-checked" routerLinkActive="active">16_ngAfterViewChecked() lifecycle</a>
+    </nav>
+    <div class="examples">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>

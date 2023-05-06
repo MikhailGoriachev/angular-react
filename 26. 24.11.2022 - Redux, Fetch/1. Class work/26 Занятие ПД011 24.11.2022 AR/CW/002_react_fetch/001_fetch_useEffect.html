@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!--
+  Получение данных от сервера - useEffect:
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React. Хуки функциональных компонентов</title>
+
+    <link rel="stylesheet" href="style.css">
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="images/emotion_smile.png" type="image/x-icon">
+
+    <!-- локальное подключение React -->
+    <script src="lib/react/react.production.min.js"></script>
+    <script src=" lib/react/react-dom.production.min.js"></script>
+    <script src="lib/babel.min.js"></script>
+</head>
+<body>
+
+<h3>Функциональные компоненты, использование хука useEffect() для получения данных от сервера</h3>
+<h4>Поле вывода: <span id="out"></span></h4>
+<div id="app"></div>
+
+<script type="text/babel">
+    
+    class Client {
+        
+        constructor(surname = '', name = '', patronymic = '', passport = '') {
+            this.surname = surname;
+            this.name = name;
+            this.patronymic = patronymic;
+            this.passport = passport;
+        }
+    }
+
+    // для удобства работы примеров получим корень рендеринга компонентов
+    const root = ReactDOM.createRoot(document.getElementById("app"));
+
+    // при загрузке компонента обращаемся на сервер
+    function User(props) {
+        // состояния компонента: id
+        const [id, setId] = React.useState(props.id);
+        const [name, setName] = React.useState("");
+        const [username, setUsername] = React.useState("");
+
+        // Определение эффекта, получающего данные от сервера
+        // и задающего новое состояние
+        React.useEffect(() => {
+            const url=`https://jsonplaceholder.typicode.com/users/${id}`;
+            
+            // массив клиентов
+            let clients;
+            
+            let obj = {
+                surname: "Петров",
+                name: "Паша",
+                patronymic: "Викторович",
+                passport: "9734658342",
+                salary: 15_000
+            }
+            
+            fetch(url)
+                .then((r) => r.json())
+                .then((obj) => clients = obj.map(o => Object.assign(new Client(), o)));
+            
+            // обращение к серверу
+            fetch(url)
+                .then((response) => {
+                    console.log(`Ответ от сервера получен, статус: `, response.status);
+                    return response.json();
+                })
+                .then((json) => {
+                    console.dir(json);
+                    setId(json.id);
+                    setName(json.name);
+                    setUsername(json.username);
+                })
+                .catch(error => console.error(error));
+        }, []);
+
+        return (
+            <>
+                <ul>
+                    <li>Ид: <b>{id}</b></li>
+                    <li>Имя: <b>{name}</b></li>
+                    <li>Никнейм: <b>{username}</b></li>
+                </ul>
+                { console.log(`render: ${id}, ${name}, ${username}`) }
+            </>
+        );
+    } // User
+
+
+    // отрисовка компонентов на странице
+    root.render(
+        <>
+            <hr/>
+            <User id="1" />
+            <hr/>
+            <User id="2" />
+            <hr/>
+            <User id="3" />
+            <hr/>
+        </>
+    )
+</script>
+</body>
+</html>

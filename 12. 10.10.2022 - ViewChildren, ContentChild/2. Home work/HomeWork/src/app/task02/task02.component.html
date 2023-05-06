@@ -1,0 +1,46 @@
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 min-vh-100 p-3">
+    <h4 class="text-center">Задание 2. Корабли</h4>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th><a (click)="$event.preventDefault(); sortById()" href="#">Id</a></th>
+            <th>Изображение</th>
+            <th><a (click)="$event.preventDefault(); sortByName()" href="#">Название</a></th>
+            <th>Тип</th>
+            <th>Длина</th>
+            <th>Ширина</th>
+            <th><a (click)="$event.preventDefault(); sortByDisplacement()" href="#">Водоизмещение</a></th>
+            <th><a (click)="$event.preventDefault(); sortByYear()" href="#">Год постройки</a></th>
+            <th class="text-center">
+                <button class="btn btn-success"
+                        (click)="addItem()">
+                    <i class="bi bi-plus-lg"></i>
+                    Добавить
+                </button>
+            </th>
+        </tr>
+        </thead>
+
+        <tbody class="align-middle">
+        <tr *ngFor="let s of shipList">
+            <td>{{s.id}}</td>
+            <td class="h-7rem w-10rem bg-img text-center">
+                <img src="assets/images/ships/{{s.imageFile}}" alt="d.image" class="h-100">
+            </td>
+            <td>{{s.name}}</td>
+            <td>{{s.typeShip}}</td>
+            <td>{{s.length}}</td>
+            <td>{{s.width}}</td>
+            <td>{{s.displacement}}</td>
+            <td>{{s.year}}</td>
+            <td class="text-center"
+                (click)="removeItem(s.id)">
+                <button class="btn btn-danger">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>

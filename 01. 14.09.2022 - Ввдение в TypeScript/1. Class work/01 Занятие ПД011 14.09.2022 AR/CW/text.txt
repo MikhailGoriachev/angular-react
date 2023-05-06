@@ -1,0 +1,34 @@
+001 Основы синтаксиса TypeScript
+002 Особенности JavaScript и TypeScript
+003 Типы данных в TypeScript
+004 Функции в TypeScript
+
+
+https://nodejs.org/ru/
+
+
+node -v
+npm -v
+
+REPL: Read Evaluate Print Loop
+node
+
+.exit  - команда выхода из REPL-режима
+
+
+TypeScript
+https://www.typescriptlang.org/
+
+
+установка typescript глобально
+npm install -g typescript
+или
+npm i -g typescript
+
+проверка версии компилятора с typescript
+tsc -v
+
+
+устновка пакетов зависимостей, прочитанных из package.json
+npm install 
+npm i

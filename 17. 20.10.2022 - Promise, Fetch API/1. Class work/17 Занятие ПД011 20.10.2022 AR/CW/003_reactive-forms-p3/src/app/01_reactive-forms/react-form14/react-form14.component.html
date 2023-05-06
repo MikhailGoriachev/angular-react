@@ -1,0 +1,24 @@
+<h2>
+    Создание асинхронного пользовательского валидатора с зависимостями
+</h2>
+
+<form novalidate [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm)">
+    <label>Регистрация имейла в акции</label><br>
+    <input type="email" formControlName="email">
+    <div class="alert alert-danger" *ngIf="email.errors && (email.dirty || email.touched)">
+        <span *ngIf="email.errors['required']">Поле обязательное для ввода</span>
+        <span *ngIf="email.errors['emailValidator']">Не правильный формат</span>
+        <span *ngIf="email.errors['blackListValidator']">Адрес находится в черном списке</span>
+    </div>
+    <div *ngIf="email.pending">
+        Идет проверка email адреса
+    </div>
+    <br>
+    <br>
+    <input type="submit" value="Зарегистрироваться">
+</form>
+
+<pre>{{registrationForm.value | json}}</pre>
+<hr>
+<span>Заблокированные имеил адреса</span>
+<pre>{{blockedEmails | json}}</pre>

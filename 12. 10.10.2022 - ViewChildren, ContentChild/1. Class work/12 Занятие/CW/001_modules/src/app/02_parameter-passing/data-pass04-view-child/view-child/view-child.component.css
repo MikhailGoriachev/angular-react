@@ -1,0 +1,17 @@
+:host{
+    padding: 5px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    display: block;
+    margin: 5px 0;
+    font-size: 30px;
+}
+
+.bg{
+    background: lightgreen;
+}
+
+p{
+    margin: 0;
+    font-size: 30px;
+}

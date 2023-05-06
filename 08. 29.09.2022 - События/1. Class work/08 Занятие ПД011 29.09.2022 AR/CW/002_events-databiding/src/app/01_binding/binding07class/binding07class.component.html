@@ -1,0 +1,21 @@
+<h1>Атрибутивная Директива ngClass</h1>
+
+<div class="blocks">
+    <!--
+        [class]="stringClasses" установка значения для свойства class
+        Все классы будут изменены при смене значения свойства
+    -->
+    <!-- Bindings -->
+    <div [class]="stringClasses">1</div>
+    <div [class.bg]="flag"
+         [class.border]="flag">
+        2
+    </div>
+    <!--
+        [class.border]="flag" - class binding
+        класс border будет добавлен к списку классов если значение isAccentBorder == true
+        и уделен если значение false
+    -->
+</div>
+
+<button (click)="flag = !flag">Нажать</button>

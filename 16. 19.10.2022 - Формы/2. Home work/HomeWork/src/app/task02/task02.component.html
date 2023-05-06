@@ -1,0 +1,208 @@
+<!-- #region Параметры обработки -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark shadow border-3 border-top border-primary sticky-top">
+    <div class="container-fluid justify-content-center">
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav align-items-center">
+
+                <button type="button" class="btn btn-success me-3" (click)="selectByDefault()">
+                    Исходный порядок
+                </button>
+
+                <!-- По автору и году -->
+                <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal"
+                        data-bs-target="#modalId"
+                        (click)="currentSelectType = SelectType.authorAndYear">
+                    По автору и году
+                </button>
+
+                <!-- По названию и макс. цене -->
+                <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal"
+                        data-bs-target="#modalId"
+                        (click)="currentSelectType = SelectType.nameAndMaxPrice">
+                    По названию и макс. цене
+                </button>
+
+                <!-- По цене -->
+                <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal"
+                        data-bs-target="#modalId"
+                        (click)="currentSelectType = SelectType.priceRange">
+                    По цене
+                </button>
+
+                <!-- Авторы -->
+                <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal"
+                        data-bs-target="#modalId"
+                        (click)="currentSelectType = SelectType.authorList">
+                    Авторы
+                </button>
+
+                <!-- Максимальная цена -->
+                <button type="button" class="btn btn-primary me-3"
+                        (click)="selectByPriceMax()">
+                    Максимальная цена
+                </button>
+
+                <!-- Минимальная цена -->
+                <button type="button" class="btn btn-primary me-3"
+                        (click)="selectByPriceMin()">
+                    Минимальная цена
+                </button>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- #endregion -->
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 min-vh-100 p-3">
+
+    <h4 class="text-center">Задание 2. Книги</h4>
+
+    <!-- Книги -->
+    <app-books-table [books]="books"
+                     (onAddItem)="addItem()"
+                     (onEditItem)="editItem($event)"
+                     (onRemoveItem)="removeItem($event)">
+    </app-books-table>
+
+</section>
+
+<!-- Форма для книги -->
+<app-book-form (onSubmitEvent)="formBookHandler($event)"
+               [authorList]="authorList"
+               [isCreateMode]="isCreateBook"
+               [sourceBook]="currentBook">
+    </app-book-form>
+
+<!-- Модальное окно -->
+<div class="modal fade" id="modalId" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <ng-container [ngSwitch]="currentSelectType">
+                <ng-container *ngSwitchCase="SelectType.authorAndYear">
+                    <ng-container *ngTemplateOutlet="authorAndYearModalContent"></ng-container>
+                </ng-container>
+                <ng-container *ngSwitchCase="SelectType.nameAndMaxPrice">
+                    <ng-container *ngTemplateOutlet="nameAndMaxPriceModalContent"></ng-container>
+                </ng-container>
+                <ng-container *ngSwitchCase="SelectType.priceRange">
+                    <ng-container *ngTemplateOutlet="priceRangeModalContent"></ng-container>
+                </ng-container>
+                <ng-container *ngSwitchCase="SelectType.authorList">
+                    <ng-container *ngTemplateOutlet="authorListContent"></ng-container>
+                </ng-container>
+            </ng-container>
+        </div>
+    </div>
+</div>
+
+<!-- По автору и году -->
+<ng-template #authorAndYearModalContent>
+    <div class="modal-header">
+        <h5 class="modal-title">Выборка по автору и году</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+    </div>
+    <div class="modal-body">
+        <div class="row p-3">
+            <label class="form-label">Автор:</label>
+            <select #author class="form-select me-3">
+                <option *ngFor="let t of authorList">{{t}}</option>
+            </select>
+            <label class="form-label">Год издания:</label>
+            <select #year class="form-select w-10rem me-3">
+                <option *ngFor="let t of yearList">{{t}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-primary me-3 w-8rem" data-bs-dismiss="modal"
+                (click)="selectByAuthorAndYear(author.value, +year.value)">
+            Выбрать
+        </button>
+    </div>
+</ng-template>
+
+<!-- По названию и макс. цене -->
+<ng-template #nameAndMaxPriceModalContent>
+    <form [formGroup]="formByNameAndLessMaxPrice"
+          (ngSubmit)="selectByNameAndLessMaxPrice(formByNameAndLessMaxPrice)">
+        <div class="modal-header">
+            <h5 class="modal-title">Выборка по названию и макс. цене</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+        </div>
+        <div class="modal-body">
+            <div class="row p-3">
+
+                <label class="form-label">Название:</label>
+                <select class="form-select me-3 {{Utils.getClassValid(this.controlsByNameAndLessMaxPrice.name)}}"
+                        formControlName="name">
+                    <option *ngFor="let t of nameList" [value]="t">{{t}}</option>
+                </select>
+
+                <label class="form-label">Максимальная цена:</label>
+                <input type="number"
+                       class="form-control w-8rem me-3 {{Utils.getClassValid(this.controlsByNameAndLessMaxPrice.maxPrice)}}"
+                       min="0" formControlName="maxPrice">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            <button type="submit" class="btn btn-primary me-3 w-8rem" data-bs-dismiss="modal">
+                Выбрать
+            </button>
+        </div>
+    </form>
+</ng-template>
+
+<!-- По цене -->
+<ng-template #priceRangeModalContent>
+    <form id="authorAndPriceRangeForm" [formGroup]="formByPriceRange"
+          (ngSubmit)="selectByAuthorAndPriceRange(formByPriceRange)">
+        <div class="modal-header">
+            <h5 class="modal-title">Выборка по цене</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+        </div>
+        <div class="modal-body">
+            <div class="row p-3">
+
+                <label class="form-label">Диапазон цены:</label>
+                <div class="row">
+                    <input type="number"
+                           class="form-control w-8rem me-3 {{Utils.getClassValid(this.controlsByPriceRange.minPrice)}}"
+                           min="0" placeholder="Мин"
+                           formControlName="minPrice">
+                    <input type="number"
+                           class="form-control w-8rem {{Utils.getClassValid(this.controlsByPriceRange.maxPrice)}}"
+                           min="0" placeholder="Макс"
+                           formControlName="maxPrice">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary me-3" data-bs-dismiss="modal">Закрыть</button>
+            <button type="submit" class="btn btn-primary w-8rem" data-bs-dismiss="modal">
+                Выбрать
+            </button>
+        </div>
+    </form>
+</ng-template>
+
+<!-- Список авторов -->
+<ng-template #authorListContent>
+    <div class="modal-header">
+        <h5 class="modal-title">Авторы</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+    </div>
+    <div class="modal-body">
+        <label>Авторы:</label>
+        <table class="table table-bordered">
+            <tr *ngFor="let a of authorList">
+                {{a}}
+            </tr>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+    </div>
+</ng-template>

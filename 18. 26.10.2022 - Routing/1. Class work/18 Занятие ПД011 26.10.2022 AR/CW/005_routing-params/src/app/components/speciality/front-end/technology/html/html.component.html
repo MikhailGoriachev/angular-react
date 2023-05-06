@@ -1,0 +1,35 @@
+<div class="wrapper-component">
+    <p>html!</p>
+    <!-- формирование URL с параметром в адресной строке
+         http://localhost:4200/front-end/html?pairs=true
+    -->
+    <button [queryParams]="{pairs: true}" [routerLink]="['/front-end','html']">Парные теги</button>
+
+     <!-- программное формирование URL с параметром в адресной строке
+     http://localhost:4200/front-end/html?pairs=true
+     -->
+    <button (click)="notPairedTagsMethod()">Не парные теги</button>
+    <hr>
+
+    <!--
+    формирование URL http://localhost:4200/front-end/html#block
+    строка block - параметр запроса
+    -->
+    <button [fragment]="'block'" [routerLink]="['/front-end','html']">Блочные</button>
+
+    <!--
+    Программное формирование URL с парамером в адресной строке
+    http://localhost:4200/front-end/html#inline
+    -->
+    <button (click)="inlineTypeFragment()">Строчные</button>
+    <br>
+    <br>
+    <a
+    [routerLink]="tag.id"
+    *ngFor="let tag of htmlTags"
+    [class.selected]="isSelected(tag)"
+    [class.end-tag]="addBgForTag(tag)"
+    [style.background]="typeElement(tag)"
+    >{{ '<' + tag.id + '>' }}</a>
+</div>
+<router-outlet></router-outlet>

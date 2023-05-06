@@ -1,0 +1,24 @@
+body {
+    font-family: Tahoma, sans-serif;
+    font-size: 12pt;
+}
+
+/* стили для примера 002 --------------------------------------- */
+button{
+    width: 100px;
+    min-height:30px;
+    padding: 6px;
+    border-radius: 4px;
+    margin:50px;
+}
+
+.on{
+    color: darkgreen;
+    background-color: lightgreen;
+}
+
+.off{
+    color:darkgray;
+    background-color: white;
+}
+/* стили для примера 002 --------------------------------------- */

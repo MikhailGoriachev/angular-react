@@ -1,0 +1,14 @@
+{
+  "name": "typescript-fundamentals-generics",
+  "version": "1.0.0",
+  "description": "TypeScript Fundamentals Generics",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -w",
+    "start": "lite-server"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
+}

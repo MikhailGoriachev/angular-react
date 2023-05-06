@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--
+
+Пример компонента на базе класса для преобразования в функциональный компонент
+(чтобы показать управление функциональными компонентами при помощи хуков)
+
+Хуки позволяют определять и использовать состояние и другие возможности React
+без создания классов. По сути хуки представляют функции, которые позволяют
+подключиться к состоянию и другим возможностям React.
+
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React. Хуки функциональных компонентов</title>
+
+    <link rel="stylesheet" href="style.css">
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="images/emotion_smile.png" type="image/x-icon">
+
+    <!-- локальное подключение React -->
+    <script src="lib/react/react.production.min.js"></script>
+    <script src=" lib/react/react-dom.production.min.js"></script>
+    <script src="lib/babel.min.js"></script>
+</head>
+<body>
+<h3>Компонент на базе класса - для пребразования в функциональный</h3>
+<div id="app"></div>
+
+<script type="text/babel">
+    class ClickButton extends React.Component {
+
+        constructor(props) {
+            super(props);
+
+            // в state в данном случае только то, что изменяется
+            this.state = {counter: 0};
+
+            // привязка контента обработчика клика по кнопке
+            this.press = this.press.bind(this);
+        }
+
+        // пример метода, меняющего state
+        // возвращается объект с новым state, собранным из предыдущего
+        incrementCounter(prevState, props) {
+            return {
+                counter: prevState.counter + props.increment
+            };
+        }
+
+        // обработчик клика по кнопке
+        press() {
+            this.setState(this.incrementCounter);
+        }
+
+        render() {
+            return (
+            <>
+                <button onClick={this.press}>Счет</button>
+                <ul>
+                    <li>Текущее значение счетчика: {this.state.counter}</li>
+                    <li>Шаг инкремента: {this.props.increment}</li>
+                </ul>
+            </>)
+        }
+    }
+
+    ReactDOM.createRoot(document.getElementById("app"))
+    .render(
+        <ClickButton increment={2} />
+    )
+</script>
+</body>
+</html>

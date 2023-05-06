@@ -1,0 +1,13 @@
+<div class="wrapper-component">
+  <p>Страница о фронтенде</p>
+
+  <!-- навигация по дочерним компонентам -->
+  <nav class="links">
+    <a routerLink="html">HTML</a>
+    <a [routerLink]="['css']">CSS</a>
+    <a routerLink="js">JS</a>
+  </nav>
+
+  <!-- место вставки дочерних компонентов -->
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,10 @@
+<div class="row">
+  <h3>Обработка по заданию:</h3>
+  <div class="col-3 m-3">
+    <img src="assets/images/variant13.png">
+    <button class="btn btn-primary" (click)="calc()">Вычислить</button>
+  </div>
+
+  <!-- передача a, b в компонент c3 для дальнейшей передачи их в компонент c2 -->
+  <app-c3 #appC3 [a]="a" [b]="b"></app-c3>
+</div>

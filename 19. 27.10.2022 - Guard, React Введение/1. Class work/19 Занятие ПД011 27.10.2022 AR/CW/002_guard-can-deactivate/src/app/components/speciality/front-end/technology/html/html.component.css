@@ -1,0 +1,20 @@
+a{
+    margin: 5px;
+    font-size: 25px;
+}
+
+.selected{
+    background: lightgray;
+}
+
+.end-tag{
+    background: aqua;
+}
+
+.inline-elements{
+    background: green;
+}
+
+.block-elements{
+    background: blue;
+}

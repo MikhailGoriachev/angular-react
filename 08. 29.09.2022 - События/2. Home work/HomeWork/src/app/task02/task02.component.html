@@ -1,0 +1,116 @@
+<!-- #region Параметры обработки -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark shadow border-3 border-top border-primary sticky-top">
+    <div class="container-fluid justify-content-center">
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+                <div>
+                    <h6 class="text-white text-center">Сортировка:</h6>
+                    <button type="button" class="btn btn-success me-3" (click)="showDefault()">Исходный порядок</button>
+                    <button type="button" class="btn btn-primary me-3" (click)="showOrderByDestination()">
+                        По пункту назначения
+                    </button>
+                    <button type="button" class="btn btn-primary me-3" (click)="showOrderByPrice()">
+                        По стоимости
+                    </button>
+                    <button type="button" class="btn btn-primary me-5" (click)="showOrderByFlightNumber()">
+                        По номеру рейса
+                    </button>
+                </div>
+
+                <div>
+                    <h6 class="text-white text-center">Выборка (подсветка записей):</h6>
+                    <div class="d-inline-flex align-items-center"
+                         title='Оставьте поля пустыми и нажмите "Показать", чтобы убрать выборку'>
+
+                        <input #price type="number" class="form-control me-3" placeholder="Мин. цена билета (&#8381;)"
+                               (keyup.enter)="setPredicateByPriceOver(price.value.length !== 0 ? +price.value : null)">
+                        <button type="button" class="btn btn-primary me-5"
+                                (click)="setPredicateByPriceOver(price.value.length !== 0 ? +price.value : null)">
+                            Показать&nbsp;(Enter)
+                        </button>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- #endregion -->
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 min-vh-100 p-3">
+    <h4 class="text-center">Задание 2. Заявки на авиабилеты</h4>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Пункт назначения</th>
+            <th>Номер рейса</th>
+            <th>Фамилию и инициалы пассажира</th>
+            <th>Стоимость билета</th>
+        </tr>
+        </thead>
+
+        <tbody class="align-middle">
+        <tr [class.bg-warning]="isSelect(ticketsView[0])">
+            <td>{{ticketsView[0].destination}}</td>
+            <td>{{ticketsView[0].flightNumber}}</td>
+            <td>{{ticketsView[0].fullName}}</td>
+            <td>{{ticketsView[0].price}}</td>
+        </tr>
+        <tr [class.bg-warning]="isSelect(ticketsView[1])">
+            <td>{{ticketsView[1].destination}}</td>
+            <td>{{ticketsView[1].flightNumber}}</td>
+            <td>{{ticketsView[1].fullName}}</td>
+            <td>{{ticketsView[1].price}}</td>
+        </tr>
+        <tr [class.bg-warning]="isSelect(ticketsView[2])">
+            <td>{{ticketsView[2].destination}}</td>
+            <td>{{ticketsView[2].flightNumber}}</td>
+            <td>{{ticketsView[2].fullName}}</td>
+            <td>{{ticketsView[2].price}}</td>
+        </tr>
+        <tr [class.bg-warning]="isSelect(ticketsView[3])">
+            <td>{{ticketsView[3].destination}}</td>
+            <td>{{ticketsView[3].flightNumber}}</td>
+            <td>{{ticketsView[3].fullName}}</td>
+            <td>{{ticketsView[3].price}}</td>
+        </tr>
+        <tr [class.bg-warning]="isSelect(ticketsView[4])">
+            <td>{{ticketsView[4].destination}}</td>
+            <td>{{ticketsView[4].flightNumber}}</td>
+            <td>{{ticketsView[4].fullName}}</td>
+            <td>{{ticketsView[4].price}}</td>
+        </tr>
+        <tr [class.bg-warning]="isSelect(ticketsView[5])">
+            <td>{{ticketsView[5].destination}}</td>
+            <td>{{ticketsView[5].flightNumber}}</td>
+            <td>{{ticketsView[5].fullName}}</td>
+            <td>{{ticketsView[5].price}}</td>
+        </tr>
+        <tr [class.bg-warning]="isSelect(ticketsView[6])">
+            <td>{{ticketsView[6].destination}}</td>
+            <td>{{ticketsView[6].flightNumber}}</td>
+            <td>{{ticketsView[6].fullName}}</td>
+            <td>{{ticketsView[6].price}}</td>
+        </tr>
+        <tr [class.bg-warning]="isSelect(ticketsView[7])">
+            <td>{{ticketsView[7].destination}}</td>
+            <td>{{ticketsView[7].flightNumber}}</td>
+            <td>{{ticketsView[7].fullName}}</td>
+            <td>{{ticketsView[7].price}}</td>
+        </tr>
+        <tr [class.bg-warning]="isSelect(ticketsView[8])">
+            <td>{{ticketsView[8].destination}}</td>
+            <td>{{ticketsView[8].flightNumber}}</td>
+            <td>{{ticketsView[8].fullName}}</td>
+            <td>{{ticketsView[8].price}}</td>
+        </tr>
+        <tr [class.bg-warning]="isSelect(ticketsView[9])">
+            <td>{{ticketsView[9].destination}}</td>
+            <td>{{ticketsView[9].flightNumber}}</td>
+            <td>{{ticketsView[9].fullName}}</td>
+            <td>{{ticketsView[9].price}}</td>
+        </tr>
+        </tbody>
+    </table>
+</section>

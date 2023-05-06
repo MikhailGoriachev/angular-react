@@ -1,0 +1,53 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th><a (click)="$event.preventDefault(); sortById()" href="#">Id</a></th>
+        <th>Фамилия и инициалы</th>
+        <th>Дата рождения</th>
+        <th>Телефон</th>
+        <th>E-mail</th>
+        <th>Разряд</th>
+        <th>Тренер</th>
+        <th><a (click)="$event.preventDefault(); sortByGroup()" href="#">Группа</a></th>
+        <th class="text-center">
+            <button class="btn btn-success"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalFormId"
+                    (click)="onAddItem.emit()">
+                <i class="bi bi-plus-lg"></i>
+                Добавить
+            </button>
+        </th>
+    </tr>
+    </thead>
+
+    <tbody class="align-middle">
+    <tr *ngFor="let i of itemsView">
+        <td>{{i.id}}</td>
+        <td>{{i.fullName}}</td>
+        <td>{{i.dateOfBirth | date: "dd/MM/yyyy"}}</td>
+        <td>{{i.phone}}</td>
+        <td>{{i.email}}</td>
+        <td>{{i.level!.name}}</td>
+        <td>{{i.coach}}</td>
+        <td>{{i.group}}</td>
+        <td class="text-center">
+            <!-- Изменить -->
+            <button class="btn btn-warning mx-2"
+                    title="Изменить..."
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalFormId"
+                    (click)="onEditItem.emit(i.id)">
+                <i class="bi bi-pencil-square"></i>
+            </button>
+
+            <!-- Удалить -->
+            <button class="btn btn-danger mx-2"
+                    title="Удалить"
+                    (click)="onRemoveItem.emit(i.id)">
+                <i class="bi bi-trash-fill"></i>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>

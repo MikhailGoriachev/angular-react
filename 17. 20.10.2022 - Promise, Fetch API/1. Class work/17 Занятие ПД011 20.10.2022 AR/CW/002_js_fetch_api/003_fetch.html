@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fetch</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script>
+    // Метод fetch – это XMLHttpRequest нового поколения. Он предоставляет
+    //  улучшенный интерфейс для осуществления запросов к серверу:
+    //   как по части возможностей и контроля над происходящим,
+    //   так и по синтаксису, так как построен на промисах.
+    let url = 'https://jsonplaceholder.typicode.com/users/9';
+    let options = {
+        method: 'GET',
+        // headers,
+        // body, // Тело запроса
+        // mode, // в каком режиме кросс-доменности предполагается делать запрос.
+        // credentials, //пересылать ли куки и заголовки авторизации вместе с запросом.
+        // cache, //как кешировать запрос.
+    }
+
+    // При вызове fetch возвращает промис, который, когда получен ответ, выполняет коллбэки
+    // с объектом Response или с ошибкой, если запрос не удался.
+    let req = fetch(url, options);
+    // response кроме доступа к заголовкам headers,
+    //  статусу status и некоторым другим полям ответа, даёт возможность
+    //  прочитать его тело, в желаемом формате:
+    //     response.arrayBuffer()
+    //     response.blob()
+    //     response.formData()
+    //     response.json()
+    //     response.text()
+    req .then(response => { console.dir(response); return response.json() /* json() Возвращает Promise */ })
+        .then(data => {
+            console.dir(data);
+            document.querySelector('#out1').innerHTML = `<h3>id = ${data.id}`; })
+        .catch(err => { console.error(err);  });
+</script>
+
+<h3>Fetch для Promise</h3>
+<div id="out1"></div>
+</body>
+</html>

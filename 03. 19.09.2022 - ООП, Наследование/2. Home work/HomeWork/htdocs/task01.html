@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- #region Стили -->
+    <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/block.css">
+    <!-- #endregion -->
+
+    <!-- скрипты -->
+    <script src="../lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../dist/Utils.js"></script>
+    <script src="../dist/models/task01/Aeroflot.js"></script>
+    <script src="../dist/task01.js"></script>
+
+    <!-- заголовок -->
+    <title>Задание 1</title>
+
+    <!-- логотип -->
+    <link rel="shortcut icon" type="image/x-icon" href="../images/icon.svg">
+</head>
+
+<body>
+
+<!-- #region Навигация -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top shadow">
+    <div class="container-fluid justify-content-center">
+        <!-- Логотип -->
+        <a class="navbar-brand mx-2" href="../index.html">
+            <img class="logo" src="../images/icon.svg" alt="logo">
+        </a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+
+                <!-- Главная -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3" href="../index.html">Главная</a>
+                </li>
+
+                <!-- Задание 1 -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3 active" href="task01.html">Задание 1</a>
+                </li>
+
+                <!-- Задание 2 -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3" href="task02.html">Задание 2</a>
+                </li>
+
+                <!-- Задание 3 -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3" href="task03.html">Задание 3</a>
+                </li>
+
+                <!-- Генерация данных -->
+                <li class="nav-item">
+                    <button class="btn btn-primary ms-5 me-2" id="initId">Генерация данных</button>
+                </li>
+
+                <!-- Все записи -->
+                <li class="nav-item">
+                    <button class="btn btn-primary mx-2" id="dataAllId">Все записи</button>
+                </li>
+
+                <!-- Выборка данных -->
+                <li class="nav-item mx-2">
+                    <div class="dropdown">
+                        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Выборка
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
+                            <li><button class="dropdown-item" id="filterByDestinationId">По пункту назначения</button></li>
+                            <li><button class="dropdown-item" id="filterByAircraftTypeId">По типу самолёта</button></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- #endregion -->
+
+<!-- #region Главная секция -->
+<main>
+
+    <section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+
+        <h4 class="text-center" id="titleId"></h4>
+
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>&#8470;</th>
+                <th>Номер рейса</th>
+                <th>Пункт назначения</th>
+                <th>Тип самолёта</th>
+            </tr>
+            </thead>
+
+            <tbody id="tbodyId">
+
+            </tbody>
+        </table>
+
+        <!-- Alert для вывода сообщений -->
+        <div class="alert alert-danger" role="alert" id="alertId">
+            Список пуст! Не удалось найти элементы по вашему запросу!
+        </div>
+
+    </section>
+
+</main>
+<!-- #endregion -->
+
+<!-- #region Подвал-->
+<footer class="bg-dark shadow fs-6 text-white-50 p-5 pb-2">
+    <p>
+        Разработчик:
+        <a href="https://github.com/MikhailGoriachev" target="_bank">
+            <b>Горячев Михаил</b>
+        </a>
+    </p>
+    <p>Группа: <b>ПД011</b></p>
+    <p>Город: <b>Донецк</b></p>
+    <p>Год создания: <b>2022</b></p>
+    <p>
+        Поддержка:
+        <a href="mailto:goriachevmichael@gmail.com">
+            <b>goriachevmichael@gmail.com</b>
+        </a>
+    </p>
+
+</footer>
+<!-- #endregion -->
+</body>
+
+</html>

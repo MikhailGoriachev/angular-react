@@ -1,0 +1,27 @@
+﻿.block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3rem;
+    width: 3rem;
+    margin: 0.3rem;
+    border-radius: 1rem;
+    background: var(--bs-dark);
+    transition: all 0.2s;
+    cursor: pointer;
+    color: white;
+
+    box-shadow: 0.1rem 0.1rem 0.4rem rgb(154, 154, 154);
+}
+
+.block:hover {
+    background: var(--bs-success);
+}
+
+.block.active {
+    background: #86b7fe;
+}
+
+.block.sub {
+    background: #ec5865;
+}

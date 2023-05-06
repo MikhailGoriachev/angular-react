@@ -1,0 +1,29 @@
+<h1>Простые события</h1>
+
+<!-- задание обработчика события - привязка события -->
+<!-- (событие)="кодОбработчика" -->
+<button (click)="increment()">Плюс</button>
+<button (click)="decrement()">Минус</button>
+<br>
+<br>
+Значение счетчика: {{ counter }}
+<br>
+<br>
+
+<!-- передача параметра в обработчик - свойство или литеральная константа -->
+<button (click)="consoleCounter(counter)">Консоль счетчик</button>
+
+<!--
+    $event - Event Object (событийный объект)
+    Ангуляр-константа  $event  которую можно использовать при необходимости
+-->
+<button (click)="consoleEventObj1($event)">Событийный объект</button>
+<button (click)="consoleEventObjValue($event.type)">type у кнопки</button>
+<br>
+<br>
+<!-- пример только для ознакомления с возможностью использования выражений
+     в разметка компонента
+-->
+<button (click)="a = 'hello'; b = ' привет от ASP Razor Pages';">Поменять значение у свойств a, b</button>
+<br>
+{{ a + b }}

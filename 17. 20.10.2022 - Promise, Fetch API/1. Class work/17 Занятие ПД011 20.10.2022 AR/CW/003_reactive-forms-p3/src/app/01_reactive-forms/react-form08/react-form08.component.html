@@ -1,0 +1,24 @@
+<h2>patchValue & setValue</h2>
+
+<form novalidate [formGroup]="form" (ngSubmit)="onSubmit()">
+	<div >
+		<label>Имя</label><br>
+		<input type="text" readonly formControlName="name">
+	</div>
+	<div >
+		<label>Заголовок сообщения</label><br>
+		<input type="text" readonly formControlName="title">
+	</div>
+	<div >
+		<label>Сообщение</label><br>
+		<textarea type="text" formControlName="msg"></textarea>
+	</div>
+
+	<br >
+	<br>
+	<input type="submit" value="Отправить">
+</form>
+
+<br>
+
+<pre>{{form.value |json}}</pre>

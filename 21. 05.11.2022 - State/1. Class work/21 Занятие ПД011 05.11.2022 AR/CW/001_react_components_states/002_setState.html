@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8"/>
+    <meta charset="UTF-8">
+    <title>React. Состояния</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="images/emotion_smile.png" type="image/x-icon">
+
+</head>
+<body>
+
+<h3>Изменение состояния</h3>
+<div id="app"></div>
+
+<!-- локальное подключение React -->
+<script src="lib/react/react.production.min.js"></script>
+<script src=" lib/react/react-dom.production.min.js"></script>
+<script src="lib/babel.min.js"></script>
+<script type="text/babel">
+
+
+    class ClickButton extends React.Component {
+
+        constructor(props) {
+            super(props);
+            this.state = {class: "on", label: "Нажми"};
+
+            this.press = this.press.bind(this);
+        }
+
+        press() {
+            let className = (this.state.class === "off") ? "on" : "off";
+
+            // для изменения стейта - только вызов метода setState()
+            // свойство стейта class изменилось, получило новое значение
+            // setState({class: className}) - передаем объект, содержащий свойство для изменения
+            // одноименного свойства state
+            // this.state.class = className;
+
+            // можно передавать по одному свойству, но React скорее
+            // сего сам объединит их в один пакет
+            // this.setState({class: className});
+            // this.setState({label: `Нажми. Я сейчас "${className}"`});
+
+            // можно передавать несколько свойств
+            this.setState({class: className, label: `Нажми. Я сейчас "${className}"`});
+            console.log(className);
+        } // press
+
+        render() {
+            return <button onClick={this.press} className={this.state.class}>{this.state.label}</button>;
+        }
+    }
+
+    ReactDOM.createRoot(document.getElementById("app"))
+    .render(
+        <ClickButton/>
+    );
+
+</script>
+</body>
+</html>

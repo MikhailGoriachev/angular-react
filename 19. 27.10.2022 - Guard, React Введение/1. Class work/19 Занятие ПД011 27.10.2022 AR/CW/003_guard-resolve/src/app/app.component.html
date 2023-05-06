@@ -1,0 +1,42 @@
+<div class="container">
+  <h1>Angular Routing</h1>
+  <div class="flex">
+    <nav>
+      <ul class="menu">
+        <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Главная</a></li>
+        <!-- <li><a routerLink="main" routerLinkActive="active">Главная</a></li> -->
+        <li>
+          <span>Обучение у нас</span>
+          <ul>
+            <li><a routerLink="theory" routerLinkActive="active">Теория</a></li>
+            <li><a routerLink="practice" routerLinkActive="active">Практика</a></li>
+          </ul>
+        </li>
+        <li>
+          <span>Специальности</span>
+          <ul>
+            <li><a routerLink="front-end" routerLinkActive="active">Фронтенд</a></li>
+            <li><a routerLink="backend" routerLinkActive="active">Бекенд</a></li>
+          </ul>
+        </li>
+        <li>
+          <a routerLink="about" routerLinkActive="active">О Нас</a>
+        </li>
+        <li>
+          <a [routerLink]="['contacts']" routerLinkActive="active">Контакты</a>
+        </li>
+        <li>
+          <a routerLink="settings" routerLinkActive="active">Настройки</a>
+        </li>
+        <li>
+          <a routerLink="login" routerLinkActive="active">Вход</a>
+        </li>
+      </ul>
+    </nav>
+    <main>
+      <h2>Контент пунктов меню</h2>
+      <!-- Специальный тег под которым выводятся компоненты отталкиваясь от настроек указанных в  файлах как app-routing.module.ts -->
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

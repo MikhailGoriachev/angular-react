@@ -1,0 +1,22 @@
+001 Повторение и разбор ДЗ
+
+002 Типы данных в TypeScript
+003 Функции в TypeScript
+
+004 Методы массивов в TypeScript
+005 Оператор rest ... ES6+
+
+
+компиляция в фоновом режиме (watch)
+tsc -w
+
+Запуск скриптов из package.json
+
+скрипт компиляции
+npm run build
+
+скрипт запуска HTTP-сервера
+npm run start
+или
+npm start
+

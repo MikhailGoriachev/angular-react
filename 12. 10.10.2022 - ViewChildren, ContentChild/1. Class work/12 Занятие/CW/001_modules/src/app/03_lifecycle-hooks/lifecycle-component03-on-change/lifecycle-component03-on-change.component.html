@@ -1,0 +1,10 @@
+<h2>Lifecycle ngOnChanges()</h2>
+<input type="text" #field><br><br>
+<button (click)="editValueInput(field.value)">значение поля</button><br><br>
+<button (click)="editValueCounter()">счетчик</button><br><br>
+<button (click)="editAll()">редактировать все</button>
+<app-child-component 
+        [fromInput]="textString"
+        [btnCounterClicked]="counter"
+        [booleanValue]="bool"
+        ></app-child-component>

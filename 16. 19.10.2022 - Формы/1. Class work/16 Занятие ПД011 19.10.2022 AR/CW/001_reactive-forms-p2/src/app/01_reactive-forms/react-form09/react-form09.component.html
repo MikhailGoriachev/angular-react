@@ -1,0 +1,43 @@
+<h2>alerts-reactive-form & Validators</h2>
+<form novalidate [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm)">
+
+    <div>
+        Имя <br>
+        <input type="text" formControlName="userName">
+
+        <!-- 1 Способ через ссылки свойств -->
+        <div *ngIf="registerForm.controls['userName'].invalid &&
+                    registerForm.controls['userName'].touched">
+            <p class="alert" *ngIf="registerForm.controls['userName'].errors!['required']">
+                Обязательное поле.
+            </p>
+            <p class="alert" *ngIf="registerForm.controls['userName'].errors!['minlength']">
+                Длина строки должна быть не менее
+                {{ registerForm.controls['userName'].errors!['minlength'].requiredLength }}
+                символов.
+                Сейчас {{ registerForm.controls['userName'].errors!['minlength'].actualLength }}
+            </p>
+        </div>
+    </div>
+    <br>
+    <div>
+        Email <br>
+        <input type="text"
+               formControlName="emailFiled">
+
+        <!-- 2 Способ через методы get() hasError() -->
+        <div *ngIf="registerForm.get('emailFiled')!.hasError('required') &&
+                    registerForm.get('emailFiled')!.touched" class="alert">
+            Обязательное поле.
+        </div>
+        <div *ngIf="registerForm.get('emailFiled')!.hasError('email') &&
+                                      registerForm.get('emailFiled')!.touched" class="alert">
+            Ошибка формата при написании email
+        </div>
+    </div>
+    <br>
+    <input type="submit" class="btn"
+           [disabled]="registerForm.invalid" value="Войти">
+
+    <input type="button" (click)="showLog(registerForm)" value="Клик">
+</form>

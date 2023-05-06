@@ -1,0 +1,1 @@
+{"version":3,"file":"Figure.js","sourceRoot":"","sources":["../../../src/models/task03/Figure.ts"],"names":[],"mappings":"AAAA,eAAe;AACf,MAAe,MAAM;IAajB,cAAc;IACd,YAAY,IAAY;QACpB,IAAI,CAAC,KAAK,GAAG,IAAI,CAAC;IACtB,CAAC;IAZD,IAAI,IAAI;QACJ,OAAO,IAAI,CAAC,KAAK,CAAC;IACtB,CAAC;IAED,IAAI,IAAI,CAAC,KAAa;QAClB,IAAI,CAAC,KAAK,GAAG,KAAK,CAAC;IACvB,CAAC;CAOJ"}

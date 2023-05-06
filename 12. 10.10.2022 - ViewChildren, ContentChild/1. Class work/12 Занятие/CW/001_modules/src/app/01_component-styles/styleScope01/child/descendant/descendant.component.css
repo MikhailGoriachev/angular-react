@@ -1,0 +1,9 @@
+/* :host-context(.second-child) p {
+    background: gold;
+} */
+
+/* :host-context(.block-container) div {
+    border: 2px solid blue;
+    display: block;
+    padding: 10px;
+} */

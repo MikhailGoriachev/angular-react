@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<!-- 
+Обработка событий элементов в React во многом похожа на обработку событий
+элементов DOM с помощью обычного JavaScript. В то же время есть небольшие 
+отличия:
+
+События в React используют camelCase (в стандартном html/js "onclick",
+в React - "onClick")
+
+В JSX в обработчик события передается функция компонента, а не строка
+<button onclick="click()">Кнопка</button>
+<button onClick={click}>Элемент React/кнопка</button>
+
+В React можно применять разные способы определения и вызова событий. 
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React. События</title>
+
+    <link rel="stylesheet" href="style.css">
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="images/emotion_smile.png" type="image/x-icon">
+</head>
+<body>
+
+<div id="app"></div>
+
+<!-- подключение React из CDN -->
+<!--<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>-->
+<!--<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>-->
+<!--<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>-->
+
+<!-- локальное подключение React -->
+<script src="/lib/react/react.production.min.js"></script>
+<script src="lib/react/react-dom.production.min.js"></script>
+<script src="lib/babel.min.js"></script>
+
+<script type="text/babel">
+
+    // счетчик - классический пример использования кнопок
+    let counter = 0;
+
+    // компонент - кнопка, на которую можно кликать
+    function ClickableButton(props) {
+
+        // обработчик клика по кнопке
+        function click(e) {
+
+            // вывод информации о событии
+            console.dir(e);
+
+            ++counter;
+            document.querySelector("#out").innerHTML = `Клик по кнопке <b>${props.value}</b>`;
+            document.querySelector("#counter").innerHTML = `<h3>${counter}</h3>`;
+        }
+
+        // на кнопку "вешаем" обработчик события - указывается функция,
+        // а не строка, как в обычном JS
+        return <button onClick={click}>{props.value}</button>;
+    }
+
+    ClickableButton.defaultProps = {value: "Кнопка - название по умолчанию"}
+
+    // события в классе
+    class ClickButton extends React.Component {
+
+        // обязательные действия в конструкторе
+        constructor(props) {
+            // обязательный вызов
+            super(props);
+
+            // обязательная привязка обработчика события к контексту класса
+            this.press = this.press.bind(this);
+        }
+
+        // Главная сложность при использовании событий в компонентах-классах - это работа
+        // с ключевым словом this, которое указывает на текущий объект, в данном случае
+        // компонент. По умолчанию в функцию обработчика не передается текущий объект,
+        // поэтому this будет иметь значение undefined. И ни к каким свойствам и методам
+        // компонента через this мы обратиться не сможем. И чтобы в метод press корректно
+        // передавалась ссылка на текущий объект через this, в конструкторе класса
+        // прописывается вызов:
+        press(e) {
+            // демонстрация дл чего нужна привязка контекста
+            // console.log(this);
+
+            // вывод информации о событии
+            console.dir(e);
+
+            // тоже счетчик подергаем
+            --counter;
+            document.querySelector("#out").innerHTML = `Клик по кнопке <b>${this.props.value}</b>`;
+            document.querySelector("#counter").innerHTML = `<h3>${counter}</h3>`;
+        }
+
+        render() {
+            return <button onClick={this.press}>{this.props.value}</button>;
+        }
+    }
+
+    ClickButton.defaultProps = {value: "Кнопка на базе класса"}
+
+    // демонстрация параметров события в компоненте на базе функции
+    function AutomnButton(props) {
+
+        // функция, продолжающая обработку события, демонстрация получения параметров
+        // из события
+        function click(str, num, e = undefined) {
+            console.dir(e);
+            document.querySelector('#out').innerHTML = `<b>${str}</b> <u>${num}</u>`;
+        } // click
+
+        // для простоты определим функцию-обработчик события прямо в разметке
+        return <span>
+            <button onClick={(e) => click("осень", 2022, e)}>{props.value1}</button>
+            <button onClick={() => click("желтый", 120)}>{props.value2}</button>
+        </span>
+    } // AutomnButton
+    AutomnButton.defaultProps = {value1: "Season", value2: "Color"};
+
+    // демонстрация параметров события в компоненте на базе классе
+    class WinterButton extends React.Component {
+        constructor(props) {
+            super(props);
+
+            // привязка контекста обработчика к контексту класса
+            this.click = this.click.bind(this);
+        } // constructor
+
+        // Метод, продолжающая обработку события, демонстрация получения параметров
+        // из события
+        click(str, num, e = undefined) {
+            console.dir(e);
+
+            // props неизменен :(
+            // this.props.value1 = "Весна";
+            // props меняем только через state / состояние
+
+            document.querySelector('#out').innerHTML = `Класс: <b>${str}</b> <u>${num}</u>`;
+        } // click
+
+        // обязательный метод для рендеринга клмпонента
+        render() {
+            // для простоты определим функцию-обработчик события прямо в разметке
+            return <span>
+            <button onClick={(e) => this.click("зима", 2023, e)}>{this.props.value.season}</button>
+            <button onClick={() => this.click("белый", 42)}>{this.props.value.color}</button>
+        </span>
+        } // render
+    } // class WinterButton
+    WinterButton.defaultProps = {value: {season: 'Декабрь и январь и февраль', color: 'Снежно'}};
+    
+    // демонстрация параметров события в компоненте на базе классе
+    class SpringButton extends React.Component {
+        constructor(props) {
+            super(props);
+        } // constructor
+
+        // Метод, продолжающая обработку события, демонстрация получения параметров
+        // из события
+        click = (str, num, e = undefined) => {
+            console.dir(this);
+            console.dir(e);
+
+            document.querySelector('#out').innerHTML = `Класс: <b>${str}</b> <u>${num}</u>`;
+        } // click
+
+        // обязательный метод для рендеринга клмпонента
+        render() {
+            // для простоты определим функцию-обработчик события прямо в разметке
+            return <span>
+            <button onClick={(e) => this.click("весна", 2024, e)}>{this.props.value.season}</button>
+            <button onClick={() => this.click("зеленый", 42)}>{this.props.value.color}</button>
+        </span>
+        } // render
+    } // class SummerButton
+    SpringButton.defaultProps = {value: {season: 'Весенняя', color: 'Трава и листва'}};
+
+    let objProps = {season: "Время года из переменной", color: "Цвет из переменной"};
+    
+    ReactDOM.createRoot(document.getElementById("app"))
+        .render(
+            <div>
+                <h3>События в функциональном компоненте</h3>
+                <p id="out">Поле вывода результатов</p>
+                <p id="counter"><h3>{counter}</h3></p>
+                <ClickableButton value="Кнопка 1"/>
+                <ClickableButton value="Кнопка 2"/>
+                <ClickableButton/>
+
+                <h3>События в компоненте на базе класса</h3>
+                <ClickButton value="Кнопка на базе класса 1"/>
+                <ClickButton value="Кнопка на базе класса 2"/>
+                <ClickButton/>
+
+                <h3>Передача параметров в событие, компонент на базе функции</h3>
+                <AutomnButton value1="Время года" value2="Цвет"/>
+                <AutomnButton/>
+
+                <h3>Передача параметров в событие, компонент на базе класса</h3>
+                <WinterButton value={{season: "Еще время года", color: "Еще цвет"}}/>
+                <WinterButton value={objProps}/>
+                <WinterButton/>
+
+                <h3>Передача параметров в событие, компонент на базе класса/стрелочная функция</h3>
+                <SpringButton value={{season: "Весна красна", color: "Весенний"}}/>
+                <SpringButton value={objProps}/>
+                <SpringButton/>
+            </div>
+        );
+</script>
+</body>
+</html>

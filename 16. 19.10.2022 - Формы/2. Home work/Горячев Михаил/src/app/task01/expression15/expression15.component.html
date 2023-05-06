@@ -1,0 +1,29 @@
+<!-- Выражение 15 -->
+<div class="card w-22rem shadow m-auto">
+    <div class="card-body">
+        <h5 class="card-title">Выражение 15</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item text-center"><b>Результат</b></li>
+        <li class="list-group-item">&beta;: <b>{{expression.b | number: '.10'}}</b></li>
+        <li class="list-group-item">z<sub>1</sub>: <b>{{expression.z1 | number: '.10'}}</b></li>
+        <li class="list-group-item">z<sub>2</sub>: <b>{{expression.z2 | number: '.10'}}</b></li>
+    </ul>
+    <div class="card-body">
+        <form novalidate [formGroup]="form" (ngSubmit)="onSubmit(form)">
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="form-floating w-10rem">
+                        <input type="number" class="form-control {{Utils.getClassValid(this.controlB)}}" formControlName="b">
+                        <label>Введите &beta;:</label>
+                        <div *ngIf="this.controlB.errors" class="invalid-feedback">{{this.controlB.errors!['minGreatValidator']}}</div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <button class="btn btn-primary" [disabled]="form.invalid">Вычислить</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

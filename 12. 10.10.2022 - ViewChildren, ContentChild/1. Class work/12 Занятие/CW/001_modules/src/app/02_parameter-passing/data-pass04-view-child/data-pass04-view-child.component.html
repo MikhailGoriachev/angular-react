@@ -1,0 +1,28 @@
+<h2>@ViewChild</h2>
+
+<button (click)="changeColor()">view-child</button>
+<button (click)="secondChangeColor()">по ссылке</button>
+
+<!-- обращение к компоненту по #имя, вызов метода компонента  -->
+<button (click)="toggleBg.childMethod()">вызов метода #имя.method()</button>
+<hr>
+
+<app-view-child></app-view-child>
+<app-view-child></app-view-child>
+
+<!-- доступ к этому компоненту - по ссылке на него в коде -->
+<app-view-child #secondViewChild></app-view-child>
+
+<app-view-child></app-view-child>
+
+<app-view-child #toggleBg></app-view-child>
+<br>
+<hr>
+<br>
+
+<!-- чтение данных строки ввода - при помощи переменной #mainInput -->
+<input #mainInput type="text">
+<p> Значение из строки ввода: "{{ p }}" </p>
+<button (click)="takeFocus()">Взять фокус поля</button>
+<button (click)="takeValue()">Взять значение поля</button>
+

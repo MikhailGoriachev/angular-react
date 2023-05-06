@@ -1,0 +1,84 @@
+<!-- #region Параметры обработки -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark shadow border-3 border-top border-primary sticky-top">
+    <div class="container-fluid justify-content-center">
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav d-flex">
+                <div>
+                    <div class="d-inline-flex align-items-center">
+
+                        <!-- Оценка 2 -->
+                        <button type="button" class="btn btn-primary w-10rem ms-5 me-3" (click)="selectByMarkTwo()">
+                            Оценка 2
+                        </button>
+
+                        <!-- Оценки 4 и 5 -->
+                        <button type="button" class="btn btn-primary w-10rem me-3" (click)="selectByMarkFourAndFive()">
+                            Оценки 4 и 5
+                        </button>
+
+                        <!-- По группе -->
+                        <select #group class="form-select w-5rem ms-4 me-3">
+                            <option *ngFor="let t of Utils.groupNameList">{{t}}</option>
+                        </select>
+                        <button type="button" class="btn btn-primary w-10rem me-3" data-bs-toggle="modal"
+                                data-bs-target="#modalId"
+                                (click)="selectByGroupName(group.value)">
+                            По группе
+                        </button>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- #endregion -->
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 min-vh-100 p-3">
+    <h4 class="text-center">Задание 1. Студенты</h4>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th><a (click)="$event.preventDefault(); sortById()" href="#">Id</a></th>
+            <th>Изображение</th>
+            <th><a (click)="$event.preventDefault(); sortByFullName()" href="#">Фамилия и инициалы</a></th>
+            <th>Пол</th>
+            <th><a (click)="$event.preventDefault(); sortByGroup()" href="#">Группа</a></th>
+            <th>Оценки</th>
+            <th><a (click)="$event.preventDefault(); sortByAvgMark()" href="#">Средний балл</a></th>
+            <th class="text-center">
+                <button class="btn btn-success"
+                        (click)="addItem()">
+                    <i class="bi bi-plus-lg"></i>
+                    Добавить
+                </button>
+            </th>
+        </tr>
+        </thead>
+
+        <tbody class="align-middle">
+        <tr *ngFor="let s of studentListView" [class.bg-warning]="isSelect(s)">
+            <td>{{s.id}}</td>
+            <td class="h-7rem w-10rem bg-img text-center">
+                <img src="assets/images/persons/{{s.image}}" alt="d.image" class="h-100">
+            </td>
+            <td>{{s.fullName}}</td>
+            <td>{{s.gender | gender}}</td>
+            <td>{{s.group}}</td>
+            <td>
+                <ul>
+                    <li *ngFor="let m of s.markList">{{m.schoolSubjects}}: {{m.mark}}</li>
+                </ul>
+            </td>
+            <td>{{s.avgMark.toFixed(1)}}</td>
+            <td class="text-center"
+                (click)="removeItem(s.id)">
+                <button class="btn btn-danger">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>

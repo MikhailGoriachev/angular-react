@@ -1,0 +1,8 @@
+<p>Описание</p>
+<div style="border: 2px solid brown; padding: 5px;" *ngIf="tagHTML">
+    <h3>{{ tagHTML.id }}</h3>
+    <p>{{ tagHTML.content }}</p>
+    <p>тег парный {{ tagHTML.paired }}</p>
+</div>
+<hr>
+<button (click)="visited(tagHTML)" >Назад к тегам</button>

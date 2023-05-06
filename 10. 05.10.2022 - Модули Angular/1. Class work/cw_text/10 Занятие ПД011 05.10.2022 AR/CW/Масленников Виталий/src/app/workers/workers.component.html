@@ -1,0 +1,62 @@
+<div class="d-flex align-items-baseline">
+    
+    <button class="btn btn-secondary me-3">Мин.оклады</button>
+    
+    <button class="btn btn-secondary me-3">Мин.оклады</button>
+    
+    <span class="lead ms-4 ms-3 me-2">Свыше стажа:</span>
+    <input type="number" class="form-control-sm me-2 text-end" placeholder="стаж"
+            (input)="setSelectionTimeout()">
+    
+    <span class="lead ms-3">Должность:</span>
+    <select class="ms-2 form-select-sm"
+            (click)="setSelectionTimeout()">
+        <option></option>
+        <option *ngFor="let position of positions">{{position}}</option>
+    </select>
+    
+    <span class="lead ms-3">Год поступления:</span>
+    <select class="ms-2 form-select-sm"
+            (click)="setSelectionTimeout()">
+        <option></option>
+        <option *ngFor="let year of years">{{year}}</option>
+    </select>
+</div>
+
+
+<table class="table caption-top mt-3">
+    <caption class="fs-5">Список работников</caption>
+    <thead class="fw-bold border-dark">
+    <tr>
+        <td *ngFor="let column of columns">
+            <a *ngIf="column.sortProp; else notSortingHeader"
+               (click)="onOrderChanged($event, column.sortProp)" href="">
+
+                {{column.name}}
+
+                <i-bs *ngIf="lastSorted == column.sortProp"
+                      [name]="isOrderDescend ? iconNames.ArrowDownShort : iconNames.ArrowUpShort"
+                      width="1.5rem" height="1.5rem"></i-bs>
+            </a>
+
+            <ng-template #notSortingHeader> {{column.name}} </ng-template>
+        </td>
+    </tr>
+    </thead>
+
+    <tbody class="color-1">
+    <tr *ngFor="let worker of workers;let i = index"
+        [ngClass]="{ 'bg-primary bg-opacity-10': checkSelection(worker) }">
+
+        <td>{{worker.id}}</td>
+        <td><img class="w-180-px" src="assets/images/workers/{{worker.photoImg}}" alt="{{worker.fullName}}"></td>
+        <td>{{worker.fullName}}</td>
+        <td>{{worker.gender}}</td>
+        <td>{{worker.position | titlecase}}</td>
+        <td> {{worker.admissionYear}} </td>
+        <td> {{worker.lengthOfService()}} </td>
+        <td>{{worker.salary}}</td>
+        
+    </tr>
+    </tbody>
+</table>

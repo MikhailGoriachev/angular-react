@@ -1,0 +1,68 @@
+Работа с webpack (https://webpack.js.org/)
+
+Установить Webpack в проект, --save-dev записывает в "DevDependecies" packages.json
+npm i webpack --save-dev
+
+Установить WebpackCLI в проект, --save-dev записывает в "DevDependecies" packages.json
+WebpackCLI - Command Line Interpreter - утилита ком. строки
+npm i webpack-cli --save-dev
+
+Установить загрузчик модулей в проект, --save-dev записывает в "DevDependecies" packages.json
+npm i ts-loader --save-dev
+
+В файлах исходного кода команды import не должны содежать тип файла
+Должно быть, например, так:
+import {EmailValidators, NumberValidator, RequiresValidator, ValidationStrategy} from "./validator-strategies";
+
+В корневую папку проекта (там, где packages.json)добавить файл webpack.config.js
+// ----------------------------------------------------------------------------------------
+
+const path = require('path');
+
+module.exports = {
+  entry: './src/main.ts',
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
+      }
+    ]
+  },
+  resolve: {
+    extensions: [ '.tsx', '.ts', '.js' ]
+  },
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  }
+};
+
+// ----------------------------------------------------------------------------------------
+
+
+https://angular.io/
+
+Инструкция тут:
+https://angular.io/cli
+
+
+Установить AngularCLI
+npm i -g @angular/cli
+
+Создать проект при помощи AngularCLI
+ng new имя-папки-проекта
+ng new first-app
+
+перейти в папку проекта
+cd имя-папки-проекта
+cd first-app
+
+построить и запустить проект
+ng serve
+ng s
+
+с запуском браузера
+ng serve -o
+ng s -o

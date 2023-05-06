@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- #region Стили -->
+    <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- #endregion -->
+
+    <!-- скрипты -->
+    <script src="../lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="module" src="../dist/bundle.js"></script>
+
+    <!-- заголовок -->
+    <title>Задание 2</title>
+
+    <!-- логотип -->
+    <link rel="shortcut icon" type="image/x-icon" href="../images/icon.svg">
+</head>
+
+<body>
+
+<!-- #region Навигация -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top shadow">
+    <div class="container-fluid justify-content-center">
+        <!-- Логотип -->
+        <a class="navbar-brand mx-2" href="../index.html">
+            <img class="logo" src="../images/icon.svg" alt="logo">
+        </a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+
+                <!-- Главная -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3" href="../index.html">Главная</a>
+                </li>
+
+                <!-- Задание 1 -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3" href="task01.html">Задание 1</a>
+                </li>
+
+                <!-- Задание 2 -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3 active" href="task02.html">Задание 2</a>
+                </li>
+
+                <!-- Генерация данных -->
+                <li class="nav-item">
+                    <button class="btn btn-success ms-5 me-2" id="initTask02Id">Генерация данных</button>
+                </li>
+
+                <!-- Сортировка -->
+                <li class="nav-item mx-2">
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            Сортировка
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <button class="dropdown-item" id="orderByPlateId">По номеру автобуса</button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item" id="orderByRouteId">По номеру маршрута</button>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- На маршрут -->
+                <li class="nav-item">
+                    <button class="btn btn-primary w-10rem mx-2" id="gotoRouteModalBtnId" data-bs-toggle="modal"
+                            data-bs-target="#modalId">
+                        На маршрут
+                    </button>
+                </li>
+
+                <!-- В парк -->
+                <li class="nav-item">
+                    <button class="btn btn-primary w-10rem mx-2" id="gotoFleetModalBtnId" data-bs-toggle="modal"
+                            data-bs-target="#modalId">
+                        В парк
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- #endregion -->
+
+<!-- #region Главная секция -->
+<main>
+
+    <section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+
+        <!-- Навигация по вкладкам -->
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="buses-tab" data-bs-toggle="tab" data-bs-target="#nav-buses"
+                        type="button" role="tab" aria-controls="nav-home" aria-selected="true">Все автобусы
+                </button>
+                <button class="nav-link" id="buses-fleet-tab" data-bs-toggle="tab" data-bs-target="#nav-buses-fleet"
+                        type="button" role="tab" aria-controls="nav-profile" aria-selected="false">В парке
+                </button>
+                <button class="nav-link" id="buses-route-tab" data-bs-toggle="tab" data-bs-target="#nav-buses-route"
+                        type="button" role="tab" aria-controls="nav-contact" aria-selected="false">На маршруте
+                </button>
+            </div>
+        </nav>
+
+        <!-- Все автобусы -->
+        <div class="tab-content" id="tabs-content">
+            <div class="tab-pane fade show active" id="nav-buses" role="tabpanel" aria-labelledby="buses-tab"
+                 tabindex="0">
+
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>&#8470;</th>
+                        <th>Маршрут</th>
+                        <th>Водитель</th>
+                        <th>Номер автобуса</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="busTbodyId">
+
+                    </tbody>
+                </table>
+
+            </div>
+
+            <!-- В парке -->
+            <div class="tab-pane fade" id="nav-buses-fleet" role="tabpanel" aria-labelledby="buses-fleet-tab"
+                 tabindex="0">
+
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>&#8470;</th>
+                        <th>Маршрут</th>
+                        <th>Водитель</th>
+                        <th>Номер автобуса</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="fleetBusTbodyId">
+
+                    </tbody>
+                </table>
+
+            </div>
+
+            <!-- На маршруте -->
+            <div class="tab-pane fade" id="nav-buses-route" role="tabpanel" aria-labelledby="buses-route-tab"
+                 tabindex="0">
+
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>&#8470;</th>
+                        <th>Маршрут</th>
+                        <th>Водитель</th>
+                        <th>Номер автобуса</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="routeBusTbodyId">
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Модальное окно -->
+    <div class="modal fade" id="modalId" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" id="modalDialogId">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalBodyId">
+                    <div class="form-floating">
+                        <select id="modalListId" class="form-select"></select>
+                        <label for="modalListId">Автобусы</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="modalBtnOkId" class="btn btn-primary" data-bs-dismiss="modal">
+                        Отправить
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+<!-- #endregion -->
+
+<!-- #region Подвал-->
+<footer class="bg-dark shadow fs-6 text-white-50 p-5 pb-2">
+    <p>
+        Разработчик:
+        <a href="https://github.com/MikhailGoriachev" target="_bank">
+            <b>Горячев Михаил</b>
+        </a>
+    </p>
+    <p>Группа: <b>ПД011</b></p>
+    <p>Город: <b>Донецк</b></p>
+    <p>Год создания: <b>2022</b></p>
+    <p>
+        Поддержка:
+        <a href="mailto:goriachevmichael@gmail.com">
+            <b>goriachevmichael@gmail.com</b>
+        </a>
+    </p>
+
+</footer>
+<!-- #endregion -->
+</body>
+
+</html>

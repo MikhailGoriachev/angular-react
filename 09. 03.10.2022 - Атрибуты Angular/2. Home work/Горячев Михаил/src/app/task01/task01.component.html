@@ -1,0 +1,172 @@
+<!-- #region Параметры обработки -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark shadow border-3 border-top border-primary sticky-top">
+    <div class="container-fluid justify-content-center">
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav d-flex">
+
+                <div>
+                    <h6 class="text-white text-center">Сортировка:</h6>
+                    <button type="button" class="btn btn-success me-3" (click)="sortByDefault()">
+                        Исходный порядок
+                    </button>
+                    <button type="button" class="btn btn-primary me-3" (click)="sortByName()">
+                        По названию
+                    </button>
+                    <button type="button" class="btn btn-primary me-3" (click)="sortByTopper()">
+                        По топперу
+                </button>
+                    <button type="button" class="btn btn-primary me-5" (click)="sortByPriceDesc()">
+                        По цене
+                    </button>
+                </div>
+
+                <div>
+                    <h6 class="text-white text-center">Выборка (подсветка записей):</h6>
+                    <div class="d-inline-flex align-items-center">
+
+                        <!-- По топперу -->
+                        <button type="button" class="btn btn-primary me-3 w-8rem" data-bs-toggle="modal"
+                                data-bs-target="#modalId"
+                                (click)="selectType = SelectType.topper">
+                            По топперу
+                        </button>
+
+                        <!-- По цене -->
+                        <button type="button" class="btn btn-primary me-3 w-8rem" data-bs-toggle="modal"
+                                data-bs-target="#modalId"
+                                (click)="selectType = SelectType.priceRange">
+                            По цене
+                        </button>
+
+                        <!-- На вынос -->
+                        <button type="button" class="btn btn-primary me-3 w-8rem" data-bs-toggle="modal"
+                                data-bs-target="#modalId"
+                                (click)="selectType = SelectType.isGoto">
+                            На вынос
+                        </button>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- #endregion -->
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 min-vh-100 p-3">
+    <h4 class="text-center">Задание 1. Напитки</h4>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Изображение</th>
+            <th>Название</th>
+            <th>Объём (мл)</th>
+            <th>Цена (&#8381;)</th>
+            <th>На вынос</th>
+            <th>Топпер</th>
+        </tr>
+        </thead>
+
+        <tbody class="align-middle">
+        <tr *ngFor="let d of drinkViewList" [class.bg-warning]="isSelect(d)">
+            <td class="h-7rem w-10rem bg-img text-center">
+                <img src="assets/images/drinks/{{d.image}}" [alt]="d.image" class="h-100">
+            </td>
+            <td>{{d.name}}</td>
+            <td>{{d.volume}}</td>
+            <td>{{d.price | currency : '&#8381; ' }}</td>
+            <td>{{d.isDrinkToGo | booleanPipe }}</td>
+            <td>{{d.topper}}</td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- Модальное окно -->
+<div class="modal fade" id="modalId" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <ng-container [ngSwitch]="selectType">
+                <ng-container *ngSwitchCase="SelectType.topper">
+                    <ng-container *ngTemplateOutlet="topperModalContent"></ng-container>
+                </ng-container>
+                <ng-container *ngSwitchCase="SelectType.priceRange">
+                    <ng-container *ngTemplateOutlet="priceRangeModalContent"></ng-container>
+                </ng-container>
+                <ng-container *ngSwitchCase="SelectType.isGoto">
+                    <ng-container *ngTemplateOutlet="isGotoModalContent"></ng-container>
+                </ng-container>
+            </ng-container>
+        </div>
+    </div>
+</div>
+
+<!-- Наименование топпера -->
+<ng-template #topperModalContent>
+    <div class="modal-header">
+        <h5 class="modal-title">Выборка по наименованию топпера</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+    </div>
+    <div class="modal-body">
+        <div class="row p-3">
+            <label class="form-label">Наименование топпера:</label>
+            <select #toppers class="form-select w-10rem me-3">
+                <option *ngFor="let t of topperList">{{t}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-primary me-3 w-8rem" data-bs-dismiss="modal"
+                (click)="selectByTopper(toppers.value)">
+            Выбрать
+        </button>
+    </div>
+</ng-template>
+
+<!-- По цене -->
+<ng-template #priceRangeModalContent>
+    <div class="modal-header">
+        <h5 class="modal-title">Выборка по диапазону цены</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+    </div>
+    <div class="modal-body">
+        <div class="row p-3">
+            <label class="form-label">Диапазон цены:</label>
+            <input type="number" class="form-control w-8rem me-3" min="0" placeholder="Мин" #minPrice>
+            <input type="number" class="form-control w-8rem" min="0" placeholder="Макс" #maxPrice>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-primary me-3 w-8rem" data-bs-dismiss="modal"
+                (click)="selectByPriceRange(+minPrice.value, +maxPrice.value)">
+            Выбрать
+        </button>
+    </div>
+</ng-template>
+
+<!-- На вынос -->
+<ng-template #isGotoModalContent>
+    <div class="modal-header">
+        <h5 class="modal-title">Выборка по признаку напитка "на вынос"</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+    </div>
+    <div class="modal-body">
+        <div class="row p-3">
+            <label class="form-label">Признак напитка "на вынос":</label>
+            <select #isGoto class="form-select w-10rem me-3 w-8rem">
+                <option>Нет</option>
+                <option>Да</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-primary me-3 w-8rem" data-bs-dismiss="modal"
+                (click)='selectByIsDrinkToGo(isGoto.value === "Да")'>
+            Выбрать
+        </button>
+    </div>
+</ng-template>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <title>Маршруты в React</title>
+
+    <link rel="stylesheet" href="style.css">
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="images/emotion_smile.png" type="image/x-icon">
+
+    <!-- локальное подключение React -->
+    <script src="lib/react/react.production.min.js"></script>
+    <script src=" lib/react/react-dom.production.min.js"></script>
+    <script src=" lib/react/history.production.min.js"></script>
+    <script src=" lib/react/react-router.production.min.js"></script>
+    <script src=" lib/react/react-router-dom.production.min.js"></script>
+
+    <script src="lib/babel.min.js"></script>
+</head>
+<body>
+
+<h3>Маршрутизация - программна навигация</h3>
+<div id="app"></div>
+
+<script type="text/babel">
+    const Router = ReactRouterDOM.BrowserRouter;
+    const Route = ReactRouterDOM.Route;
+    const Routes = ReactRouterDOM.Routes;
+    const Link = ReactRouterDOM.Link;
+    const Navigate = ReactRouterDOM.Navigate;
+    const useParams = ReactRouterDOM.useParams;
+    const useNavigate = ReactRouterDOM.useNavigate;
+         
+    function Home(){ return <h2>Главная</h2>; }
+
+    // в нем программный переход на Home - без параметров
+    function New(){
+        const params = useParams();
+
+        // для программных переходов - получаем сылку на функцию перехода
+        // из хука useNavigate()
+        const navigate = useNavigate();
+
+        return <div>
+            <h2>New {params.id}</h2>
+            <button onClick={event => navigate(`/`)}>На главную</button>
+        </div>;
+    }
+
+    // в нем программный переход на New - с параметром
+    // кстати, тоже получаем параметры
+    function Old(){
+        const params = useParams();
+        const id = params.id;
+        const navigate = useNavigate();
+
+        return <div>
+            <h2>Old {id}</h2>
+            <button onClick={event => navigate(`/new/${id}`)}>На New</button>
+        </div>;
+    }
+     
+    ReactDOM.createRoot(document.getElementById("app"))
+    .render(
+        <Router>
+            <div>
+                <nav>
+                    <Link to="/">Home</Link> | 
+                    <Link to="/old/2442">Old</Link> |
+                    <Link to="/new/4224">New</Link>
+                </nav>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/new/:id" element={<New/>} />
+                    <Route path="/old/:id" element={<Old />} />
+                </Routes>
+            </div>
+        </Router>
+    );
+</script>
+</body>
+</html>

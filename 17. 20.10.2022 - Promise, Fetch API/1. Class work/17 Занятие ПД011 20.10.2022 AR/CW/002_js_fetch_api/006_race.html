@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Promise race</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script>
+        // Вызов Promise.race, как и Promise.all, получает итерируемый объект
+        // с промисами, которые нужно выполнить, и возвращает новый промис.
+        // Но, в отличие от Promise.all(), результатом будет только первый
+        // успешно выполнившийся промис из списка. Остальные игнорируются.
+        function userInfo(url) {  return fetch(url); }
+
+        Promise.race([
+            userInfo("https://jsonplaceholder.typicode.com/posts/4"),
+            userInfo("https://jsonplaceholder.typicode.com/users/4"),
+            userInfo("https://jsonplaceholder.typicode.com/photos/4"),
+        ])
+        .then(responses => responses.json())
+        .then(i => console.log(i))
+        .catch(error => console.error('Error:', error));
+    </script>
+    <h3>Метод race() - демо вывод в консоли</h3>
+</body>
+</html>

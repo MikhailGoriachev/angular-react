@@ -1,0 +1,10 @@
+{
+  "name": "home-work",
+  "version": "1.0.0",
+  "dependencies": {
+    "lite-server": "^2.6.1"
+  },
+  "scripts": {
+    "start": "lite-server"
+  }
+}

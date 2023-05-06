@@ -1,0 +1,22 @@
+<h2>Атрибутивная Директива ngStyle</h2>
+
+<div class="blocks">
+    <!-- Binding -->
+    <div [style.background-color]="'lightgreen'" class="block">
+        binding style
+    </div>
+
+    <!-- Directive -->
+    <!--
+            background: toggle ? 'lightgray' : 'brown'
+            backgroundColor: toggle ? 'gold' : 'aqua',
+            'background-color': toggle ? 'gold' : 'tomato'
+     -->
+    <div [ngStyle]="{
+        color: 'brown',
+        background: toggle ? 'lightgray' : 'lightseagreen'
+    }" class="block">ngStyle directive</div>
+</div>
+<hr>
+<!-- привязка к событию (click)="кодОбработчика" -->
+<button (click)="toggle = !toggle">Изменить фон</button>

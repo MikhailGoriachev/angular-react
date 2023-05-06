@@ -1,0 +1,21 @@
+
+input{
+    border: 1px solid #ddd;
+    outline: none;
+}
+
+/* ng-invalid - стандартный класс Angular */
+input.ng-invalid{
+    border-bottom: 2px solid red;
+}
+
+/* ng-valid - стандартный класс Angular */
+input.ng-valid{
+    border-bottom: 2px solid green;
+}
+
+label{
+    user-select: none;
+    display: block;
+    margin-bottom: 5px;
+}

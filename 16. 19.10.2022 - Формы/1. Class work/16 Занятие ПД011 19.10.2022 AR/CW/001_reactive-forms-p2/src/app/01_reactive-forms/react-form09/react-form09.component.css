@@ -1,0 +1,20 @@
+.alert {
+    background: pink;
+    padding: 5px;
+}
+
+.ng-valid:not(form) {
+    background: lightgreen;
+}
+
+input[type=text] {
+    border: none;
+    padding: 4px;
+    border-bottom: 3px solid #ccc;
+}
+
+form {
+    padding: 10px;
+    border: 2px solid #000;
+    border-radius: 5px;
+}

@@ -1,0 +1,16 @@
+<h2>сustom Validators</h2>
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <span>Паспортные данные</span>
+    <br>
+    <input type="text" formControlName="passportUser">
+    <p>Валидный вариант AA123456, 123456789</p>
+    <input type="text" formControlName="birthYearUser">
+    <p>Год рождения с 1955 по {{maxBirthYear}}</p>
+    <div *ngIf="userForm.get('birthYearUser')!.hasError('ageValidator') &&
+	userForm.get('birthYearUser')!.touched">
+        {{ userForm.controls['birthYearUser'].errors!['ageValidator'].value }}
+    </div>
+    <button type="submit" [disabled]="!userForm.valid">Отправить</button>
+    <button type="button" (click)="showForm(userForm)">Показать форму</button>
+</form>

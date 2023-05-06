@@ -1,0 +1,36 @@
+<h2>Reactive forms: FormControl, FormGroup</h2>
+<form novalidate
+    [formGroup]="registrationForm"
+    (ngSubmit)="onSubmit(registrationForm)">
+
+    <div >
+        Логин
+        <br>
+        <input type="text" required formControlName="userLogin">
+    </div>
+    <br>
+    <div>
+        Пароль
+        <br>
+        <input type="password" required formControlName="userPass">
+    </div>
+    <br>
+    <details formGroupName="fullName">
+        <summary>Дополнительно</summary>
+        <div >
+            Имя
+            <br>
+            <input type="text" formControlName="firstName">
+        </div>
+        <br>
+        <div >
+            Фамилия
+            <br>
+            <input type="text" formControlName="lastName">
+        </div>
+        <br>
+    </details>
+    <input type="submit" class="btn" value="Регистрация"
+            [disabled]="registrationForm.invalid">
+</form>
+<pre>{{registrationForm.value | json}}</pre>

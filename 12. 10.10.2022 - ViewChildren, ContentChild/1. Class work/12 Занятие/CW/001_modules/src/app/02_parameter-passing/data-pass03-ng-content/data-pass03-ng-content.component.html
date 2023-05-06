@@ -1,0 +1,22 @@
+<h2>ng-content</h2>
+<!-- способ передачи контента в компонент через ng-content  -->
+<app-ng-content-child>
+    <!-- контент элементов попадает в ng-content дочернего компонента  -->
+    Первый текст
+</app-ng-content-child>
+<app-ng-content-child>
+    <!-- контент элементов попадает в ng-content дочернего компонента  -->
+    Второй текст
+</app-ng-content-child>
+<app-ng-content-child>
+  <!--
+  контент, передаваемый в дочерний компонент
+  может содержать разметку
+  -->
+  <p>Третий текст</p>
+  <ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ul>
+</app-ng-content-child>

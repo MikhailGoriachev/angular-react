@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- #region Стили -->
+    <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/block.css">
+    <!-- #endregion -->
+
+    <!-- скрипты -->
+    <script src="../lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../dist/utils.js"></script>
+    <script src="../dist/task01.js"></script>
+
+    <!-- заголовок -->
+    <title>Задание 1</title>
+
+    <!-- логотип -->
+    <link rel="shortcut icon" type="image/x-icon" href="../images/icon.svg">
+</head>
+
+<body>
+
+<!-- #region Навигация -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top shadow">
+    <div class="container-fluid justify-content-center">
+        <!-- Логотип -->
+        <a class="navbar-brand mx-2" href="../index.html">
+            <img class="logo" src="../images/icon.svg" alt="logo">
+        </a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+
+                <!-- Главная -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3" href="../index.html">Главная</a>
+                </li>
+
+                <!-- Задание 1 -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3 active" href="task01.html">Задание 1</a>
+                </li>
+
+                <!-- Задание 2 -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3" href="task02.html">Задание 2</a>
+                </li>
+
+                <!-- Задание 3 -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3" href="task03.html">Задание 3</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- #endregion -->
+
+<!-- #region Главная секция -->
+<main>
+
+    <section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="text-center">Задание 1</h4>
+                        </div>
+
+                        <div class="card-body">
+                            <ul class="list-group">
+                                <li class="list-group-item"><h5 class="text-center">Массив</h5></li>
+                                <li class="list-group-item">
+                                    <div class="row justify-content-center" id="arrayId"></div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="card-footer">
+                            <h5 class="text-center">Результат обработки</h5>
+                            <ul class="list-group" id="resultId"></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="list-group" id="groupListId">
+                        <a class="list-group-item list-group-item-action list-group-item-success w-100" href="#"
+                           id="initBtnId">Сгенерировать новый массив</a>
+                        <a class="list-group-item list-group-item-action list-group-item-primary w-100" href="#"
+                           id="point01">Количество элементов массива, равных
+                            нулю
+                        </a>
+                        <a class="list-group-item list-group-item-action list-group-item-primary w-100" href="#"
+                           id="point02">Количество отрицательных элементов
+                            массива
+                        </a>
+                        <a class="list-group-item list-group-item-action list-group-item-primary w-100" href="#"
+                           id="point03">Сумму элементов массива, расположенных
+                            после
+                            минимального элемента
+                        </a>
+                        <a class="list-group-item list-group-item-action list-group-item-primary w-100" href="#"
+                           id="point04">Сумму модулей элементов массива,
+                            расположенных после
+                            минимального по модулю элемента
+                        </a>
+                        <a class="list-group-item list-group-item-action list-group-item-primary w-100" href="#"
+                           id="point05">Упорядочить элементы массива по
+                            возрастанию модулей
+                        </a>
+                        <a class="list-group-item list-group-item-action list-group-item-primary w-100" href="#"
+                           id="point06">Заменить все отрицательные элементы
+                            массива их
+                            квадратами и упорядочить элементы массива по возрастанию
+                        </a>
+                    </div>
+                </div>
+
+                <!--                <div class="col-4">-->
+                <!--                    <div>-->
+                <!--                        <button class="btn btn-primary m-1 w-100" id="initBtnId">Сгенерировать новый массив</button>-->
+                <!--                        <button class="btn btn-success m-1 w-100" id="point01">Количество элементов массива, равных-->
+                <!--                            нулю-->
+                <!--                        </button>-->
+                <!--                        <button class="btn btn-success m-1 w-100" id="point02">Количество отрицательных элементов-->
+                <!--                            массива-->
+                <!--                        </button>-->
+                <!--                        <button class="btn btn-success m-1 w-100" id="point03">Сумму элементов массива, расположенных-->
+                <!--                            после-->
+                <!--                            минимального элемента-->
+                <!--                        </button>-->
+                <!--                        <button class="btn btn-success m-1 w-100" id="point04">Сумму модулей элементов массива,-->
+                <!--                            расположенных после-->
+                <!--                            минимального по модулю элемента-->
+                <!--                        </button>-->
+                <!--                        <button class="btn btn-success m-1 w-100" id="point05">Упорядочить элементы массива по-->
+                <!--                            возрастанию модулей-->
+                <!--                        </button>-->
+                <!--                        <button class="btn btn-success m-1 w-100" id="point06">Заменить все отрицательные элементы-->
+                <!--                            массива их-->
+                <!--                            квадратами и упорядочить элементы массива по возрастанию-->
+                <!--                        </button>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+            </div>
+        </div>
+
+    </section>
+
+</main>
+<!-- #endregion -->
+
+<!-- #region Подвал-->
+<footer class="bg-dark shadow fs-6 text-white-50 p-5 pb-2">
+    <p>
+        Разработчик:
+        <a href="https://github.com/MikhailGoriachev" target="_bank">
+            <b>Горячев Михаил</b>
+        </a>
+    </p>
+    <p>Группа: <b>ПД011</b></p>
+    <p>Город: <b>Донецк</b></p>
+    <p>Год создания: <b>2022</b></p>
+    <p>
+        Поддержка:
+        <a href="mailto:goriachevmichael@gmail.com">
+            <b>goriachevmichael@gmail.com</b>
+        </a>
+    </p>
+
+</footer>
+<!-- #endregion -->
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+
+.container {
+    max-width: 1165px;
+    padding: 0 15px;
+    margin: 0 auto;
+    border: 2.5px solid #ccc;
+}
+
+nav a{
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    margin-right: 3px;
+    text-decoration: none;
+    transition: all 0.5s;
+    color: #E03237;
+    font-size: 30px;
+}
+
+nav a:hover{
+    box-shadow: 0 6px 6px rgba(10,16,20,.15), 0 0 52px rgba(10,16,20,.12);
+}
+
+nav .active{
+    background: #E03237;
+    color: #fff;
+}

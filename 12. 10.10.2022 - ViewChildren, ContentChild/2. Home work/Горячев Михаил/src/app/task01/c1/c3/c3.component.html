@@ -1,0 +1,17 @@
+<app-c2 [numbers]="numbers" (resultReady)="resultReadyHandler($event)"></app-c2>
+
+<ul class="list-group">
+    <li class="text-center fw-bold list-group-item bg-secondary text-white">Данные</li>
+
+    <li class="list-group-item"><b>&alpha;</b>: {{numbers.a.toFixed(10)}}</li>
+    <li class="list-group-item"><b>&beta;</b>: {{numbers.b.toFixed(10)}}</li>
+
+    <li class="text-center fw-bold list-group-item bg-secondary text-white">Результат</li>
+
+    <li class="list-group-item"><b>z<sub>1</sub></b>: {{result.z1.toFixed(10)}}</li>
+    <li class="list-group-item"><b>z<sub>2</sub></b>: {{result.z2.toFixed(10)}}</li>
+
+    <li class="list-group-item text-white" [ngClass]="isEquals ? 'bg-success' : 'bg-danger'">
+        <b>z<sub>1</sub> === z<sub>2</sub></b>: {{isEquals ? "да" : "нет"}}
+    </li>
+</ul>

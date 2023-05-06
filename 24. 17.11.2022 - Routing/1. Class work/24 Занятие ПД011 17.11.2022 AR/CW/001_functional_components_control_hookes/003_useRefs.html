@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<!--
+  Хук useRef позволяет сохранить некоторый объект, который можно изменять.
+  Этот объект хранится в течение всей жизни компонента.
+
+  В качестве параметра функция useRef() принимает начальное значение хранимого
+  объекта. Возвращаемое значение - ссылка-объект, из свойства current которого
+  можно получить хранимое значение.
+
+  Типичным примером применения useRef является хранение ссылки на html-элементы
+  внутри компонента:
+
+  Однако только операциями с элементами html применение useRef не ограничивается.
+  В реальности useRef может хранить любой объект, и это может быть полезно в
+  различных ситуациях.
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React. Хуки функциональных компонентов</title>
+
+    <link rel="stylesheet" href="style.css">
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="images/emotion_smile.png" type="image/x-icon">
+
+    <!-- локальное подключение React -->
+    <script src="lib/react/react.production.min.js"></script>
+    <script src="lib/react/react-dom.production.min.js"></script>
+    <script src="lib/babel.min.js"></script>
+</head>
+<body>
+
+<h3>Функциональные компоненты, использование хука useRefs()</h3>
+<div id="app"></div>
+
+<script type="text/babel">
+
+    // полученрие корня - из предыдущего примера
+    const root = ReactDOM.createRoot(document.getElementById("app"));
+
+    // использование useRef() для работы с элементом разметки - полем ввода
+    function SeasonForm(props) {
+
+        // используем useState(), как обычно
+        const [season, setSeason] = React.useState(props.season);
+
+        // использование хука useRef(), создаем ссылку
+        const seasonRef = React.useRef(null);
+
+        // для примера используем эффект
+        React.useEffect(() => {
+            console.dir(seasonRef.current);
+            seasonRef.current.value = season.toUpperCase();
+        }, [season]);
+
+        // обработка события отправки формы
+        const submitHandler = (e) => {
+            e.preventDefault();
+
+            // свойство current указывает на элемент input
+            const value = seasonRef.current.value;
+            console.log(`Отправлено время года : ${value}`);
+
+            // изменим также состояние
+            setSeason("Валера");
+        };
+
+        return (
+            <>
+                <ul>
+                    <li>Время года: <b>{season}</b></li>
+                </ul>
+                <div className="border">
+                    <form onSubmit={submitHandler}>
+                        <p>
+                            <label>Время года:</label>
+                            <input type="text" ref={seasonRef}/>
+                        </p>
+                        <button type="submit">Отправить</button>
+                    </form>
+                </div>
+            </>
+        );
+    }
+
+    // Ref как Хранитель, работаем с локальным хранилищем
+    function UserForm(props) {
+        const [name, setName] = React.useState(props.name);
+        const nameRef = React.useRef(name);
+
+        // обновление Хранителя
+        React.useEffect(() => {
+            nameRef.current = name;
+        }, [name]);
+
+        // чтение в Хранитель при создании компонента
+        // сохранение Хранителя при удалении компонента
+        React.useEffect(() => {
+                // извлекаем данные из localStorage
+                const userName = localStorage.getItem("userName");
+
+                // если в localStorage есть такой объект
+                if (userName !== null) {
+                    setName(userName);
+                    console.log("Данные получены из localStorge");
+                }
+
+                // сохраняем данные в localStorage при уничтожении компонента
+                return () => {
+                    console.log(nameRef.current);
+                    localStorage.setItem("userName", nameRef.current);
+                    console.log("Данные сохранены в localStorage");
+                }
+            },
+            []); // эффект срабатывает только один раз - при самом первом рендеринге
+
+        // для привязкти к полю ввода
+        const changeName = (event) => setName(event.target.value);
+
+        // удаление компонентов страницы
+        const unmount = () => root.unmount();
+
+        return (
+            <div>
+                <h3>Имя: {name}</h3>
+
+                <div>
+                    <p>Имя: <input type="text" value={name} onChange={changeName}/></p>
+                    <button onClick={unmount}>Unmount</button>
+                </div>
+            </div>
+        );
+    }
+
+    // отрисовка компонентов на странице
+    root.render(
+        <>
+            <SeasonForm season="Зима"/>
+            <hr/>
+            <UserForm name="Полуэкт"/>
+            <hr/>
+        </>
+    )
+</script>
+</body>
+</html>

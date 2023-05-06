@@ -1,0 +1,24 @@
+
+p {
+    font-style: italic;
+    background: lightgreen;
+}
+
+/* https://angular.io/guide/component-styles */
+
+
+
+/* :host /deep/ p {
+    color: darkgreen;
+    font-size: 30px;
+    font-weight: bold;
+} */
+
+/* /deep/ устаревшая запись и в дальнейшем будет удалена */
+/* ::ng-deep p{
+    color: blue;
+    font-size: 40px;
+    font-weight: bold;
+} */
+
+

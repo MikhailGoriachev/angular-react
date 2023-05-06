@@ -1,0 +1,13 @@
+.ng-valid{
+    border: 3px solid lightgreen;
+}
+.ng-invalid{
+    border: 3px solid pink;
+}
+
+form{
+    padding: 10px;
+}
+div{
+    padding: 5px;
+}

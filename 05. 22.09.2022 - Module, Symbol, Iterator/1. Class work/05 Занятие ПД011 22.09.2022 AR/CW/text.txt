@@ -1,0 +1,3 @@
+
+установка пакета с записью в package.json
+npm i lite-server --save-dev 

@@ -1,0 +1,13 @@
+
+input{
+    border: 1px solid #ddd;
+}
+.ng-invalid{
+    border-bottom: 2px solid red;
+}
+.ng-valid{
+    border-bottom: 2px solid green;
+}
+label{
+    user-select: none;
+}

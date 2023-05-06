@@ -1,0 +1,52 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Имя</th>
+        <th>Ник</th>
+        <th>Email</th>
+        <th>Телефон</th>
+        <th>Веб-сайт</th>
+        <th>Доп. информация</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let u of users">
+        <td>{{u.id}}</td>
+        <td>{{u.name}}</td>
+        <td>{{u.username}}</td>
+        <td>{{u.email}}</td>
+        <td>{{u.phone}}</td>
+        <td>{{u.website}}</td>
+        <td>
+            <!-- Посты -->
+            <button class="btn btn-dark mx-2"
+                    title="Посты пользователя..."
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalId"
+                    (click)="onSelectPostsUser.emit(u.id)">
+                <i class="bi bi-postcard-fill"></i>
+            </button>
+
+            <!-- Фото дел -->
+            <button class="btn btn-primary mx-2"
+                    title="Фото пользователя..."
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalId"
+                    (click)="onSelectPhotosUser.emit(u.id)">
+                <i class="bi bi-images"></i>
+            </button>
+
+            <!-- Список дел -->
+            <button class="btn btn-success mx-2"
+                    title="Список дел пользователя..."
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalId"
+                    (click)="onSelectTodosUser.emit(u.id)">
+                <i class="bi bi-check2-all"></i>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>

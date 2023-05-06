@@ -1,0 +1,8 @@
+:host{
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+.buttons{
+    padding: 5px;
+    border: 2px solid green;
+}

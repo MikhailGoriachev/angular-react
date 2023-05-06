@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Маршруты в React</title>
+
+    <link rel="stylesheet" href="style.css">
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="images/emotion_smile.png" type="image/x-icon">
+
+    <!-- локальное подключение React -->
+    <script src="lib/react/react.production.min.js"></script>
+    <script src=" lib/react/react-dom.production.min.js"></script>
+    <script src=" lib/react/history.production.min.js"></script>
+    <script src=" lib/react/react-router.production.min.js"></script>
+    <script src=" lib/react/react-router-dom.production.min.js"></script>
+
+    <script src="lib/babel.min.js"></script>
+</head>
+<body>
+
+<h3>Переадресация</h3>
+<div id="app"></div>
+
+<script type="text/babel">
+    const Router = ReactRouterDOM.BrowserRouter;
+    const Route = ReactRouterDOM.Route;
+    const Routes = ReactRouterDOM.Routes;
+    const Link = ReactRouterDOM.Link;
+    const Navigate = ReactRouterDOM.Navigate;
+         
+    function Home(){ return <h2>Главная</h2>;}
+    function New() { return <h2>New</h2>;}
+     
+    ReactDOM.createRoot(
+        document.getElementById("app")
+    )
+    .render(
+        <Router>
+            <div>
+                <nav>
+                    <Link to="/">Home</Link> | 
+                    <Link to="/old">Old</Link> |
+                    <Link to="/new">New</Link>
+                </nav>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/new" element={<New/>} />
+                    <Route path="/old" element={<Navigate to="/new" />} />
+                </Routes>
+            </div>
+        </Router>
+    );
+</script>
+</body>
+</html>

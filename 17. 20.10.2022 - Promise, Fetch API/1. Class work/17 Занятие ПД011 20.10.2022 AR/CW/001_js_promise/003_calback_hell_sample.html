@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Callback hell</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <script>
+        // 1 проблема:
+        // resolve, reject - могут вызываться 1,2 и более раз
+        // 2 проблема: 
+        // Невообразимое количество callbacks
+        function watchMovie(movie, resolve, reject) {
+            console.log('Поиск фильма', movie, '...');
+            setTimeout(function () {
+                let cinema = {
+                    name: 'Мегамакс Фокс'
+                };
+                Math.random() > 0.1 ? resolve(cinema) : reject('Кинотеатр не найден');
+            }, 1000)
+        }
+
+
+        function buyTickets(cinema, resolve, reject) {
+            console.log('Покупка билетов...');
+            setTimeout(function () {
+                let tickets = {
+                    seats: '4 билета. 17 ряд. 2, 3, 4 и 5 места'
+                };
+                Math.random() > 0.6 ? resolve(tickets) : reject('Недостаточно средств');
+            }, 1000)
+        }
+
+
+        function buyPopCorn(resolve, reject) {
+            console.log('Покупка попкорна...');
+            setTimeout(function () {
+                let popCorn = {
+                    cost: 'Большой попкорн. 180 руб'
+                };
+                Math.random() > 0.7 ? resolve(popCorn) : reject('В баре закончился поп-корн');
+            }, 1000)
+        }
+
+
+        watchMovie('Venom',
+            function (cinema) {
+                console.log('Кинотеатр найден!', cinema);
+                buyTickets(cinema,
+                    function (tickets) {
+                        console.log('Билеты куплены', tickets);
+                        buyPopCorn(
+                            function (success) {
+                                console.log('Попкорн куплен!');
+                                console.log('Смотрим фильм:)');
+                            },
+                            function (reason) {
+                                console.error(reason);
+                                console.error('В кинотеатр не пойдем!')
+                        });
+                    },
+                    function (reason) {
+                        console.error(reason);
+                    })
+            },
+            function (reason) {
+                console.error(reason);
+            });
+
+    </script>
+</body>
+
+</html>

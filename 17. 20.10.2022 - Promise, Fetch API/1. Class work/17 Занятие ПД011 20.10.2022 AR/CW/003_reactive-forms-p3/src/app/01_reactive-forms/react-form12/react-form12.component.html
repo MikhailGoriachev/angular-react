@@ -1,0 +1,30 @@
+<h2>Проверка на совпадение значений в полях</h2>
+
+<form novalidate [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+
+    <label>Логин</label><br>
+    <input type="text" formControlName="login">
+    <br>
+    <label>Введите пароль</label><br>
+    <input type="password" formControlName="password">
+    <div *ngIf="password.errors && (password.dirty || password.touched)">
+        <span *ngIf="password.errors['required']">Поле обязательное для ввода</span>
+        <span *ngIf="password.errors['minlength']">Минимальная длина пароля {{password.errors['minlength'].requiredLength}}
+        </span>
+    </div>
+    <br>
+    <label>Подтвердите пароль</label><br>
+    <input type="password" formControlName="passwordConfirm">
+    <!-- т.к. валидатор совпадения на форме, то и проверяем errors на форме -->
+    <div *ngIf="registrationForm.errors && (passwordConfirm.dirty || passwordConfirm.touched)">
+        <span *ngIf="passwordConfirm.errors!['required']">Поле обязательное для ввода</span>
+        <span *ngIf="registrationForm.errors['match']">Пароли должны совпадать</span>
+    </div>
+    <br>
+    <br>
+    <input type="submit" value="Отправить" [disabled]="registrationForm.invalid">
+</form>
+
+<br>
+
+<pre>{{registrationForm.value |json}}</pre>

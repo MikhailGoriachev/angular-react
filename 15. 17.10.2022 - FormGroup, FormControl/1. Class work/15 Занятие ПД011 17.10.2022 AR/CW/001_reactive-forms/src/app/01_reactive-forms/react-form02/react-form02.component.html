@@ -1,0 +1,11 @@
+<h2>Forms styles</h2>
+<input type="text" class="my_field" [(ngModel)]="data" #input pattern="\d+" required>
+<br>
+<p>Классы поля <b>{{ input.className }}</b></p>
+
+<p>Классы в инпут добавляются автоматически и меняются тоже</p>
+<ul>
+	<li>Был ли фокус на поле <b>(ng-untouched -> ng-touched)</b></li>
+	<li>Было изменение поля с начального вида <b>(ng-pristine -> ng-dirty)</b></li>
+	<li>Валидно поле или нет <b>(ng-valid -> ng-invalid)</b></li>
+</ul>

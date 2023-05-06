@@ -1,0 +1,46 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th><a (click)="$event.preventDefault(); sortById()" href="#">Id</a></th>
+        <th>Изображение</th>
+        <th><a (click)="$event.preventDefault(); sortByAuthor()" href="#">Автор</a></th>
+        <th><a (click)="$event.preventDefault(); sortByName()" href="#">Название</a></th>
+        <th>Год выпуска</th>
+        <th>Цена</th>
+        <th>
+            <button class="btn btn-success"
+                    (click)="onAddItem.emit()">
+                Добавить
+            </button>
+        </th>
+    </tr>
+    </thead>
+
+    <tbody class="align-middle">
+    <tr *ngFor="let b of booksView">
+        <td>{{b.id}}</td>
+        <td>
+            <img src="assets/images/books/{{b.image}}" class="w-5rem" alt="{{b.image}}">
+        </td>
+        <td>{{b.author}}</td>
+        <td>{{b.name}}</td>
+        <td>{{b.pubYear}}</td>
+        <td>{{b.price}}</td>
+        <td>
+            <!-- Изменить -->
+            <button class="btn btn-warning mx-2"
+                    title="Фото пользователя..."
+                    (click)="onEditItem.emit(b.id)">
+                <i class="bi bi-pencil-square"></i>
+            </button>
+
+            <!-- Удалить -->
+            <button class="btn btn-danger mx-2"
+                    title="Удалить"
+                    (click)="onRemoveItem.emit(b.id)">
+                <i class="bi bi-trash-fill"></i>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>

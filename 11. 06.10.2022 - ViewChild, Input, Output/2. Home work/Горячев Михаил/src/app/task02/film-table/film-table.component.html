@@ -1,0 +1,19 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Название</th>
+        <th>Режиссер</th>
+        <th>Жанр</th>
+        <th>Год выпуска</th>
+    </tr>
+    </thead>
+
+    <tbody class="align-middle">
+    <tr *ngFor="let f of filmListView">
+        <td>{{f.name}}</td>
+        <td>{{f.director}}</td>
+        <td>{{f.genre}}</td>
+        <td>{{f.year}}</td>
+    </tr>
+    </tbody>
+</table>

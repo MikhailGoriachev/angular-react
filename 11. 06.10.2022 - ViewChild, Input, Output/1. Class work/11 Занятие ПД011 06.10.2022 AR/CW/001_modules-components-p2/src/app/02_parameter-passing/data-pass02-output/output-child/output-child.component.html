@@ -1,0 +1,13 @@
+<div style="background-color: aqua; padding: 10px;">
+    <h5>app-output-child</h5>
+    <b>{{currentValue}}</b>
+    <br>
+    <input type="text" #inp (input)="start(inp.value)">
+    <hr>
+    <button (click)="incCounter()">выполнить++</button>
+    {{ outputCounter }}
+</div>
+
+
+
+    

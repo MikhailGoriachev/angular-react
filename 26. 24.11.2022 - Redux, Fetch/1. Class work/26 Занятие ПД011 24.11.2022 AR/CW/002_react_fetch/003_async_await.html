@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<h1>async / await</h1>
+
+<script>
+    const id = 1;
+
+    // const getUserById = function(url) {
+    // // обращение к серверу
+    //     fetch(url)
+    //         .then((response) => {
+    //             console.log(`Ответ от сервера получен, статус: `, response.status);
+    //             return response.json();
+    //         })
+    //         .then((json) => {
+    //             console.dir(json);
+    //         });
+    // }
+
+
+    const getUserById = async function(id) {
+        const url=`https://jsonplaceholder.typicode.com/users/${id}`;
+
+        // обращение к серверу
+        const response = await fetch(url);
+        
+        console.log(`Ответ от сервера получен, статус: `, response.status);
+
+        const json = await response.json();
+        console.dir(json);
+    }
+
+    getUserById(id);
+</script>
+
+</body>
+</html>

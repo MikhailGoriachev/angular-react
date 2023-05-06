@@ -1,0 +1,16 @@
+<h2>HTTPClient methods</h2>
+
+<input #taskField type="text">
+
+<br>
+<button (click)="addTodo(taskField.value)">add todo</button>
+
+<button (click)="finishEditTodo(taskField.value)">Edit task</button>
+
+<ul>
+    <li *ngFor="let todo of todoList">
+        {{ todo.name }}
+        <span (click)="startEditTodo(todo, taskField)">&#9998;</span>
+        <span (click)="deleteTask(todo.id)">&times;</span>
+    </li>
+</ul>

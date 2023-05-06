@@ -1,0 +1,20 @@
+<div class="container">
+  <h1>Введение в Angular</h1>
+  <h2></h2>
+  <main>
+    <nav>
+      <h3>RxJS</h3>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">01_RxJS introduction</a>
+      <a routerLink="/reactive-extensions" routerLinkActive="active">02_RxJS extensions</a>
+      <h3>Common services</h3>
+      <a routerLink="/http-client" routerLinkActive="active">03_HTTPClient get()</a>
+      <a routerLink="/todo-list" routerLinkActive="active">04_HTTPClient get() put() post() delete()</a>
+      <a routerLink="/http-params" routerLinkActive="active">05_HttpParams</a>
+      <a routerLink="/http-headers" routerLinkActive="active">06_HttpHeaders</a>
+
+    </nav>
+    <div class="examples">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>

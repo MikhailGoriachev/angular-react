@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--
+
+Введение в формы
+
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React.Введение в формы. Валидация</title>
+
+    <link rel="stylesheet" href="style.css">
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="images/emotion_smile.png" type="image/x-icon">
+</head>
+<body>
+<h3>Введение в формы React. Валидация</h3>
+<div id="app"></div>
+<!-- локальное подключение React -->
+<script src="lib/react/react.production.min.js"></script>
+<script src=" lib/react/react-dom.production.min.js"></script>
+<script src="lib/babel.min.js"></script>
+
+<script type="text/babel">
+    class UserForm extends React.Component {
+
+        constructor(props) {
+            super(props);
+
+            let name = props.name;
+            let nameIsValid = this.validateName(name);
+
+            let age = props.age;
+            let ageIsValid = this.validateAge(age);
+
+            this.state = {name: name, age: age, nameValid: nameIsValid, ageValid: ageIsValid};
+
+            this.onNameChange = this.onNameChange.bind(this);
+            this.onAgeChange = this.onAgeChange.bind(this);
+            this.handleSubmit = this.handleSubmit.bind(this);
+        }
+
+        // это просто пример валидации
+        validateAge(age)   { return age >= 0 && age <= 200; }
+        validateName(name) { return name.length >= 1; }
+
+        // в обработчике изменения поля ведем валидацию
+        onAgeChange(e) {
+            let val = e.target.value;
+            let valid = this.validateAge(val);
+            console.log(val, valid);
+
+            this.setState({age: val, ageValid: valid});
+        }
+
+        // в обработчике изменения поля ведем валидацию
+        onNameChange(e) {
+            let val = e.target.value;
+            let valid = this.validateName(val);
+            console.log(val, valid);
+
+            this.setState({name: val, nameValid: valid});
+        }
+
+        handleSubmit(e) {
+            e.preventDefault();
+
+            // имитация отправки только при валидных данных
+            if (this.state.nameValid && this.state.ageValid){
+                alert(`Имя: ${this.state.name}\nВозраст: ${this.state.age}`);
+            }
+        }
+
+        render() {
+            // цвет границы для поля для ввода имени
+            let nameColor = this.state.nameValid?"green":"red";
+
+            // цвет границы для поля для ввода возраста
+            let ageColor = this.state.ageValid?"green":"red";
+
+            return (
+                <form onSubmit={this.handleSubmit}>
+                    <p>
+                        <label>Имя:</label><br />
+                        <input type="text" value={this.state.name}
+                               onChange={this.onNameChange} style={{borderColor:nameColor}} />
+                    </p>
+                    <p>
+                        <label>Возраст:</label><br />
+                        <input type="number" value={this.state.age}
+                               onChange={this.onAgeChange}  style={{borderColor:ageColor}} />
+                    </p>
+                    <input type="submit" value="Отправить" />
+                </form>
+            );
+        }
+    }
+    ReactDOM.createRoot(document.getElementById("app"))
+        .render(
+            <UserForm name="" age="0" />
+        );
+</script>
+</body>
+</html>

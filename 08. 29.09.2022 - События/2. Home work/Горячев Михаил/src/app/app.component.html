@@ -1,0 +1,58 @@
+<!-- #region Навигация -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top shadow">
+    <div class="container-fluid justify-content-center">
+
+        <!-- Логотип -->
+        <a class="navbar-brand mx-2" routerLink="/">
+            <img class="logo" src="assets/images/icon.svg" alt="logo">
+        </a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+
+                <!-- Главная -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3" routerLink="/" routerLinkActive="active"
+                       [routerLinkActiveOptions]="{exact: true}">
+                        Главная
+                    </a>
+                </li>
+
+                <!-- Задание 1 -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3" routerLink="/task01" routerLinkActive="active">Задание 1</a>
+                </li>
+
+                <!-- Задание 2 -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3" routerLink="/task02" routerLinkActive="active">Задание 2</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- #endregion -->
+
+<router-outlet></router-outlet>
+
+<!-- #region Подвал-->
+<footer class="bg-dark shadow fs-6 text-white-50 p-5 pb-2">
+    <p>
+        Разработчик:
+        <a href="https://github.com/MikhailGoriachev" target="_bank">
+            <b>Горячев Михаил</b>
+        </a>
+    </p>
+    <p>Группа: <b>ПД011</b></p>
+    <p>Город: <b>Донецк</b></p>
+    <p>Год создания: <b>2022</b></p>
+    <p>
+        Поддержка:
+        <a href="mailto:goriachevmichael@gmail.com">
+            <b>goriachevmichael@gmail.com</b>
+        </a>
+    </p>
+
+</footer>
+<!-- #endregion -->

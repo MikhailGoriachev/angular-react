@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Маршруты в React</title>
+
+    <link rel="stylesheet" href="style.css">
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="images/emotion_smile.png" type="image/x-icon">
+
+    <!-- локальное подключение React -->
+    <script src="lib/react/react.production.min.js"></script>
+    <script src=" lib/react/react-dom.production.min.js"></script>
+    <script src=" lib/react/history.production.min.js"></script>
+    <script src=" lib/react/react-router.production.min.js"></script>
+    <script src=" lib/react/react-router-dom.production.min.js"></script>
+
+    <script src="lib/babel.min.js"></script>
+</head>
+<body>
+
+<h3>Параметры маршрутов</h3>
+<div id="app"></div>
+
+<script type="text/babel">
+  const Router = ReactRouterDOM.BrowserRouter;
+    const Route = ReactRouterDOM.Route;
+	const Routes = ReactRouterDOM.Routes;
+	const useParams = ReactRouterDOM.useParams;
+	const NavLink = ReactRouterDOM.NavLink;
+	const Outlet = ReactRouterDOM.Outlet;
+    const phones =[
+                    {id: 1, name: "Apple iPhone 12 Pro"}, 
+                    {id: 2, name: "Google Pixel 5"}, 
+                    {id: 3, name: "Huawei P40 Pro"} 
+                ];
+
+    class ProductsList extends React.Component{
+        render(){
+            return <div>
+                    <h2>Список товаров</h2>
+                    <ul>
+                    {
+                        phones.map(function(item){
+                            return <li key={item.id}>
+                                     <NavLink to={`/products/${item.id}`}>{item.name}</NavLink>
+                                   </li>
+                        })
+                    }
+                </ul>
+            </div>;
+        }
+    }
+
+    // т.к. требуетя получать параметры - функциональный компонент
+    function Product(){
+        // получаем параметры
+        const params = useParams();
+        const prodId = params.id;
+        const phone = phones.find(p=>p.id == prodId);
+        if(phone===undefined)
+            return <h2>Товар не найден</h2>;
+        else
+            return <h2>Товар {phone.name}</h2>;
+    }
+	
+    class Products extends React.Component{
+        render(){
+            return (<div>
+                <h1>Товары</h1>
+                <Outlet />
+            </div>)
+        }
+    }
+	
+    ReactDOM.createRoot(document.getElementById("app"))
+    .render(
+	<Router>
+		<div>
+		  <Routes>
+			<Route path="/" element={<h2>Главная</h2>} />
+
+			<Route path="/products" element={<Products />}>
+				<Route index element={<ProductsList />} />
+				<Route path=":id" element={<Product />} />
+			</Route>
+
+			<Route path="*" element={<h2>Ресурс не найден</h2>} />
+		   </Routes>
+		</div>
+	</Router>
+    );
+</script>
+</body>
+</html>

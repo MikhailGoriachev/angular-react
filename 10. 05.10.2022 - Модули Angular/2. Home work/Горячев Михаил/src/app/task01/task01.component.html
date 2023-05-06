@@ -1,0 +1,177 @@
+<!-- #region Параметры обработки -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark shadow border-3 border-top border-primary sticky-top">
+    <div class="container-fluid justify-content-center">
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav d-flex">
+
+                <div>
+                    <h6 class="text-white text-center">Сортировка:</h6>
+                    <button type="button" class="btn btn-success me-3" (click)="sortByDefault()">
+                        Исходный порядок
+                    </button>
+                    <button type="button" class="btn btn-primary me-3" (click)="sortBySalaryDesc()">
+                        По окладу
+                    </button>
+                    <button type="button" class="btn btn-primary me-5" (click)="sortByFullName()">
+                        По фамилии и инициалам
+                    </button>
+                </div>
+
+                <div>
+                    <h6 class="text-white text-center">Выборка (подсветка записей):</h6>
+                    <div class="d-inline-flex align-items-center">
+
+                        <!-- По мин. окладу -->
+                        <button type="button" class="btn btn-primary me-3" (click)="selectByMinSalary()">
+                            По мин. окладу
+                        </button>
+
+                        <!-- По макс. окладу -->
+                        <button type="button" class="btn btn-primary me-3" (click)="selectByMaxSalary()">
+                            По макс. окладу
+                        </button>
+
+                        <!-- Выше заданного стажа -->
+                        <button type="button" class="btn btn-primary me-3 w-8rem" data-bs-toggle="modal"
+                                data-bs-target="#modalId"
+                                (click)="selectType = SelectType.overExperience">
+                            По стажу
+                        </button>
+
+                        <!-- По должности -->
+                        <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal"
+                                data-bs-target="#modalId"
+                                (click)="selectType = SelectType.position">
+                            По должности
+                        </button>
+
+                        <!-- По году трудоустройства -->
+                        <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal"
+                                data-bs-target="#modalId"
+                                (click)="selectType = SelectType.yearOfEmployment">
+                            По году трудоустройства
+                        </button>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- #endregion -->
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 min-vh-100 p-3">
+    <h4 class="text-center">Задание 1. Работники</h4>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Изображение</th>
+            <th>Фамилия и инициалы</th>
+            <th>Должность</th>
+            <th>Пол</th>
+            <th>Год трудоустройства</th>
+            <th>Стаж (лет)</th>
+            <th>Оклад (&#8381;)</th>
+        </tr>
+        </thead>
+
+        <tbody class="align-middle">
+        <tr *ngFor="let w of workerListView" [class.bg-warning]="isSelect(w)">
+            <td class="h-7rem w-10rem bg-img text-center">
+                <img src="assets/images/persons/{{w.image}}" alt="d.image" class="h-100">
+            </td>
+            <td>{{w.fullName}}</td>
+            <td>{{w.position}}</td>
+            <td>{{w.gender | gender}}</td>
+            <td>{{w.yearOfEmployment}}</td>
+            <td>{{w.getExperience()}}</td>
+            <td>{{w.salary | currency : '&#8381; ' }}</td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- Модальное окно -->
+<div class="modal fade" id="modalId" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <ng-container [ngSwitch]="selectType">
+                <ng-container *ngSwitchCase="SelectType.overExperience">
+                    <ng-container *ngTemplateOutlet="overExperienceModalContent"></ng-container>
+                </ng-container>
+                <ng-container *ngSwitchCase="SelectType.position">
+                    <ng-container *ngTemplateOutlet="positionModalContent"></ng-container>
+                </ng-container>
+                <ng-container *ngSwitchCase="SelectType.yearOfEmployment">
+                    <ng-container *ngTemplateOutlet="yearOfEmploymentModalContent"></ng-container>
+                </ng-container>
+            </ng-container>
+        </div>
+    </div>
+</div>
+
+<!-- Выше заданного стажа -->
+<ng-template #overExperienceModalContent>
+    <div class="modal-header">
+        <h5 class="modal-title">Выборка по стажу</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+    </div>
+    <div class="modal-body">
+        <div class="row p-3">
+            <label class="form-label">Минимальный стаж:</label>
+            <input type="number" class="form-control" min="0" placeholder="Мин. стаж (лет)" #minExperience>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-primary me-3 w-8rem" data-bs-dismiss="modal"
+                (click)="selectByOverExperience(+minExperience.value)">
+            Выбрать
+        </button>
+    </div>
+</ng-template>
+
+<!-- По должности -->
+<ng-template #positionModalContent>
+    <div class="modal-header">
+        <h5 class="modal-title">Выборка по должности</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+    </div>
+    <div class="modal-body">
+        <div class="row p-3">
+            <label class="form-label">Должность:</label>
+            <select #position class="form-select w-10rem me-3">
+                <option *ngFor="let t of Utils.positionList">{{t}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-primary me-3 w-8rem" data-bs-dismiss="modal"
+                (click)="selectByPosition(position.value)">
+            Выбрать
+        </button>
+    </div>
+</ng-template>
+
+<!-- Выборка по году трудоустройства -->
+<ng-template #yearOfEmploymentModalContent>
+    <div class="modal-header">
+        <h5 class="modal-title">Выборка по году трудоустройства</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+    </div>
+    <div class="modal-body">
+        <div class="row p-3">
+            <label class="form-label">Год трудоустройства:</label>
+            <input type="number" class="form-control" min="1900" value="2020" placeholder="Год" #year>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-primary me-3 w-8rem" data-bs-dismiss="modal"
+                (click)="selectByYearOfEmployment(+year.value)">
+            Выбрать
+        </button>
+    </div>
+</ng-template>

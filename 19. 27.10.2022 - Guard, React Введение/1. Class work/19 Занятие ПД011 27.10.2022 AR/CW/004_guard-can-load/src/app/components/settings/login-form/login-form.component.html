@@ -1,0 +1,4 @@
+<!-- это простейшая форма ввода -->
+<h4>Вход/выход пользователя</h4>
+<button *ngIf="!isAuth" (click)="login()">{{ btnText }}</button>
+<button *ngIf="isAuth" (click)="logout()">{{ btnText }}</button>

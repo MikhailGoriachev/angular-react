@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--
+
+Введение в формы
+
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React.Введение в формы</title>
+
+    <link rel="stylesheet" href="style.css">
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="images/emotion_smile.png" type="image/x-icon">
+</head>
+<body>
+
+<h3>Введение в формы React</h3>
+<div id="app"></div>
+
+<!-- локальное подключение React -->
+<script src="lib/react/react.production.min.js"></script>
+<script src=" lib/react/react-dom.production.min.js"></script>
+<script src="lib/babel.min.js"></script>
+
+<script type="text/babel">
+    class UserForm extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {name: "", age: 0};
+
+            this.onChangeName = this.onChangeName.bind(this);
+            this.onChangeAge = this.onChangeAge.bind(this);
+            this.handleSubmit = this.handleSubmit.bind(this);
+        }
+
+        // обработчик события change на строке ввода name
+        onChangeName(e) {
+            let val = e.target.value;
+            this.setState({name: val});
+        }
+
+        // обработчик события change на строке ввода age
+        onChangeAge(e) {
+            let val = e.target.value;
+            this.setState({age: val});
+        }
+
+        // обработчик события клика по кнопке submit формы ввода
+        handleSubmit(e) {
+            // требуется явный вызов, return false не работает :(
+            e.preventDefault();
+            alert("Имя: " + this.state.name + "\n" + "Возраст: " + this.state.age );
+        }
+
+        render() {
+            return (
+                <form name="login" onSubmit={this.handleSubmit}>
+                    <p>
+                        <label>Имя:</label><br />
+                        <input type="text" value={this.state.name} onChange={this.onChangeName}/>
+                        <br />
+                        <label>Возраст:</label><br />
+                        <input type="number" name="age" value={this.state.age} onChange={this.onChangeAge} />
+                    </p>
+                    <input type="submit" value="Отправить" />
+                </form>
+            );
+        }
+    }
+    ReactDOM.createRoot(document.getElementById("app"))
+        .render(
+            <UserForm />
+        );
+</script>
+</body>
+</html>

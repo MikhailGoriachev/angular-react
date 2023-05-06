@@ -1,0 +1,25 @@
+<!-- #region Общий контейнер контента -->
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 p-3">
+    <h4 class="text-center">Задание 3. Галерея</h4>
+    <div id="shipCarousel" class="carousel carousel-dark slide min-vh-100" data-bs-ride="carousel">
+
+        <!-- Изображения -->
+        <div class="carousel-inner">
+            <div class="carousel-item" [class.active]="i === 0" *ngFor="let f of files; index as i">
+                <img src="assets/images/ships/{{f}}" alt="{{f}}" class="d-block mx-auto h-30rem">
+                <div class="carousel-caption text-white">
+                    <h3>{{f}}</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Кнопки переключения слайдов -->
+        <button type="button" class="carousel-control-prev" data-bs-target="#shipCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button type="button" class="carousel-control-next" data-bs-target="#shipCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+
+    </div>
+</section>

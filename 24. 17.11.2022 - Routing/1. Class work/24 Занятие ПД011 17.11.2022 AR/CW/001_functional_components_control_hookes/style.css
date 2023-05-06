@@ -1,0 +1,41 @@
+body {
+    font-family: Tahoma, sans-serif;
+    font-size: 12pt;
+}
+
+
+button{
+    width: 100px;
+    min-height:30px;
+    padding: 6px;
+    border-radius: 4px;
+    margin:12px;
+}
+
+.on{
+    color: darkgreen;
+    background-color: lightgreen;
+}
+
+.off{
+    color:darkgray;
+    background-color: white;
+}
+
+label {
+    display: inline-block;
+    width: 80px;
+}
+
+input {
+    display: inline-block;
+    width: 120px;
+    margin-bottom: 8px;
+}
+
+.border {
+    border: solid 1px black;
+    border-radius: 8px;
+    width: 300px;
+    padding: 6px;
+}

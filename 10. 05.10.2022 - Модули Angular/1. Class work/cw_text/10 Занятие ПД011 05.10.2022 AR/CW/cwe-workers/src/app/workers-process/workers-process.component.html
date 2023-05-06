@@ -1,0 +1,26 @@
+<!-- Разметка компонента для отображения коллекции работников -->
+<table class="table table-borderless table-striped w-75">
+  <thead>
+  <tr>
+    <th>Ид</th>
+    <th>Фото</th>
+    <th>Фамилия И.О.</th>
+    <th>Должность</th>
+    <th>Оклад, руб.</th>
+    <th>Пол</th>
+    <th>Стаж, лет</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!-- вывод коллекции в строки таблицы -->
+  <tr *ngFor="let w of displayWorkers">
+    <td>{{w.id}}</td>
+    <td><img [src]="'assets/images/' + w.photo" height="80" alt="Фото работника"/></td>
+    <td>{{w.fullName}}</td>
+    <td>{{w.position}}</td>
+    <td>{{w.salary}}</td>
+    <td>{{w.gender?"муж":"жен"}}</td>
+    <td>{{w.getExperience()}}</td>
+  </tr>
+  </tbody>
+</table>

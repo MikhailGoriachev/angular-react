@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!--
+
+В процессе работы компонент проходит через ряд этапов жизненного цикла. На каждом
+из этапов вызывается определенная функция, в которой мы можем определить какие-либо
+действия:
+
+    1. constructor(props): конструктор, в котором происходит начальная инициализация
+                           компонента
+    2. static getDerivedStateFromProps(props, state): вызывается непосредственно перед
+              рендерингом компонента. Этот метод не имеет доступа к текущему объекту
+              компонента (то есть обратиться к объекту компонента через this) и должен
+              возвращать объект для обновления объекта state или значение null, если
+              нечего обновлять.
+
+     3. render(): рендеринг компонента
+
+    4. componentDidMount(): вызывается после рендеринга компонента. Здесь можно выполнять
+              запросы к удаленным ресурсам
+
+    5. componentWillUnmount(): вызывается перед удалением компонента из DOM
+
+Кроме этих основных этапов или событий жизненного цикла, также имеется еще ряд функций,
+которые вызываются при обновлении состояния после начального рендеринга компонента,
+если в компоненте происходят обновления:
+
+    1. static getDerivedStateFromProps(props, state)
+
+    2. shouldComponentUpdate(nextProps, nextState): вызывается каждый раз при обновлении
+              объекта props или state. В качестве параметра передаются новый объект props
+              и state. Эта функция должна возвращать true (надо делать обновление) или
+              false (игнорировать обновление). По умолчанию возвращается true.
+              Но если функция будет возвращать false, то тем самым мы отключим обновление
+              компонента, а последующие функции не будут срабатывать.
+
+    3. render(): рендеринг компонента (если shouldComponentUpdate возвращает true)
+
+    4. getSnapshotBeforeUpdate(prevProps, prevState): вызывается непосредственно перед
+              обновлением компонента. Он позволяет компоненту получить информацию из
+              DOM перед возможным обновлением. Возвращает в качестве значения какой-то
+              отдельный аспект, который передается в качестве третьего параметра в метод
+              componentDidUpdate() и может учитываться в componentDidUpdate при обновлении.
+              Если нечего возвращать, то возвращается значение null
+
+    5. componentDidUpdate(prevProps, prevState, snapshot): вызывается сразу после обновления
+              компонента (если shouldComponentUpdate возвращает true). В качестве параметров
+              передаются старые значения объектов props и state. Третий параметр - значение,
+              которое возвращает метод getSnapshotBeforeUpdate
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React. Жизненный цикл компонента</title>
+
+    <link rel="stylesheet" href="style.css">
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="images/emotion_smile.png" type="image/x-icon">
+</head>
+<body>
+<h3>Введение в жизненный цикл компонентов</h3>
+<div id="app"></div>
+<!-- локальное подключение React -->
+<script src="lib/react/react.production.min.js"></script>
+<script src=" lib/react/react-dom.production.min.js"></script>
+<script src="lib/babel.min.js"></script>
+
+<script type="text/babel">
+    class ClickButton extends React.Component {
+
+        constructor(props) {
+            super(props);
+            this.state = {class: "off", label: "Нажми"};
+
+            this.press = this.press.bind(this);
+
+            console.log("constructor");
+        }
+
+        static getDerivedStateFromProps(props, state) {
+            console.log("getDerivedStateFromProps()");
+            return null;
+        }
+
+        componentDidMount() {
+            console.log("componentDidMount()");
+        }
+
+        componentWillUnmount() {
+            console.log("componentWillUnmount()");
+        }
+
+        shouldComponentUpdate() {
+            console.log("shouldComponentUpdate()");
+            return true;
+        }
+
+        getSnapshotBeforeUpdate(prevProps, prevState) {
+            console.log("getSnapshotBeforeUpdate()");
+            return null;
+        }
+
+        componentDidUpdate() {
+            console.log("componentDidUpdate()");
+        }
+
+        press() {
+            let className = (this.state.class === "off") ? "on" : "off";
+            this.setState({class: className});
+        }
+
+        render() {
+            console.log("render()");
+            return <button onClick={this.press} className={this.state.class}>{this.state.label}</button>;
+        }
+    }
+
+    ReactDOM.createRoot(document.getElementById("app"))
+        .render(
+            <ClickButton/>
+        );
+</script>
+</body>
+</html>

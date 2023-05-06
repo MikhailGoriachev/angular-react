@@ -1,0 +1,13 @@
+<h2>События клавиш клавиатуры</h2>
+<!--(keyup.enter) - привязка обработчика на нажатие по клавише Enter
+keydown, keyup -->
+<label>вводите что угодно, главное - потом ENTER не забудьте</label>
+<input type="text" #input1 (keyup.enter)="show(input1.value)">
+<br>
+<br>
+<label>вводите что угодно, главное - потом r не забудьте</label>
+<input type="text" #input2 (keyup.r)="show(input2.value)">
+<br>
+<br>
+Вы ввели: <br>
+{{ message }}

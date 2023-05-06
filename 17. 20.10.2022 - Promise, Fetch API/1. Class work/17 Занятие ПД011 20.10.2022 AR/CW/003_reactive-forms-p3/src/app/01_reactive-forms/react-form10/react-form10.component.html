@@ -1,0 +1,30 @@
+<h2>
+    Observable valueChanges
+</h2>
+
+<form novalidate [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <h3>Создайте почту</h3>
+    <input type="text" formControlName="nameEmail">
+    <p>
+        Ваш email будет:<br><b>{{ registrationForm.get('createdEmail')!.value }}</b> <br>
+    </p>
+    <pre>{{registrationForm.value |json}}</pre>
+
+    <input type="submit" value="Создать">
+</form>
+
+<hr>
+
+<form novalidate [formGroup]="createLoginForm" (ngSubmit)="onSubmit()">
+    <h3>Регистрация на нашем веб-сервисе</h3>
+    <p class="alert" *ngIf="formErrors.existingLogin">{{ formErrors.existingLogin }}</p>
+    логин: <input type="text" formControlName="userLogin">
+    <br>
+    <br>
+    <p class="alert" *ngIf="formErrors.existingEmail">{{ formErrors.existingEmail }}</p>
+    email: <input type="text" formControlName="userEmail">
+    <pre>{{registeredUsers |json}}</pre>
+
+    <input type="submit" value="Регистрация">
+</form>
+<br>

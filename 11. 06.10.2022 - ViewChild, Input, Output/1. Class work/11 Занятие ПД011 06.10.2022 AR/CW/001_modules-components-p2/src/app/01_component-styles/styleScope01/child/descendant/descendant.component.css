@@ -1,0 +1,13 @@
+/* стилизуем класс second-child на компоненте верхнего уровня */
+/* :host-context(.second-child) p {
+  background: black;
+  color: white;
+  padding: 6px;
+} */
+
+/* поиск класса .block-container на компоненте верхнего уровня */
+/* :host-context(.block-container) div {
+    border: 2px solid blue;
+    display: block;
+    padding: 10px;
+} */

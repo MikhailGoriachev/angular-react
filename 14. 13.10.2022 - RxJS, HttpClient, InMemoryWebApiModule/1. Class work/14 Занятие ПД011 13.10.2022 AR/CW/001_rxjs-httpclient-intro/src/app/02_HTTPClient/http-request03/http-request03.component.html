@@ -1,0 +1,7 @@
+<h2>HTTP Params</h2>
+<select #limit (change)="loadList(limit.value)">
+    <option [value]="i + 1" *ngFor="let number of arr100; let i = index;">{{ i + 1 }}</option>
+</select>
+<ul>
+    <li *ngFor="let album of albums">{{ album.title }}</li>
+</ul>

@@ -1,0 +1,44 @@
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 min-vh-100 p-3">
+
+    <h4 class="text-center">Задание 1. Пользователи</h4>
+
+    <!-- Пользователи -->
+    <app-users-table
+        [users]="users"
+        (onSelectPostsUser)="getPosts($event)"
+        (onSelectPhotosUser)="getPhotos($event)"
+        (onSelectTodosUser)="getTodos($event)">
+    </app-users-table>
+</section>
+
+<!-- Модальное окно -->
+<div class="modal fade" id="modalId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Дополнительная информация</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" [ngSwitch]="currentInfoState">
+
+                <!-- Посты -->
+                <ng-container *ngSwitchCase="InfoState.posts">
+                    <app-posts-table [posts]="posts"></app-posts-table>
+                </ng-container>
+
+                <!-- Фото -->
+                <ng-container *ngSwitchCase="InfoState.photo">
+                    <app-photos-table [photos]="photos"></app-photos-table>
+                </ng-container>
+
+                <!-- Список дел -->
+                <ng-container *ngSwitchCase="InfoState.todoList">
+                    <app-todos-table [todos]="todos"></app-todos-table>
+                </ng-container>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>

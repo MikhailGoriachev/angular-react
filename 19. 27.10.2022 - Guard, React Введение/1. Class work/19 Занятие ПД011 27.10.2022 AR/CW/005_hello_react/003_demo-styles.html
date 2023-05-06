@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title>Hello React</title>
+  <style>
+    .user-info{
+      padding: 8px;
+      border: 3px blueviolet solid;
+      width: 300px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- тут будет рендерится React-разметка -->
+<div id="app"> </div>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+  // пример объекта
+  const user = {
+    id : 5,
+    age: 33,
+    firstName: 'Tom',
+    lastName: 'Smith',
+
+    getFullName: function(){
+      return `${this.firstName} ${this.lastName}`;
+    }
+  };
+
+  // строка имя стилевого класса
+  const userClassName = "user-info";
+
+  // объект, представляющий стиль
+  const styleObj = {
+    color: 'darkblue',
+    // font-family
+    fontFamily:'Verdana',
+    fontSize: '14pt'
+  };
+
+  m
+    .render(
+        // вместо class -- className
+        <div className={userClassName} style={styleObj}>
+          <p>Полное имя: {user.getFullName()}</p>
+          <p>Возраст: {user.age}</p>
+        </div>
+    );
+</script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+*{
+    box-sizing: border-box;
+}
+body{
+    font-family: Arial, sans-serif;
+}
+.wrapper-component{
+    padding: 10px;
+    border: 2px solid #ccc;
+}

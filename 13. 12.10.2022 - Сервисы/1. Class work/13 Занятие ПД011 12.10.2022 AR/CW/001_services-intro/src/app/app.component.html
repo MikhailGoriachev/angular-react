@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>Введение в Angular</h1>
+  <h2></h2>
+  <main>
+    <nav>
+      <h3>Custom services</h3>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">01_simple service: @NgModule providers</a>
+      <a routerLink="local-service" routerLinkActive="active">02_local service: @Component providers</a>
+      <a routerLink="scope-service" routerLinkActive="active">03_Scope services</a>
+      <a routerLink="provided-in" routerLinkActive="active">04_registration @Injectable: providedIn</a>
+      <a routerLink="example" routerLinkActive="active">05_Busket example</a>
+    </nav>
+    <div class="examples">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>

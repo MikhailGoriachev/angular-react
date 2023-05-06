@@ -1,0 +1,8 @@
+<h3>Редактирование настроек пользователя</h3>
+<h3>Логин студента</h3>
+
+<!-- при изменении строки ввода вызываем обработчик changed() -->
+<input type="text" (change)="changed()" [(ngModel)]="userName">
+<br>
+<br>
+<button (click)="save()">Сохранить</button>

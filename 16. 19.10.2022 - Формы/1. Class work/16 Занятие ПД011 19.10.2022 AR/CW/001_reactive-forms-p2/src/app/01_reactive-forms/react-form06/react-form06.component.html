@@ -1,0 +1,39 @@
+<h2>Reactive-form FormBuilder</h2>
+<form novalidate [formGroup]="form" (ngSubmit)="onSubmit(form)">
+    <div>
+        Логин
+        <input type="text" formControlName="login">
+    </div>
+    <br>
+
+    <div>
+        Email
+        <input type="text" formControlName="email">
+        <br>
+        <br><!-- Методы -->
+        <pre>
+            {{ form.controls['email'].errors | json }}
+        </pre>
+    </div>
+
+    <div formGroupName="name">
+        Имя, Фамилия
+        <br>
+        <input type="text" formControlName="fName">
+        <br>
+        <input type="text" formControlName="lName">
+        <br>
+        <pre>
+            {{ form.controls['name'].get('fName')!.errors | json }}
+            {{ form.controls['name'].get('lName')!.errors | json }}
+    </pre>
+    </div>
+
+    <div formArrayName="contacts" *ngFor="let contact of form.get('contacts')!.value; let i=index">
+        Телефон
+        <input type="text" [formControlName]="i">
+    </div>
+    <br>
+    <input type="submit" class="btn" value="Отправить">
+
+</form>

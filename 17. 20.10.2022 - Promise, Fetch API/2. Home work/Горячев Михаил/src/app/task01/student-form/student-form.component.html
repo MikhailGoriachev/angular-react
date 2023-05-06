@@ -1,0 +1,80 @@
+<!-- Модальное окно -->
+<div class="modal fade" id="modalFormId" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>{{isCreateMode ? "Создание студента" : "Редактирование студента"}}</h4>
+            </div>
+            <div class="modal-body">
+                <form novalidate [formGroup]="form" (ngSubmit)="onSubmit(form)">
+
+                    <!-- id -->
+                    <input type="hidden" formControlName="id">
+
+                    <!-- Фамилия и инициалы -->
+                    <div class="form-floating my-2">
+                        <input type="text" formControlName="fullName" placeholder="Фамилия и инициалы"
+                               class="form-control {{Utils.getClassValid(this.form.controls['fullName'])}}">
+                        <label>Фамилия и инициалы</label>
+                    </div>
+
+                    <!-- День рождения -->
+                    <div class="form-floating my-2">
+                        <input type="date" formControlName="dateOfBirthString" placeholder="День рождения"
+                               class="form-control {{Utils.getClassValid(this.form.controls['dateOfBirthString'])}}">
+                        <label>День рождения</label>
+                    </div>
+
+                    <!-- Телефон -->
+                    <div class="form-floating my-2">
+                        <input type="text" formControlName="phone" placeholder="Телефон"
+                               class="form-control {{Utils.getClassValid(this.form.controls['phone'])}}">
+                        <label>Телефон</label>
+                    </div>
+
+                    <!-- E-mail -->
+                    <div class="form-floating my-2">
+                        <input type="text" formControlName="email" placeholder="E-mail"
+                               class="form-control {{Utils.getClassValid(this.form.controls['email'])}}">
+                        <label>E-mail</label>
+                    </div>
+
+                    <!-- Разряд -->
+                    <div class="form-floating my-2">
+                        <select formControlName="levelName"
+                                class="form-select {{Utils.getClassValid(this.form.controls['levelName'])}}">
+                            <option *ngFor="let l of levelList">{{l.name}}</option>
+                        </select>
+                        <label>Разряд</label>
+                    </div>
+
+                    <!-- Тренер -->
+                    <div class="form-floating my-2">
+                        <select formControlName="coach"
+                                class="form-select {{Utils.getClassValid(this.form.controls['coach'])}}">
+                            <option *ngFor="let c of coachList">{{c}}</option>
+                        </select>
+                        <label>Тренер</label>
+                    </div>
+
+                    <!-- Группа -->
+                    <div class="form-floating my-2">
+                        <select formControlName="group"
+                                class="form-select {{Utils.getClassValid(this.form.controls['group'])}}">
+                            <option *ngFor="let g of groupList">{{g}}</option>
+                        </select>
+                        <label>Группа</label>
+                    </div>
+
+                    <hr>
+
+                    <!-- Кнопки управления -->
+                    <button class="btn btn-success" data-bs-dismiss="modal" [disabled]="form.invalid">
+                        {{isCreateMode ? "Добавить" : "Сохранить"}}
+                    </button>
+                    <button type="button" class="btn btn-secondary mx-3" data-bs-dismiss="modal">Закрыть</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

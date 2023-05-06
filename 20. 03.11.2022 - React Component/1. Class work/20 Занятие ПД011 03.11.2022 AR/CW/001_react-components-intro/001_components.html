@@ -1,0 +1,82 @@
+<!doctype html>
+<!--
+    Компоненты React
+    Компоненты проще обновлять и использовать повторно.
+    Компоненты аналогичны функциям JavaScript. Они хранят состояние
+    с помощью свойств и возвращают элементы React, которые затем
+    появляются на веб-странице.
+-->
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Компоненты React</title>
+
+    <link rel="stylesheet" href="style.css">
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="images/emotion_smile.png" type="image/x-icon">
+</head>
+<body>
+<h2>Введение в компоненты React</h2>
+
+<!-- react-азметка выводится тут-->
+<div id="app"></div>
+
+<!-- подключение React из CDN -->
+<!--<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>-->
+<!--<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>-->
+<!--<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>-->
+
+<!-- локальное подключение React -->
+<script src="/lib/react/react.production.min.js"></script>
+<script src=" lib/react/react-dom.production.min.js"></script>
+<script src="lib/babel.min.js"></script>
+
+<script type="text/babel">
+
+    // компонент на базе функции
+    function Hello() {
+        return <span style={
+            {
+                fontStyle: 'underline',
+                backgroundColor: 'darkblue',
+                color: 'white',
+                padding: '6px'
+            }}>
+            Привет. Это компонент, построенный на функции
+        </span>;
+    }
+
+    // компонент на базе стрелочной функции
+    var Greeting = () => {
+        return (<span style={{fontStyle: 'italic', color: 'darkblue', padding: '6px'}}>
+            Привет. Это компонент, построенный на стрелочной функции
+        </span>);
+    }
+
+    // компонент на базе класса ES6+
+    class ByeItem extends React.Component {
+        // обязательный метод для вывода разметки
+        render() {
+            return <li
+                style={{fontWeight: 'bold', color: 'tomato', padding: '6px'}}>
+                Это компонент, построенный на базе класса ES6+, до свидания!
+            </li>;
+        } // render
+    }
+
+    // использование компонентов
+    // ReactDOM.createRoot(document.querySelector("#app"))
+    ReactDOM.createRoot(document.getElementById('app'))
+        .render(
+            <ul>
+                <li><Hello/></li>
+                <li><Greeting/></li>
+                <ByeItem/>
+            </ul>
+        );
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!--
+передача a, b в компонент c2, назначение обработчика события получения
+результатов из компонента c2
+-->
+<app-c2 #appC2 [a]="a" [b]="b" (resultReadyEvent)="resultEventHandler($event)"></app-c2>
+
+<!--
+класс bg-success будет добавлен при success == true
+класс bg-danger будет добавлен при success == false
+-->
+<div class="text-white col-5 p-3 m-3"
+     [class.bg-success]="success"
+     [class.bg-danger]="!success">
+  <h3>Результат вычислений</h3>
+  <ul>
+    <li>z<sub>1</sub> = <b>{{z1}}</b></li>
+    <li>z<sub>2</sub> = <b>{{z2}}</b></li>
+  </ul>
+</div>
+

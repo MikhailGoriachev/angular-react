@@ -1,0 +1,54 @@
+<h2>Структурная Директива ngIf</h2>
+<!-- *ngIf - удаляет элемент и его дочерние элементы из дерева DOM если выражение false,
+     иначе, элемент div будет добавлен в разметку-->
+<!-- <button (click)="flagToggle = !flagToggle">Click</button> -->
+<label>
+    <input type="checkbox" (change)="flagToggle = !flagToggle">
+    Поменять состояние флага flagToggle
+</label>
+<hr>
+<!-- Нет в разметке при false -->
+<div *ngIf="flagToggle">Отображается когда flagToggle TRUE</div>
+<div *ngIf="!flagToggle">Отображается когда flagToggle FALSE</div>
+
+<!-- Есть в разметке при false, просто не видно на екране -->
+<div [style.display]="flagToggle ? 'block' : 'none'">
+  Привязка стиля, <b>не ngIf</b><br>
+    Блок скрывается только визуально, в разметке он остается
+</div>
+<br>
+<br>
+<br>
+<label>
+    <input type="checkbox" [disabled]="!elseLoading" (change)="changeMethod()">
+    Поменять состояние флага elseLoading
+</label>
+<hr>
+<div *ngIf="elseLoading; else templateLoad">
+    Состояние TRUE
+</div>
+
+<!-- определение шаблона -->
+<ng-template #templateLoad>
+    42. Шаблон templateLoad. Загрузка пока elseLoading FALSE
+</ng-template>
+<p>Пример then</p>
+<div *ngIf="elseLoading; then templateLoadFinish else templateLoad">
+    Текст не будет виден!
+</div>
+<ng-template #templateLoadFinish>
+  <br>
+  THEN
+  templateLoadFinish.
+  Состояние TRUE <b>#templateLoadFinish</b>
+  <br>
+</ng-template>
+
+<!-- Шаблон используем повторно -->
+<ng-template #templateLoad></ng-template>
+<!-- ng-template директива инструмент Angular шаблона и содержимое этого тега будет содержать часть шаблона,
+    которую затем может быть использовано вместе с другими шаблонами для формирования окончательного шаблона
+    компонента. -->
+<br>
+<!-- Шаблон используем повторно -->
+<ng-template #templateLoad></ng-template>

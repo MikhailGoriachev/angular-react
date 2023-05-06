@@ -1,0 +1,21 @@
+.blocks{
+    display: flex;
+    justify-content: space-around;
+}
+
+.blocks div{
+    width: 100px;
+    height: 100px;
+    background: #ddd;
+    text-align: center;
+    font-size: 30px;
+    border-radius: 5px;
+}
+
+.blocks .bg{
+    background: lightgreen;
+}
+
+.border{
+    border: 3px solid green;
+}

@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- #region Стили -->
+    <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- #endregion -->
+
+    <!-- скрипты -->
+    <script src="../lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="module" src="../dist/bundle.js"></script>
+
+    <!-- заголовок -->
+    <title>Задание 1</title>
+
+    <!-- логотип -->
+    <link rel="shortcut icon" type="image/x-icon" href="../images/icon.svg">
+</head>
+
+<body>
+
+<!-- #region Навигация -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top shadow">
+    <div class="container-fluid justify-content-center">
+        <!-- Логотип -->
+        <a class="navbar-brand mx-2" href="../index.html">
+            <img class="logo" src="../images/icon.svg" alt="logo">
+        </a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+
+                <!-- Главная -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3" href="../index.html">Главная</a>
+                </li>
+
+                <!-- Задание 1 -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3 active" href="task01.html">Задание 1</a>
+                </li>
+
+                <!-- Задание 2 -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3" href="task02.html">Задание 2</a>
+                </li>
+
+                <!-- Генерация данных -->
+                <li class="nav-item">
+                    <button class="btn btn-success ms-5 me-2" id="initTask01Id">Генерация данных</button>
+                </li>
+
+                <!-- Сортировать -->
+                <li class="nav-item">
+                    <button class="btn btn-secondary mx-2" id="orderId">Сортировать</button>
+                </li>
+
+                <!-- Лок. минимум -->
+                <li class="nav-item">
+                    <button class="btn btn-secondary mx-2" id="localMinId" data-bs-toggle="modal"
+                            data-bs-target="#modalId">
+                        Лок. минимум
+                    </button>
+                </li>
+
+                <!-- Вывод в консоль -->
+                <li class="nav-item">
+                    <button class="btn btn-secondary mx-2" id="consoleId">Вывод в консоль</button>
+                </li>
+
+                <!-- Добавить -->
+                <li class="nav-item">
+                    <button class="btn btn-primary mx-2" id="pushId">Добавить (push)</button>
+                </li>
+
+                <!-- Удалить -->
+                <li class="nav-item">
+                    <button class="btn btn-danger mx-2" id="shiftId">Удалить (shift)</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- #endregion -->
+
+<!-- #region Главная секция -->
+<main>
+
+    <section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+
+        <!-- Навигация по вкладкам -->
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="persons-tab" data-bs-toggle="tab" data-bs-target="#nav-persons"
+                        type="button" role="tab" aria-controls="nav-home" aria-selected="true">Персоны
+                </button>
+                <button class="nav-link" id="numbers-tab" data-bs-toggle="tab" data-bs-target="#nav-numbers"
+                        type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Числа
+                </button>
+            </div>
+        </nav>
+
+        <!-- Персоны -->
+        <div class="tab-content" id="tabs-content">
+            <div class="tab-pane fade show active" id="nav-persons" role="tabpanel" aria-labelledby="persons-tab"
+                 tabindex="0">
+
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>&#8470;</th>
+                        <th>ФИО</th>
+                        <th>Возраст</th>
+                        <th>Оклад</th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="personsTbodyId">
+
+                    </tbody>
+                </table>
+
+            </div>
+
+            <!-- Числа -->
+            <div class="tab-pane fade" id="nav-numbers" role="tabpanel" aria-labelledby="numbers-tab" tabindex="0">
+
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>&#8470;</th>
+                        <th>Значение</th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="numbersTbodyId">
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Модальное окно -->
+    <div class="modal fade" id="modalId" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" id="modalDialogId">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalBodyId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+<!-- #endregion -->
+
+<!-- #region Подвал-->
+<footer class="bg-dark shadow fs-6 text-white-50 p-5 pb-2">
+    <p>
+        Разработчик:
+        <a href="https://github.com/MikhailGoriachev" target="_bank">
+            <b>Горячев Михаил</b>
+        </a>
+    </p>
+    <p>Группа: <b>ПД011</b></p>
+    <p>Город: <b>Донецк</b></p>
+    <p>Год создания: <b>2022</b></p>
+    <p>
+        Поддержка:
+        <a href="mailto:goriachevmichael@gmail.com">
+            <b>goriachevmichael@gmail.com</b>
+        </a>
+    </p>
+
+</footer>
+<!-- #endregion -->
+</body>
+
+</html>

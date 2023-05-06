@@ -1,0 +1,11 @@
+<div style="background-color: lightgreen; padding: 30px;">
+    <h2>@Output</h2>
+    {{ myString }}
+
+   <!-- назначить обработчкик событий, формируемых в компоненте app-output-child -->
+    <app-output-child
+     (myOwnEvent)="fHandler($event)"
+     (counterEvent)="counterPlus($event)"></app-output-child>
+    <hr>
+    {{ counterOutSide }}
+</div>
